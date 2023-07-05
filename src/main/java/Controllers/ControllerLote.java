@@ -21,7 +21,7 @@ public class ControllerLote implements InterfaceController {
     }
 
     @Override
-    public boolean validarDados() throws Exception {
+    public boolean validarDados() throws FalhaException {
         if(estoque.getEstPreco() < 0){
             throw new FalhaException(EnumMensagem.MSG014.getDescricao());
         }

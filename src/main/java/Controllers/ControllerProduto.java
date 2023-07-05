@@ -8,7 +8,9 @@ import Interfaces.EnumMensagem;
 import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
 import br.dev.lomm.automecanicapoo.database.Produto;
+import com.toedter.calendar.JDateChooser;
 import java.util.Date;
+import javax.swing.JTextPane;
 
 /**
  *
@@ -22,8 +24,28 @@ public class ControllerProduto implements InterfaceController {
         this.produto = produto;
     }
     
+    public Produto getProduto(){
+        return this.produto;
+    }
+    
+    public void preencherForm(
+        JTextPane nome, 
+        JDateChooser dataValidade
+    ){
+        produto.setProdNome(nome.getText());
+        produto.setProdValidade(dataValidade.getDate());
+    }
+    
+    public void setCampos(
+        JTextPane nome, 
+        JDateChooser dataValidade
+    ){
+        nome.setText(produto.getProdNome());
+        dataValidade.setDate(produto.getProdValidade());
+    }
+    
     @Override
-    public boolean validarDados() throws Exception {
+    public boolean validarDados() throws FalhaException {
         if(produto.getProdNome() instanceof String ||
                 produto.getProdNome().isEmpty() ||
                 produto.getProdNome().length() <= 1){
