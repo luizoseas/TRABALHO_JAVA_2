@@ -5,6 +5,7 @@
 package Controllers;
 
 import Interfaces.EnumMensagem;
+import Interfaces.InterfaceController;
 import br.dev.lomm.automecanicapoo.database.Cliente;
 import br.dev.lomm.automecanicapoo.database.Pessoa;
 import java.util.Date;
@@ -13,7 +14,7 @@ import java.util.Date;
  *
  * @author roger
  */
-public class ControllerPessoa {
+public class ControllerPessoa implements InterfaceController {
     
     private Pessoa pessoa;
     

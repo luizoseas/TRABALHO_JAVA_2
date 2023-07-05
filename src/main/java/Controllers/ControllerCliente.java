@@ -4,6 +4,8 @@
  */
 package Controllers;
 
+import Interfaces.FalhaException;
+import Interfaces.InterfaceController;
 import br.dev.lomm.automecanicapoo.database.Cliente;
 import br.dev.lomm.automecanicapoo.database.Pessoa;
 import com.toedter.calendar.JDateChooser;
@@ -13,7 +15,7 @@ import javax.swing.JTextPane;
  *
  * @author roger
  */
-public class ControllerCliente {
+public class ControllerCliente implements InterfaceController {
     
     private Cliente cliente;
     
@@ -53,7 +55,7 @@ public class ControllerCliente {
     
     public boolean validarDados() throws Exception{
         if(!(this.cliente.getCliIdpessoa() instanceof Pessoa)){
-            new Exception("Pessoa não informada.");
+            new FalhaException("Pessoa não informada.");
         }
         ControllerPessoa controllerPessoa = new ControllerPessoa();
         controllerPessoa.setPessoa(this.cliente.getCliIdpessoa());

@@ -4,10 +4,27 @@
  */
 package Controllers;
 
+import Interfaces.InterfaceController;
+import br.dev.lomm.automecanicapoo.database.Fornecedor;
+
 /**
  *
  * @author roger
  */
-public class ControllerFornecedor {
+public class ControllerFornecedor implements InterfaceController{
+
+    private Fornecedor fornecedor;
+
+    public void setFornecedor(Fornecedor fornecedor){
+        this.fornecedor = fornecedor;
+    }
+
+    @Override
+    public boolean validarDados() throws Exception {
+    if (fornecedor.getForNomefantasia() instanceof String){
+
+    }
+    return true;
+    }
     
 }
