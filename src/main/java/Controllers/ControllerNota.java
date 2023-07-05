@@ -4,6 +4,7 @@
  */
 package Controllers;
 
+import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
 import br.dev.lomm.automecanicapoo.database.Conserto;
 import br.dev.lomm.automecanicapoo.database.Nota;
@@ -21,7 +22,7 @@ public class ControllerNota implements InterfaceController {
     }
 
     @Override
-    public boolean validarDados() throws Exception {
+    public boolean validarDados() throws FalhaException {
         return false;
     }
 }

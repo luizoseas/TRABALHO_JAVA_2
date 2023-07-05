@@ -37,8 +37,7 @@ public class ControllerEndereco implements InterfaceController {
         endereco.setEndIdlogradouro(Logradouro.buscarOuInserirLogradouro(logradouro.getText()));
     }
 
-    @Override
-    public boolean validarDados() throws Exception {
+    public boolean validarDados() throws FalhaException {
         if(!(endereco.getEndNumero() instanceof String) ||
                 endereco.getEndNumero().isEmpty() ||
                 endereco.getEndNumero().length() < 0){

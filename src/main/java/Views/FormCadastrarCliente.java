@@ -5,6 +5,7 @@
 package Views;
 
 import Controllers.ControllerCliente;
+import Interfaces.FalhaException;
 
 /**
  *
@@ -399,11 +400,14 @@ public class FormCadastrarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_CADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_CADASTRARActionPerformed
-        ControllerCliente controllerCliente = new ControllerCliente();
-        controllerCliente.setCampos(INPUT_NOME, INPUT_CPF, INPUT_DTNASCIMENTO, INPUT_EMAIL, INPUT_LOGRADOURO, INPUT_CEP, INPUT_BAIRRO, INPUT_CIDADE);
-        if(controllerCliente.validarDados()){
+        try{
+            ControllerCliente controllerCliente = new ControllerCliente();
+            controllerCliente.setCampos(INPUT_NOME, INPUT_CPF, INPUT_DTNASCIMENTO, INPUT_EMAIL, INPUT_LOGRADOURO, INPUT_CEP, INPUT_BAIRRO, INPUT_CIDADE);
+            controllerCliente.validarDados();
             controllerCliente.getCliente().salvar();
             this.setVisible(false);
+        }catch(FalhaException $erro){
+            
         }
     }//GEN-LAST:event_BUTTON_CADASTRARActionPerformed
 

@@ -4,6 +4,7 @@
  */
 package Controllers;
 
+import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
 
 /**
@@ -13,7 +14,7 @@ import Interfaces.InterfaceController;
 public class ControllerProduto implements InterfaceController {
 
     @Override
-    public boolean validarDados() throws Exception {
+    public boolean validarDados() throws FalhaException {
         return false;
     }
 }

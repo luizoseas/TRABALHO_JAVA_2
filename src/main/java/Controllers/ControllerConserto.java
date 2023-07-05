@@ -21,9 +21,13 @@ public class ControllerConserto implements InterfaceController {
     public void setConserto(Conserto conserto){
         this.conserto = conserto;
     }
+    
+    public Conserto getConserto(){
+        return this.conserto;
+    }
 
     @Override
-    public boolean validarDados() throws Exception {
+    public boolean validarDados() throws FalhaException {
         if (!(conserto.getConsDescricao() instanceof String) ||
                 conserto.getConsDescricao().length() <= 1 ||
                 conserto.getConsDescricao().isEmpty()){

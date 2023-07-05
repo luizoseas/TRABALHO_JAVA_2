@@ -5,8 +5,8 @@
 package Controllers;
 
 import Interfaces.EnumMensagem;
+import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
-import br.dev.lomm.automecanicapoo.database.Cliente;
 import br.dev.lomm.automecanicapoo.database.Pessoa;
 import com.toedter.calendar.JDateChooser;
 import java.util.Date;
@@ -40,23 +40,26 @@ public class ControllerPessoa implements InterfaceController {
         this.pessoa.setPesNome(nome.getText());
     }
     
-    public boolean validarDados() throws Exception{
+    public boolean validarDados() throws FalhaException{
         if(!(pessoa.getPesNome() instanceof String) || 
                 pessoa.getPesNome().length() <= 3){
-            throw new Exception(EnumMensagem.MSG001.getDescricao());
+            throw new FalhaException(EnumMensagem.MSG001.getDescricao());
         }
         if(!(pessoa.getPesCpf() instanceof String) ||
                 pessoa.getPesCpf().length() != 11 ||
                 !pessoa.getPesCpf().matches("\\d+")){
-            throw new Exception("CPF Inválido.");
+            throw new FalhaException("CPF Inválido.");
         }
         if(!(pessoa.getPesDatanasc() instanceof Date) ||
                 pessoa.getPesDatanasc().toString().isEmpty()){
-            throw new Exception("Data inválida.");
+            throw new FalhaException("Data inválida.");
         }
         if(!(pessoa.getPesEmail() instanceof String) || !pessoa.getPesEmail().contains("@")){
-            throw new Exception("E-mail inválido.");
+            throw new FalhaException("E-mail inválido.");
         }
+        ControllerEndereco controllerEndereco = new ControllerEndereco();
+        controllerEndereco.setEndereco(this.getPessoa().getPesIdendereco());
+        controllerEndereco.validarDados();
         return true;
     }
     

@@ -4,12 +4,28 @@
  */
 package Views;
 
+import Controllers.ControllerCliente;
+import Interfaces.FalhaException;
+import br.dev.lomm.automecanicapoo.database.Cliente;
+
 /**
  *
  * @author oseas
  */
 public class FormAtualizarCliente extends javax.swing.JFrame {
 
+    private Cliente cliente;
+    private final ControllerCliente controllerCliente = new ControllerCliente();
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+        controllerCliente.preencherForm(INPUT_NOME, INPUT_CPF, INPUT_DTNASCIMENTO, INPUT_EMAIL, INPUT_LOGRADOURO, INPUT_CEP, INPUT_BAIRRO, INPUT_CIDADE);
+    }
+    
     /**
      * Creates new form FormAtualizarCliente
      */
@@ -397,7 +413,14 @@ public class FormAtualizarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_ATUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_ATUALIZARActionPerformed
-        // TODO add your handling code here:
+        try{
+            controllerCliente.setCampos(INPUT_NOME, INPUT_CPF, INPUT_DTNASCIMENTO, INPUT_EMAIL, INPUT_LOGRADOURO, INPUT_CEP, INPUT_BAIRRO, INPUT_CIDADE);
+            controllerCliente.validarDados();
+            controllerCliente.getCliente().atualizar();
+            this.setVisible(false);
+        }catch(FalhaException $erro){
+            
+        }
     }//GEN-LAST:event_BUTTON_ATUALIZARActionPerformed
 
 

@@ -23,7 +23,7 @@ public class ControllerLote implements InterfaceController {
     }
 
     @Override
-    public boolean validarDados() throws Exception {
+    public boolean validarDados() throws FalhaException {
         if(estoque.getEstIdnota().getNotaDatacompra() instanceof Date ||
                 estoque.getEstIdnota().getNotaDatacompra().toString().isEmpty()){
             throw new FalhaException(EnumMensagem.MSG013.getDescricao());

@@ -23,7 +23,7 @@ public class ControllerFuncionario implements InterfaceController {
         this.funcionario = funcionario;
     }
     
-    public boolean validarDados() throws Exception{
+    public boolean validarDados() throws FalhaException{
         if(!(this.funcionario.getCliIdpessoa() instanceof Pessoa)){
             throw new FalhaException(EnumMensagem.MSG012.getDescricao());
         }

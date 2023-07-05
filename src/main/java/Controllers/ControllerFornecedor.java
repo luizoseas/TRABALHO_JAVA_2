@@ -4,6 +4,7 @@
  */
 package Controllers;
 
+import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
 import br.dev.lomm.automecanicapoo.database.Fornecedor;
 
@@ -20,7 +21,7 @@ public class ControllerFornecedor implements InterfaceController{
     }
 
     @Override
-    public boolean validarDados() throws Exception {
+    public boolean validarDados() throws FalhaException {
     if (fornecedor.getForNomefantasia() instanceof String){
 
     }

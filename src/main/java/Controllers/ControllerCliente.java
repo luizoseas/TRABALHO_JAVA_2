@@ -28,6 +28,25 @@ public class ControllerCliente implements InterfaceController {
         return this.cliente;
     }
     
+    public void preencherForm(
+            JTextPane nome,
+            JTextPane cpf, 
+            JDateChooser dataNascimento,
+            JTextPane email,
+            JTextPane logradouro,
+            JTextPane cep,
+            JTextPane bairro,
+            JTextPane cidade){
+        nome.setText(cliente.getCliIdpessoa().getPesNome());
+        cpf.setText(cliente.getCliIdpessoa().getPesCpf());
+        dataNascimento.setDate(cliente.getCliIdpessoa().getPesDatanasc());
+        email.setText(cliente.getCliIdpessoa().getPesEmail());
+        logradouro.setText(cliente.getCliIdpessoa().getPesIdendereco().getEndIdlogradouro().getLogDescricao());
+        cep.setText(cliente.getCliIdpessoa().getPesIdendereco().getEndCep());
+        bairro.setText(cliente.getCliIdpessoa().getPesIdendereco().getEndIdbairro().getBaiDescricao());
+        cidade.setText(cliente.getCliIdpessoa().getPesIdendereco().getEndIdcidade().getCidDescricao());
+    }
+    
     public void setCampos(
             JTextPane nome,
             JTextPane cpf, 
@@ -50,19 +69,14 @@ public class ControllerCliente implements InterfaceController {
         cliente.setCliIdpessoa(controllerPessoa.getPessoa());
     }
     
-    @Override
-    public boolean validarDados(){
-        try{
-            if(!(this.cliente.getCliIdpessoa() instanceof Pessoa)){
-                throw new FalhaException("Pessoa não informada.");
-            }
-            ControllerPessoa controllerPessoa = new ControllerPessoa();
-            controllerPessoa.setPessoa(this.cliente.getCliIdpessoa());
-            controllerPessoa.validarDados();
-            return true;
-        }catch(Exception erro){
-            return false;
+    public boolean validarDados() throws FalhaException{
+        if(!(this.cliente.getCliIdpessoa() instanceof Pessoa)){
+            throw new FalhaException("Pessoa não informada.");
         }
+        ControllerPessoa controllerPessoa = new ControllerPessoa();
+        controllerPessoa.setPessoa(this.cliente.getCliIdpessoa());
+        controllerPessoa.validarDados();
+        return true;
     }
     
 }
