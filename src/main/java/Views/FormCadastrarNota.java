@@ -4,12 +4,32 @@
  */
 package Views;
 
+import Controllers.ControllerNota;
+import Forms.FormListarFornecedor;
+import Forms.FormListarNota;
+import Interfaces.FalhaException;
+import br.dev.lomm.automecanicapoo.database.Fornecedor;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author oseas
  */
 public class FormCadastrarNota extends javax.swing.JFrame {
 
+    private final ControllerNota controllerNota = new ControllerNota();
+    private Fornecedor fornecedor;
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+        INPUT_FORNECEDOR.setText(this.fornecedor.getForNomefantasia());
+        INPUT_FORNECEDOR.disable();
+    }
     /**
      * Creates new form FormCadastrarNota
      */
@@ -236,7 +256,17 @@ public class FormCadastrarNota extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_CADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_CADASTRARActionPerformed
-        // TODO add your handling code here:
+        try {
+            controllerNota.setCampos(INPUT_NNF, INPUT_DTENTRADA, INPUT_DTCOMPRA);
+            controllerNota.setFornecedor(this.fornecedor);
+            controllerNota.validarDados();
+            controllerNota.getNota().salvar();
+            FormListarNota.atualizar();
+            FormListarFornecedor.atualizar();
+            this.setVisible(false);
+        } catch (FalhaException ex) {
+            System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_BUTTON_CADASTRARActionPerformed
 
 

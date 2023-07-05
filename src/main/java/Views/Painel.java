@@ -32,7 +32,6 @@ public class Painel extends javax.swing.JFrame {
         ButtonFuncionarios = new javax.swing.JButton();
         ButtonFornecedor = new javax.swing.JButton();
         ButtonProdutos = new javax.swing.JButton();
-        ButtonServicos = new javax.swing.JButton();
         TextTitle = new javax.swing.JLabel();
         ButtonSair = new javax.swing.JButton();
         Painel = new javax.swing.JPanel();
@@ -66,13 +65,6 @@ public class Painel extends javax.swing.JFrame {
         ButtonProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonProdutosActionPerformed(evt);
-            }
-        });
-
-        ButtonServicos.setText("Serviços");
-        ButtonServicos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonServicosActionPerformed(evt);
             }
         });
 
@@ -133,8 +125,7 @@ public class Painel extends javax.swing.JFrame {
                                 .addGap(15, 15, 15)
                                 .addComponent(TextTitle))
                             .addComponent(ButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(ButtonServicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Painel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -151,8 +142,6 @@ public class Painel extends javax.swing.JFrame {
                 .addComponent(ButtonFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ButtonServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
@@ -171,24 +160,20 @@ public class Painel extends javax.swing.JFrame {
     }
     
     private void ButtonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonClientesActionPerformed
-        this.adicionarComponente(new FormListarCliente());
+        this.adicionarComponente(new ViewListarCliente());
     }//GEN-LAST:event_ButtonClientesActionPerformed
 
     private void ButtonFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonFuncionariosActionPerformed
-        this.adicionarComponente(new FormListarFuncionario());
+        this.adicionarComponente(new ViewListarFuncionario());
     }//GEN-LAST:event_ButtonFuncionariosActionPerformed
 
     private void ButtonFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonFornecedorActionPerformed
-        this.adicionarComponente(new FormListarFornecedor());
+        this.adicionarComponente(new ViewListarFornecedor());
     }//GEN-LAST:event_ButtonFornecedorActionPerformed
 
     private void ButtonProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonProdutosActionPerformed
-        this.adicionarComponente(new FormListarProduto());
+        this.adicionarComponente(new ViewListarProduto());
     }//GEN-LAST:event_ButtonProdutosActionPerformed
-
-    private void ButtonServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonServicosActionPerformed
-
-    }//GEN-LAST:event_ButtonServicosActionPerformed
 
     private void ButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSairActionPerformed
         // TODO add your handling code here:
@@ -236,7 +221,6 @@ public class Painel extends javax.swing.JFrame {
     private javax.swing.JButton ButtonFuncionarios;
     private javax.swing.JButton ButtonProdutos;
     private javax.swing.JButton ButtonSair;
-    private javax.swing.JButton ButtonServicos;
     private javax.swing.JPanel Painel;
     private javax.swing.JDesktopPane PainelFrame;
     private javax.swing.JLabel TextTitle;

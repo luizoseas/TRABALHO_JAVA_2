@@ -45,7 +45,9 @@ abstract public class DAO {
             manager.getTransaction().commit();
             return true;
         }catch(Exception erro){
-            manager.getTransaction().rollback();
+            if(manager.getTransaction().isActive()){
+                manager.getTransaction().rollback();
+            }
             throw new FalhaException(erro.getMessage());
         }
     }
@@ -57,7 +59,9 @@ abstract public class DAO {
             manager.getTransaction().commit();
             return true;
         }catch(Exception erro){
-            manager.getTransaction().rollback();
+            if(manager.getTransaction().isActive()){
+                manager.getTransaction().rollback();
+            }
             throw new FalhaException(erro.getMessage());
         }
     }
@@ -69,7 +73,9 @@ abstract public class DAO {
             manager.getTransaction().commit();
             return true;
         }catch(Exception erro){
-            manager.getTransaction().rollback();
+            if(manager.getTransaction().isActive()){
+                manager.getTransaction().rollback();
+            }
             System.out.println(erro.getMessage());
             return false;
         }

@@ -47,7 +47,7 @@ public class Funcionario extends DAO implements Serializable {
     @ManyToOne(optional = false)
     private Pessoa funIdpessoa;
     
-    public List<Funcionario> getFuncionarios(){        
+    public static List<Funcionario> getFuncionarios(){        
         Query query = DAO.getInstance().createNamedQuery("Funcionario.findAll");
         return query.getResultList();
     }

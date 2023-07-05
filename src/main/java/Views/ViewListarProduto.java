@@ -5,6 +5,7 @@
 package Views;
 
 import Controllers.DAO;
+import Forms.FormListarProduto;
 import br.dev.lomm.automecanicapoo.database.Produto;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -12,40 +13,44 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author oseas
  */
-public class FormListarProduto extends javax.swing.JInternalFrame {
+public class ViewListarProduto extends javax.swing.JInternalFrame {
 
     private FormCadastrarProduto formCadastrarProduto;
     private FormConsultarProduto formConsultarProduto;
-    private static DefaultTableModel Tabela;
+        private boolean iniciado = false;
     private static Produto produtoDAO = new Produto();
-    
-    private static EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("automecanica");
-    private static EntityManager entityManager = entityManagerFactory.createEntityManager();
+    ;
     /**
      * Creates new form FormListarProduto
      */
-    public FormListarProduto() {
-        initComponents();
-        setTabela((DefaultTableModel) TABLE_PRODUTOS.getModel());
-        atualizarTabela();
-    }
-    
-    private static void setTabela(DefaultTableModel tabela){
-        Tabela = tabela;
-    }
-    
-    public static void atualizarTabela(){
-        Tabela.getDataVector().removeAllElements();
-        for (Produto prod : produtoDAO.getProdutos()) {
-            String data[] = {prod.getIdproduto()+"",prod.getProdNome(),prod.getProdValidade().toString()};
-            Tabela.addRow(data);   
+    public ViewListarProduto() {
+        if(!iniciado){
+            initComponents();
+            iniciado = true;
         }
     }
+
+    @Override
+    public void setVisible(boolean aFlag) {
+        if(!iniciado){
+            initComponents();
+            iniciado = true;
+        }
+        super.setVisible(aFlag); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        FormListarProduto.setTabela(TABLE_PRODUTOS);
+        FormListarProduto.atualizar();
+        
+    }
+    
+    
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -134,30 +139,28 @@ public class FormListarProduto extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(HEADER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(TABLE, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(BUTTON_CONSULTAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BUTTON_CADASTRAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(145, 145, 145)
+                .addComponent(BUTTON_CONSULTAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BUTTON_CADASTRAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(134, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(TABLE, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(BUTTON_ATUALIZAR, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(HEADER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(BUTTON_ATUALIZAR, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(TABLE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(TABLE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BUTTON_CONSULTAR, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BUTTON_CADASTRAR, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -189,7 +192,7 @@ public class FormListarProduto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_BUTTON_CONSULTARActionPerformed
 
     private void BUTTON_ATUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_ATUALIZARActionPerformed
-        atualizarTabela();
+        FormListarProduto.atualizar();
     }//GEN-LAST:event_BUTTON_ATUALIZARActionPerformed
 
 

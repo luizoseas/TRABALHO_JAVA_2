@@ -79,7 +79,8 @@ public class ControllerFuncionario implements InterfaceController {
             JTextPane logradouro,
             JTextPane cep,
             JTextPane bairro,
-            JTextPane cidade
+            JTextPane cidade,
+            JComboBox cargo
             )  throws FalhaException{
 
         ControllerEndereco controllerEndereco = new ControllerEndereco();
@@ -93,6 +94,7 @@ public class ControllerFuncionario implements InterfaceController {
             funcionario = new Funcionario();
         }
         funcionario.setFunIdpessoa(controllerPessoa.getPessoa());
+        funcionario.setFunIdcargo(DAO.getInstance().find(Cargo.class, Integer.parseInt((String) cargo.getItemAt(cargo.getSelectedIndex()))));
     }
     
     

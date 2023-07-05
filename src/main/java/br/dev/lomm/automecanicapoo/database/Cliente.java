@@ -11,12 +11,15 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 
 /**
@@ -32,7 +35,7 @@ public class Cliente extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idcliente")
     private Integer idcliente;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiIdcliente")
@@ -41,6 +44,12 @@ public class Cliente extends DAO implements Serializable {
     @ManyToOne(optional = false)
     private Pessoa cliIdpessoa;
 
+        
+    public static List<Cliente> getCliente(){        
+        Query query = DAO.getInstance().createNamedQuery("Cliente.findAll");
+        return query.getResultList();
+    }
+    
     public Cliente() {
     }
 

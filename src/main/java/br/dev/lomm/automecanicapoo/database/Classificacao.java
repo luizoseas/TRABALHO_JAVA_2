@@ -4,6 +4,8 @@
  */
 package br.dev.lomm.automecanicapoo.database;
 
+import Controllers.DAO;
+import Interfaces.FalhaException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -13,8 +15,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -26,7 +30,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Classificacao.findAll", query = "SELECT c FROM Classificacao c"),
     @NamedQuery(name = "Classificacao.findByIdclassificacao", query = "SELECT c FROM Classificacao c WHERE c.idclassificacao = :idclassificacao"),
     @NamedQuery(name = "Classificacao.findByClasDescricao", query = "SELECT c FROM Classificacao c WHERE c.clasDescricao = :clasDescricao")})
-public class Classificacao implements Serializable {
+public class Classificacao extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -38,6 +42,20 @@ public class Classificacao implements Serializable {
     private String clasDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiIdclassificacao")
     private List<Veiculo> veiculoList;
+    
+    public static Classificacao buscarOuInserirClassificacao(String nome) throws FalhaException {
+        TypedQuery<Classificacao> query = DAO.getInstance().createNamedQuery("Classificacao.findByClasDescricao", Classificacao.class);
+        query.setParameter("clasDescricao", nome);
+
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            Classificacao novo = new Classificacao();
+            novo.setClasDescricao(nome);
+            novo.salvar();
+            return novo;
+        }
+    }
 
     public Classificacao() {
     }

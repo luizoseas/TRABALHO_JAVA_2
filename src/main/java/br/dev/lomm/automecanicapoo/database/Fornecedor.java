@@ -19,6 +19,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Query;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 
 /**
  *
@@ -55,6 +56,10 @@ public class Fornecedor extends DAO implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "notaIdfornecedor")
     private List<Nota> notaList;
 
+    public static List<Fornecedor> getFornecedores(){        
+        Query query = DAO.getInstance().createNamedQuery("Fornecedor.findAll");
+        return query.getResultList();
+    }
     
     public List<Fornecedor> getFornecedor(){        
         Query query = DAO.getInstance().createNamedQuery("Fornecedor.findAll");

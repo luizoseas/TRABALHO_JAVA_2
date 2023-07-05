@@ -5,6 +5,8 @@
 package Views;
 
 import Controllers.ControllerFornecedor;
+import Forms.FormListarFornecedor;
+import Forms.FormListarProduto;
 import Interfaces.FalhaException;
 import br.dev.lomm.automecanicapoo.database.Fornecedor;
 
@@ -266,7 +268,7 @@ public class FormAtualizarFornecedor extends javax.swing.JFrame {
             controllerFornecedor.validarDados();
             controllerFornecedor.getFornecedor().atualizar();
             this.setVisible(false);
-            FormListarProduto.atualizarTabela();
+            FormListarFornecedor.atualizar();
         }catch(FalhaException $erro){
             
         }

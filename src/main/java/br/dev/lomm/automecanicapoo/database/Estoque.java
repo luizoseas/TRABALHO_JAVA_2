@@ -21,6 +21,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Query;
 import javax.persistence.Table;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -58,11 +59,6 @@ public class Estoque extends DAO implements Serializable {
     public Estoque() {
     }
 
-    public List<Estoque> getEstoques(Produto produto){      
-        Query query = DAO.getInstance().createNativeQuery("Estoque.findAll");
-        return query.getResultList();
-    }
-    
     public Estoque(Integer idestoque) {
         this.idestoque = idestoque;
     }

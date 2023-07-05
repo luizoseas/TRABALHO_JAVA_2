@@ -4,20 +4,47 @@
  */
 package Views;
 
+import Controllers.DAO;
+import Forms.FormListarFuncionario;
+import br.dev.lomm.automecanicapoo.database.Funcionario;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author oseas
  */
-public class FormListarCliente extends javax.swing.JInternalFrame {
+public class ViewListarFuncionario extends javax.swing.JInternalFrame {
 
-    private FormCadastrarCliente formCadastrarCliente;
-    
+    private FormCadastrarFuncionario formCadastrarFuncionario;
+    private static DefaultTableModel Tabela;
+    private static Funcionario funcionarioDAO = new Funcionario();
+    private FormConsultarFuncionario formConsultarFuncionario;
+        private boolean iniciado = false;
     /**
-     * Creates new form FormListarCliente
+     * Creates new form FormListarFuncionario
      */
-    public FormListarCliente() {
-        initComponents();
+    public ViewListarFuncionario() {
+        if(!iniciado){
+            initComponents();
+            iniciado = true;
+        }
     }
+
+    @Override
+    public void setVisible(boolean aFlag) {
+        if(!iniciado){
+            initComponents();
+            iniciado = true;
+        }
+        super.setVisible(aFlag); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        FormListarFuncionario.setTabela(TABLE_PRODUTOS);
+        FormListarFuncionario.atualizar();
+    }
+    
+    
+    
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,51 +57,38 @@ public class FormListarCliente extends javax.swing.JInternalFrame {
 
         TABLE = new javax.swing.JScrollPane();
         TABLE_PRODUTOS = new javax.swing.JTable();
-        INPUT_PESQUISA = new javax.swing.JTextPane();
-        BUTTON_PESQUISAR = new javax.swing.JButton();
-        TEXT_PESQUISA = new javax.swing.JLabel();
+        BUTTON_CONSULTAR = new javax.swing.JButton();
         HEADER = new javax.swing.JPanel();
         TEXT_TITLE = new javax.swing.JLabel();
         BUTTON_CADASTRAR = new javax.swing.JButton();
-        BUTTON_CONSULTAR = new javax.swing.JButton();
+        BUTTON_ATUALIZAR = new javax.swing.JButton();
 
         TABLE_PRODUTOS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Codigo", "Nome", "CPF"
+                "Codigo", "Nome", "Cargo"
             }
         ));
         TABLE.setViewportView(TABLE_PRODUTOS);
 
-        INPUT_PESQUISA.setBorder(null);
-        INPUT_PESQUISA.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
-        INPUT_PESQUISA.setToolTipText("Quantidade");
-        INPUT_PESQUISA.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
-        BUTTON_PESQUISAR.setBackground(new java.awt.Color(0, 204, 255));
-        BUTTON_PESQUISAR.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        BUTTON_PESQUISAR.setForeground(new java.awt.Color(255, 255, 255));
-        BUTTON_PESQUISAR.setText("PESQUISAR");
-        BUTTON_PESQUISAR.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        BUTTON_PESQUISAR.addActionListener(new java.awt.event.ActionListener() {
+        BUTTON_CONSULTAR.setBackground(new java.awt.Color(0, 204, 204));
+        BUTTON_CONSULTAR.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BUTTON_CONSULTAR.setForeground(new java.awt.Color(255, 255, 255));
+        BUTTON_CONSULTAR.setText("CONSULTAR");
+        BUTTON_CONSULTAR.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BUTTON_CONSULTAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BUTTON_PESQUISARActionPerformed(evt);
+                BUTTON_CONSULTARActionPerformed(evt);
             }
         });
-
-        TEXT_PESQUISA.setFont(new java.awt.Font("Arial", 0, 20)); // NOI18N
-        TEXT_PESQUISA.setText("Pequisa:");
 
         HEADER.setBackground(new java.awt.Color(159, 172, 172));
 
         TEXT_TITLE.setFont(new java.awt.Font("Arial", 1, 25)); // NOI18N
         TEXT_TITLE.setForeground(new java.awt.Color(255, 255, 255));
-        TEXT_TITLE.setText("LISTAR CLIENTE");
+        TEXT_TITLE.setText("LISTAR FUNCIONARIO");
 
         javax.swing.GroupLayout HEADERLayout = new javax.swing.GroupLayout(HEADER);
         HEADER.setLayout(HEADERLayout);
@@ -101,14 +115,14 @@ public class FormListarCliente extends javax.swing.JInternalFrame {
             }
         });
 
-        BUTTON_CONSULTAR.setBackground(new java.awt.Color(0, 204, 204));
-        BUTTON_CONSULTAR.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        BUTTON_CONSULTAR.setForeground(new java.awt.Color(255, 255, 255));
-        BUTTON_CONSULTAR.setText("CONSULTAR");
-        BUTTON_CONSULTAR.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        BUTTON_CONSULTAR.addActionListener(new java.awt.event.ActionListener() {
+        BUTTON_ATUALIZAR.setBackground(new java.awt.Color(0, 204, 255));
+        BUTTON_ATUALIZAR.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BUTTON_ATUALIZAR.setForeground(new java.awt.Color(255, 255, 255));
+        BUTTON_ATUALIZAR.setText("Atualizar");
+        BUTTON_ATUALIZAR.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BUTTON_ATUALIZAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BUTTON_CONSULTARActionPerformed(evt);
+                BUTTON_ATUALIZARActionPerformed(evt);
             }
         });
 
@@ -120,32 +134,26 @@ public class FormListarCliente extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
+                        .addGap(23, 23, 23)
+                        .addComponent(TABLE, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(132, 132, 132)
                         .addComponent(BUTTON_CONSULTAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(BUTTON_CADASTRAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(TEXT_PESQUISA)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(INPUT_PESQUISA)
-                                .addGap(18, 18, 18)
-                                .addComponent(BUTTON_PESQUISAR, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(TABLE, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(BUTTON_CADASTRAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(BUTTON_ATUALIZAR, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(HEADER, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BUTTON_PESQUISAR, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(INPUT_PESQUISA, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TEXT_PESQUISA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(10, 10, 10)
+                .addGap(16, 16, 16)
+                .addComponent(BUTTON_ATUALIZAR, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TABLE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -157,31 +165,38 @@ public class FormListarCliente extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BUTTON_PESQUISARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_PESQUISARActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BUTTON_PESQUISARActionPerformed
+    private void BUTTON_CONSULTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_CONSULTARActionPerformed
+       int linha = TABLE_PRODUTOS.getSelectedRow();
+       int codigoProduto = Integer.parseInt(TABLE_PRODUTOS.getValueAt(linha,0).toString());
+       Funcionario funcionario = DAO.getInstance().find(Funcionario.class, codigoProduto);
+       if(funcionario instanceof Funcionario){
+            if(!(this.formConsultarFuncionario instanceof FormConsultarFuncionario)){
+                this.formConsultarFuncionario = new FormConsultarFuncionario();
+            }
+            this.formConsultarFuncionario.setFuncionario(funcionario);
+            this.formConsultarFuncionario.setVisible(true);
+       }
+    }//GEN-LAST:event_BUTTON_CONSULTARActionPerformed
 
     private void BUTTON_CADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_CADASTRARActionPerformed
-        if(!(this.formCadastrarCliente instanceof FormCadastrarCliente)){
-            this.formCadastrarCliente = new FormCadastrarCliente();
+        if(!(this.formCadastrarFuncionario instanceof FormCadastrarFuncionario)){
+            this.formCadastrarFuncionario = new FormCadastrarFuncionario();
         }
-        this.formCadastrarCliente.setVisible(true);
+        this.formCadastrarFuncionario.setVisible(true);
     }//GEN-LAST:event_BUTTON_CADASTRARActionPerformed
 
-    private void BUTTON_CONSULTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_CONSULTARActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BUTTON_CONSULTARActionPerformed
+    private void BUTTON_ATUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_ATUALIZARActionPerformed
+        FormListarFuncionario.atualizar();
+    }//GEN-LAST:event_BUTTON_ATUALIZARActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BUTTON_ATUALIZAR;
     private javax.swing.JButton BUTTON_CADASTRAR;
     private javax.swing.JButton BUTTON_CONSULTAR;
-    private javax.swing.JButton BUTTON_PESQUISAR;
     private javax.swing.JPanel HEADER;
-    private javax.swing.JTextPane INPUT_PESQUISA;
     private javax.swing.JScrollPane TABLE;
     private javax.swing.JTable TABLE_PRODUTOS;
-    private javax.swing.JLabel TEXT_PESQUISA;
     private javax.swing.JLabel TEXT_TITLE;
     // End of variables declaration//GEN-END:variables
 }

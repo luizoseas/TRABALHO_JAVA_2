@@ -6,6 +6,7 @@ package Views;
 
 import Controllers.ControllerProduto;
 import Controllers.DAO;
+import Forms.FormListarProduto;
 import Interfaces.FalhaException;
 import br.dev.lomm.automecanicapoo.database.Estoque;
 import br.dev.lomm.automecanicapoo.database.Produto;
@@ -296,7 +297,7 @@ public class FormConsultarProduto extends javax.swing.JFrame {
         try {
             if(this.produto.excluir()){
                 this.setVisible(false);
-                FormListarProduto.atualizarTabela();
+                FormListarProduto.atualizar();
             }
         } catch (FalhaException ex) {
         }

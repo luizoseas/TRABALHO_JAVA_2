@@ -4,6 +4,11 @@
  */
 package Views;
 
+import Controllers.ControllerCliente;
+import Interfaces.FalhaException;
+import br.dev.lomm.automecanicapoo.database.Cliente;
+import br.dev.lomm.automecanicapoo.database.Funcionario;
+
 /**
  *
  * @author oseas
@@ -11,6 +16,8 @@ package Views;
 public class FormConsultarCliente extends javax.swing.JFrame {
 
     private FormCadastrarOrdemDeServico formCadastrarOrdemDeServico = new FormCadastrarOrdemDeServico();
+    private final ControllerCliente controllerCliente = new ControllerCliente();
+    private Cliente cliente;
     
     /**
      * Creates new form FormConsultarCliente
@@ -19,6 +26,12 @@ public class FormConsultarCliente extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void setCliente(Cliente cliente){
+        this.cliente = cliente;
+        controllerCliente.setCliente(cliente);
+        controllerCliente.preencherForm(INPUT_NOME, INPUT_CPF, INPUT_DTNASCIMENTO, INPUT_EMAIL, INPUT_LOGRADOURO, INPUT_CEP, INPUT_BAIRRO, INPUT_CIDADE);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,6 +84,8 @@ public class FormConsultarCliente extends javax.swing.JFrame {
         TEXT_DTNASCIMENTO.setBackground(new java.awt.Color(238, 238, 238));
         TEXT_DTNASCIMENTO.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
         TEXT_DTNASCIMENTO.setText("Data Nascimento:");
+
+        INPUT_DTNASCIMENTO.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_DTNASCIMENTOLayout = new javax.swing.GroupLayout(BG_INPUT_DTNASCIMENTO);
         BG_INPUT_DTNASCIMENTO.setLayout(BG_INPUT_DTNASCIMENTOLayout);
@@ -137,6 +152,7 @@ public class FormConsultarCliente extends javax.swing.JFrame {
         INPUT_LOGRADOURO.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_LOGRADOURO.setToolTipText("Quantidade");
         INPUT_LOGRADOURO.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_LOGRADOURO.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_LOGRADOUROLayout = new javax.swing.GroupLayout(BG_INPUT_LOGRADOURO);
         BG_INPUT_LOGRADOURO.setLayout(BG_INPUT_LOGRADOUROLayout);
@@ -169,6 +185,7 @@ public class FormConsultarCliente extends javax.swing.JFrame {
         INPUT_CEP.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_CEP.setToolTipText("Quantidade");
         INPUT_CEP.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_CEP.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_CEPLayout = new javax.swing.GroupLayout(BG_INPUT_CEP);
         BG_INPUT_CEP.setLayout(BG_INPUT_CEPLayout);
@@ -201,6 +218,7 @@ public class FormConsultarCliente extends javax.swing.JFrame {
         INPUT_CPF.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_CPF.setToolTipText("Quantidade");
         INPUT_CPF.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_CPF.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_CPFLayout = new javax.swing.GroupLayout(BG_INPUT_CPF);
         BG_INPUT_CPF.setLayout(BG_INPUT_CPFLayout);
@@ -233,6 +251,7 @@ public class FormConsultarCliente extends javax.swing.JFrame {
         INPUT_EMAIL.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_EMAIL.setToolTipText("Quantidade");
         INPUT_EMAIL.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_EMAIL.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_EMAILLayout = new javax.swing.GroupLayout(BG_INPUT_EMAIL);
         BG_INPUT_EMAIL.setLayout(BG_INPUT_EMAILLayout);
@@ -265,6 +284,7 @@ public class FormConsultarCliente extends javax.swing.JFrame {
         INPUT_NOME.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_NOME.setToolTipText("Quantidade");
         INPUT_NOME.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_NOME.setEnabled(false);
         INPUT_NOME.setMaximumSize(new java.awt.Dimension(62, 38));
 
         javax.swing.GroupLayout BG_INPUT_NOMELayout = new javax.swing.GroupLayout(BG_INPUT_NOME);
@@ -309,6 +329,7 @@ public class FormConsultarCliente extends javax.swing.JFrame {
         INPUT_BAIRRO.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_BAIRRO.setToolTipText("Quantidade");
         INPUT_BAIRRO.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_BAIRRO.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_BAIRROLayout = new javax.swing.GroupLayout(BG_INPUT_BAIRRO);
         BG_INPUT_BAIRRO.setLayout(BG_INPUT_BAIRROLayout);
@@ -341,6 +362,7 @@ public class FormConsultarCliente extends javax.swing.JFrame {
         INPUT_CIDADE.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_CIDADE.setToolTipText("Quantidade");
         INPUT_CIDADE.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_CIDADE.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_CIDADELayout = new javax.swing.GroupLayout(BG_INPUT_CIDADE);
         BG_INPUT_CIDADE.setLayout(BG_INPUT_CIDADELayout);
@@ -543,6 +565,7 @@ public class FormConsultarCliente extends javax.swing.JFrame {
 
     private void BUTTON_EDITAR1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITAR1ActionPerformed
         this.formCadastrarOrdemDeServico.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BUTTON_EDITAR1ActionPerformed
 
     private void BUTTON_EDITAR2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITAR2ActionPerformed

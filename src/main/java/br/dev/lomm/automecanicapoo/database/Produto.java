@@ -57,7 +57,7 @@ public class Produto extends DAO implements Serializable {
     public Produto() {
     }
     
-    public List<Produto> getProdutos(){        
+    public static List<Produto> getProdutos(){        
         Query query = DAO.getInstance().createNamedQuery("Produto.findAll");
         return query.getResultList();
     }

@@ -7,7 +7,16 @@ package Controllers;
 import Interfaces.EnumMensagem;
 import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
+import br.dev.lomm.automecanicapoo.database.Cargo;
+import br.dev.lomm.automecanicapoo.database.Cliente;
 import br.dev.lomm.automecanicapoo.database.Conserto;
+import br.dev.lomm.automecanicapoo.database.Pecasconserto;
+import br.dev.lomm.automecanicapoo.database.Produto;
+import br.dev.lomm.automecanicapoo.database.Status;
+import br.dev.lomm.automecanicapoo.database.Veiculo;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JComboBox;
+import javax.swing.JTextPane;
 
 
 /**
@@ -17,6 +26,16 @@ import br.dev.lomm.automecanicapoo.database.Conserto;
 public class ControllerConserto implements InterfaceController {
 
     private Conserto conserto;
+    
+    private Cliente cliente;
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
     public void setConserto(Conserto conserto){
         this.conserto = conserto;
@@ -26,6 +45,37 @@ public class ControllerConserto implements InterfaceController {
         return this.conserto;
     }
     
+    public void setCampos(
+        JComboBox veic,
+        JComboBox sta,
+        JTextPane descricao
+    ){
+        if(!(conserto instanceof Conserto)){
+            conserto = new Conserto();
+        }
+        conserto.setConsIdveiculo(DAO.getInstance().find(Veiculo.class, Integer.parseInt((String) veic.getItemAt(veic.getSelectedIndex()))));
+        conserto.setConsIdstatus(DAO.getInstance().find(Status.class, Integer.parseInt((String) sta.getItemAt(sta.getSelectedIndex()))));
+        conserto.setConsDescricao(descricao.getText());
+    }
+
+    public void preencherForm(
+        JComboBox veic,
+        JComboBox cliente,
+        JComboBox status,
+        JTextPane descricao,
+        JTextPane total
+    ) {
+        veic.setSelectedItem(conserto.getConsIdveiculo());
+        cliente.setSelectedItem(conserto.getConsIdveiculo().getVeiIdcliente());
+        status.setSelectedItem(conserto.getConsIdstatus());
+        descricao.setText(conserto.getConsDescricao());
+        double valortotal = 0;
+        for (Pecasconserto pecaconcerto : conserto.getPecasconsertoList()) {
+            valortotal += pecaconcerto.getEstoque().getEstPreco();
+        }
+        total.setText("R$ "+valortotal);
+    }
+
     
 
     @Override

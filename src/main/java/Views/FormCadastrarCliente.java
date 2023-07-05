@@ -5,6 +5,7 @@
 package Views;
 
 import Controllers.ControllerCliente;
+import Forms.FormListarCliente;
 import Interfaces.FalhaException;
 
 /**
@@ -404,7 +405,8 @@ public class FormCadastrarCliente extends javax.swing.JFrame {
             ControllerCliente controllerCliente = new ControllerCliente();
             controllerCliente.setCampos(INPUT_NOME, INPUT_CPF, INPUT_DTNASCIMENTO, INPUT_EMAIL, INPUT_LOGRADOURO, INPUT_CEP, INPUT_BAIRRO, INPUT_CIDADE);
             controllerCliente.validarDados();
-            controllerCliente.getCliente().salvar();
+            controllerCliente.salvar();
+            FormListarCliente.atualizar();
             this.setVisible(false);
         }catch(FalhaException $erro){
             

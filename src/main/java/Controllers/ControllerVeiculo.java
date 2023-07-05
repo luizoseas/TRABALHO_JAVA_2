@@ -6,9 +6,16 @@ package Controllers;
 
 import Interfaces.EnumMensagem;
 import Interfaces.FalhaException;
+import br.dev.lomm.automecanicapoo.database.Classificacao;
 import br.dev.lomm.automecanicapoo.database.Cliente;
+import br.dev.lomm.automecanicapoo.database.Combustivel;
+import br.dev.lomm.automecanicapoo.database.Cor;
+import br.dev.lomm.automecanicapoo.database.Modelo;
+import br.dev.lomm.automecanicapoo.database.Produto;
 import br.dev.lomm.automecanicapoo.database.Veiculo;
+import com.toedter.calendar.JDateChooser;
 import java.util.Date;
+import javax.swing.JTextPane;
 
 /**
  *
@@ -21,6 +28,49 @@ public class ControllerVeiculo {
     public void setVeiculo(Veiculo veiculo)
     {
         this.veiculo = veiculo;
+    }
+    
+    public Veiculo getVeiculo(){
+        return this.veiculo;
+    }
+    
+    public void setCampos(
+        JTextPane placa,
+        JTextPane quilometrage,
+        JTextPane cor,
+        JTextPane combustivel,
+        JTextPane modelo,
+        JTextPane classificacao,
+        JDateChooser dataFabricacao
+    ) throws FalhaException {
+        if(!(veiculo instanceof Veiculo)){
+            veiculo = new Veiculo();
+        }
+        veiculo.setVeiPlaca(placa.getText());
+        veiculo.setVeiQuilometragem(placa.getText());
+        veiculo.setVeiIdclassificacao(Classificacao.buscarOuInserirClassificacao(classificacao.getText()));
+        veiculo.setVeiIdcor(Cor.buscarOuInserirCor(cor.getText()));
+        veiculo.setVeiIdmodelo(Modelo.buscarOuInserirModelo(classificacao.getText()));
+        veiculo.setVeiIdcombustivel(Combustivel.buscarOuInserirCombustivel(combustivel.getText()));
+        veiculo.setVeiDatafabric(dataFabricacao.getDate());
+    }
+
+    public void preencherForm(
+        JTextPane placa,
+        JTextPane quilometrage,
+        JTextPane cor,
+        JTextPane combustivel,
+        JTextPane modelo,
+        JTextPane classificacao,
+        JDateChooser dataFabricacao
+    ) throws FalhaException {
+        dataFabricacao.setDate(veiculo.getVeiDatafabric());
+        placa.setText(veiculo.getVeiPlaca());
+        quilometrage.setText(veiculo.getVeiQuilometragem());
+        cor.setText(veiculo.getVeiIdcor().getCorDescricao());
+        combustivel.setText(veiculo.getVeiIdcombustivel().getCombDescricao());
+        modelo.setText(veiculo.getVeiIdmodelo().getModDescricao());
+        classificacao.setText(veiculo.getVeiIdclassificacao().getClasDescricao());
     }
 
     public boolean validarDados() throws Exception{

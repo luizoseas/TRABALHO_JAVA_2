@@ -5,6 +5,7 @@
 package Views;
 
 import Controllers.ControllerProduto;
+import Forms.FormListarProduto;
 import Interfaces.FalhaException;
 import br.dev.lomm.automecanicapoo.database.Produto;
 
@@ -176,7 +177,7 @@ public class FormAtualizarProduto extends javax.swing.JFrame {
             controllerProduto.validarDados();
             controllerProduto.getProduto().atualizar();
             this.setVisible(false);
-            FormListarProduto.atualizarTabela();
+            FormListarProduto.atualizar();
         }catch(FalhaException $erro){
             
         }

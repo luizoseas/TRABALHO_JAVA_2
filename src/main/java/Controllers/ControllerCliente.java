@@ -81,5 +81,10 @@ public class ControllerCliente implements InterfaceController {
         controllerPessoa.validarDados();
         return true;
     }
-    
+       
+    public void salvar() throws FalhaException{
+        this.cliente.getCliIdpessoa().getPesIdendereco().salvar();
+        this.cliente.getCliIdpessoa().salvar();
+        this.cliente.salvar();
+    }
 }

@@ -4,6 +4,8 @@
  */
 package br.dev.lomm.automecanicapoo.database;
 
+import Controllers.DAO;
+import Interfaces.FalhaException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -14,8 +16,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -27,7 +31,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Modelo.findAll", query = "SELECT m FROM Modelo m"),
     @NamedQuery(name = "Modelo.findByIdmodelo", query = "SELECT m FROM Modelo m WHERE m.idmodelo = :idmodelo"),
     @NamedQuery(name = "Modelo.findByModDescricao", query = "SELECT m FROM Modelo m WHERE m.modDescricao = :modDescricao")})
-public class Modelo implements Serializable {
+public class Modelo extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,6 +44,21 @@ public class Modelo implements Serializable {
     @OneToMany(mappedBy = "veiIdmodelo")
     private List<Veiculo> veiculoList;
 
+    public static Modelo buscarOuInserirModelo(String nome) throws FalhaException {
+        TypedQuery<Modelo> query = DAO.getInstance().createNamedQuery("Cor.findByModDescricao", Modelo.class);
+        query.setParameter("modDescricao", nome);
+
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            Modelo novo = new Modelo();
+            novo.setModDescricao(nome);
+            novo.salvar();
+            return novo;
+        }
+    }
+    
+    
     public Modelo() {
     }
 

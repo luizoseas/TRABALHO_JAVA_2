@@ -4,18 +4,40 @@
  */
 package Views;
 
+import Controllers.ControllerNota;
+import Forms.FormListarNota;
+import Interfaces.FalhaException;
+import br.dev.lomm.automecanicapoo.database.Nota;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author oseas
  */
 public class FormConsultarNota extends javax.swing.JFrame {
 
+
+    private final ControllerNota controllerNota = new ControllerNota();
+    private final FormAtualizarNota formAtualizarNota = new FormAtualizarNota();
+    private Nota nota;
+    public Nota getNota() {
+        return nota;
+    }
+
+    public void setNota(Nota nota) {
+        this.nota = nota;
+        controllerNota.setNota(nota);
+        controllerNota.preencherForm(INPUT_NNF, INPUT_DTENTRADA, INPUT_DTCOMPRA, INPUT_FORNECEDOR);
+    }
+    
     /**
      * Creates new form FormConsultarNota
      */
     public FormConsultarNota() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,6 +105,8 @@ public class FormConsultarNota extends javax.swing.JFrame {
         TEXT_DTENTRADA.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
         TEXT_DTENTRADA.setText("Data entrada:");
 
+        INPUT_DTENTRADA.setEnabled(false);
+
         javax.swing.GroupLayout BG_INPUT_DTENTRADALayout = new javax.swing.GroupLayout(BG_INPUT_DTENTRADA);
         BG_INPUT_DTENTRADA.setLayout(BG_INPUT_DTENTRADALayout);
         BG_INPUT_DTENTRADALayout.setHorizontalGroup(
@@ -114,6 +138,7 @@ public class FormConsultarNota extends javax.swing.JFrame {
         INPUT_NNF.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_NNF.setToolTipText("Quantidade");
         INPUT_NNF.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_NNF.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_NNFLayout = new javax.swing.GroupLayout(BG_INPUT_NNF);
         BG_INPUT_NNF.setLayout(BG_INPUT_NNFLayout);
@@ -146,6 +171,7 @@ public class FormConsultarNota extends javax.swing.JFrame {
         INPUT_FORNECEDOR.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_FORNECEDOR.setToolTipText("Quantidade");
         INPUT_FORNECEDOR.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_FORNECEDOR.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_FORNECEDORLayout = new javax.swing.GroupLayout(BG_INPUT_FORNECEDOR);
         BG_INPUT_FORNECEDOR.setLayout(BG_INPUT_FORNECEDORLayout);
@@ -185,6 +211,8 @@ public class FormConsultarNota extends javax.swing.JFrame {
         TEXT_DTCOMPRA.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
         TEXT_DTCOMPRA.setText("Data compra:");
 
+        INPUT_DTCOMPRA.setEnabled(false);
+
         javax.swing.GroupLayout BG_INPUT_DTCOMPRALayout = new javax.swing.GroupLayout(BG_INPUT_DTCOMPRA);
         BG_INPUT_DTCOMPRA.setLayout(BG_INPUT_DTCOMPRALayout);
         BG_INPUT_DTCOMPRALayout.setHorizontalGroup(
@@ -212,13 +240,8 @@ public class FormConsultarNota extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(HEADER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(BUTTON_EDITAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BUTTON_EXCLUIR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(BG_INPUT_FORNECEDOR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -228,7 +251,12 @@ public class FormConsultarNota extends javax.swing.JFrame {
                                     .addComponent(BG_INPUT_DTCOMPRA, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(BG_INPUT_DTENTRADA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(91, 91, 91))))
+                        .addGap(91, 91, 91))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(BUTTON_EDITAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(BUTTON_EXCLUIR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,11 +281,18 @@ public class FormConsultarNota extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_EDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITARActionPerformed
-        // TODO add your handling code here:
+        formAtualizarNota.setVisible(true);
+        formAtualizarNota.setNota(nota);
+        this.setVisible(false);
     }//GEN-LAST:event_BUTTON_EDITARActionPerformed
 
     private void BUTTON_EXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EXCLUIRActionPerformed
-        // TODO add your handling code here:
+        try {
+            nota.excluir();
+            this.setVisible(false);
+            FormListarNota.atualizar();
+        } catch (FalhaException ex) {
+        }
     }//GEN-LAST:event_BUTTON_EXCLUIRActionPerformed
 
 

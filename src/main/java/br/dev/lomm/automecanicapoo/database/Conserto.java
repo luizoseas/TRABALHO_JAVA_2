@@ -70,6 +70,12 @@ public class Conserto implements Serializable {
         Query query = DAO.getInstance().createNamedQuery("Conserto.findAll");
         return query.getResultList();
     }
+    public static List<Conserto> getConsertos(){        
+        Query query = DAO.getInstance().createNamedQuery("Conserto.findAll");
+        return query.getResultList();
+    }
+        
+    
     
     public Conserto() {
     }

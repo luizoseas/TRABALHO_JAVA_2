@@ -4,12 +4,29 @@
  */
 package Views;
 
+import Controllers.ControllerNota;
+import Forms.FormListarNota;
+import Interfaces.FalhaException;
+import br.dev.lomm.automecanicapoo.database.Nota;
+
 /**
  *
  * @author oseas
  */
 public class FormAtualizarNota extends javax.swing.JFrame {
 
+    private Nota nota;
+    private final ControllerNota controllerNota = new ControllerNota();
+    public Nota getNota() {
+        return nota;
+    }
+
+    public void setNota(Nota nota) {
+        this.nota = nota;
+        controllerNota.setNota(nota);
+        controllerNota.preencherForm(INPUT_NNF, INPUT_DTENTRADA, INPUT_DTCOMPRA, INPUT_FORNECEDOR);
+    }
+    
     /**
      * Creates new form FormAtualizarNota
      */
@@ -75,6 +92,7 @@ public class FormAtualizarNota extends javax.swing.JFrame {
         INPUT_NNF.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_NNF.setToolTipText("Quantidade");
         INPUT_NNF.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_NNF.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_NNFLayout = new javax.swing.GroupLayout(BG_INPUT_NNF);
         BG_INPUT_NNF.setLayout(BG_INPUT_NNFLayout);
@@ -107,6 +125,7 @@ public class FormAtualizarNota extends javax.swing.JFrame {
         INPUT_FORNECEDOR.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_FORNECEDOR.setToolTipText("Quantidade");
         INPUT_FORNECEDOR.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_FORNECEDOR.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_FORNECEDORLayout = new javax.swing.GroupLayout(BG_INPUT_FORNECEDOR);
         BG_INPUT_FORNECEDOR.setLayout(BG_INPUT_FORNECEDORLayout);
@@ -236,7 +255,15 @@ public class FormAtualizarNota extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_ATUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_ATUALIZARActionPerformed
-        // TODO add your handling code here:
+        try{
+            controllerNota.setCampos(INPUT_NNF, INPUT_DTENTRADA, INPUT_DTCOMPRA);
+            controllerNota.validarDados();
+            controllerNota.getNota().salvar();
+            FormListarNota.atualizar();
+            this.setVisible(false);
+        }catch(FalhaException $erro){
+            
+        }
     }//GEN-LAST:event_BUTTON_ATUALIZARActionPerformed
 
 

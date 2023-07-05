@@ -8,6 +8,7 @@ import Controllers.ControllerCliente;
 import Controllers.ControllerFornecedor;
 import Controllers.ControllerFuncionario;
 import Controllers.DAO;
+import Forms.FormListarFuncionario;
 import Interfaces.FalhaException;
 import br.dev.lomm.automecanicapoo.database.Cargo;
 import br.dev.lomm.automecanicapoo.database.Endereco;
@@ -460,11 +461,11 @@ public class FormCadastrarFuncionario extends javax.swing.JFrame {
     private void BUTTON_CADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_CADASTRARActionPerformed
       
          try{
-            controllerFuncionario.setCampos(INPUT_NOME, INPUT_CPF, INPUT_DTNASCIMENTO, INPUT_EMAIL, INPUT_LOGRADOURO, INPUT_CEP, INPUT_BAIRRO, INPUT_CIDADE);
+            controllerFuncionario.setCampos(INPUT_NOME, INPUT_CPF, INPUT_DTNASCIMENTO, INPUT_EMAIL, INPUT_LOGRADOURO, INPUT_CEP, INPUT_BAIRRO, INPUT_CIDADE, INPUT_CARGO);
             controllerFuncionario.validarDados();
             controllerFuncionario.salvar();
             this.setVisible(false);
-            FormListarFuncionario.atualizarTabela();
+            FormListarFuncionario.atualizar();
         }catch(FalhaException $erro){
             
         }

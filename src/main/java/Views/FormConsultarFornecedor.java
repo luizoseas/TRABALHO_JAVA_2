@@ -5,7 +5,14 @@
 package Views;
 
 import Controllers.ControllerFornecedor;
+import Controllers.DAO;
+import Forms.FormListarFornecedor;
+import Forms.FormListarNota;
+import Interfaces.FalhaException;
 import br.dev.lomm.automecanicapoo.database.Fornecedor;
+import br.dev.lomm.automecanicapoo.database.Nota;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,6 +26,9 @@ public class FormConsultarFornecedor extends javax.swing.JFrame {
     
     private Fornecedor fornecedor;
     private final ControllerFornecedor controllerFornecedor = new ControllerFornecedor();
+    private final FormConsultarNota formConsultarNota = new FormConsultarNota();
+    private final FormCadastrarNota formCadastrarNota = new FormCadastrarNota();
+    private final FormAtualizarFornecedor formAtualizarFornecedor = new FormAtualizarFornecedor();
 
     public Fornecedor getFornecedor() {
         return fornecedor;
@@ -28,6 +38,9 @@ public class FormConsultarFornecedor extends javax.swing.JFrame {
         this.fornecedor = fornecedor;
         controllerFornecedor.setFornecedor(fornecedor);
         controllerFornecedor.preencherForm(INPUT_NOME_FANTASIA, INPUT_RAZAO_SOCIAL, INPUT_CNPJ, INPUT_IE);
+        FormListarNota.setTabela(TABLE);
+        FormListarNota.setFornecedor(fornecedor);
+        FormListarNota.atualizar();
         
     }
     
@@ -60,6 +73,11 @@ public class FormConsultarFornecedor extends javax.swing.JFrame {
         TEXT_NOME_FANTASIA = new javax.swing.JLabel();
         INPUT_NOME_FANTASIA = new javax.swing.JTextPane();
         BUTTON_EDITAR = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TABLE = new javax.swing.JTable();
+        BUTTON_EDITAR1 = new javax.swing.JButton();
+        BUTTON_EDITAR2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         HEADER.setBackground(new java.awt.Color(159, 172, 172));
 
@@ -94,6 +112,7 @@ public class FormConsultarFornecedor extends javax.swing.JFrame {
         INPUT_IE.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_IE.setToolTipText("Quantidade");
         INPUT_IE.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_IE.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_IELayout = new javax.swing.GroupLayout(BG_INPUT_IE);
         BG_INPUT_IE.setLayout(BG_INPUT_IELayout);
@@ -126,6 +145,7 @@ public class FormConsultarFornecedor extends javax.swing.JFrame {
         INPUT_RAZAO_SOCIAL.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_RAZAO_SOCIAL.setToolTipText("Quantidade");
         INPUT_RAZAO_SOCIAL.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_RAZAO_SOCIAL.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_RAZAO_SOCIALLayout = new javax.swing.GroupLayout(BG_INPUT_RAZAO_SOCIAL);
         BG_INPUT_RAZAO_SOCIAL.setLayout(BG_INPUT_RAZAO_SOCIALLayout);
@@ -135,7 +155,7 @@ public class FormConsultarFornecedor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(TEXT_RAZAO_SOCIAL)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(INPUT_RAZAO_SOCIAL, javax.swing.GroupLayout.DEFAULT_SIZE, 493, Short.MAX_VALUE)
+                .addComponent(INPUT_RAZAO_SOCIAL)
                 .addContainerGap())
         );
         BG_INPUT_RAZAO_SOCIALLayout.setVerticalGroup(
@@ -169,6 +189,7 @@ public class FormConsultarFornecedor extends javax.swing.JFrame {
         INPUT_CNPJ.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_CNPJ.setToolTipText("Quantidade");
         INPUT_CNPJ.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_CNPJ.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_CNPJLayout = new javax.swing.GroupLayout(BG_INPUT_CNPJ);
         BG_INPUT_CNPJ.setLayout(BG_INPUT_CNPJLayout);
@@ -201,6 +222,7 @@ public class FormConsultarFornecedor extends javax.swing.JFrame {
         INPUT_NOME_FANTASIA.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_NOME_FANTASIA.setToolTipText("Quantidade");
         INPUT_NOME_FANTASIA.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_NOME_FANTASIA.setEnabled(false);
         INPUT_NOME_FANTASIA.setMaximumSize(new java.awt.Dimension(62, 38));
 
         javax.swing.GroupLayout BG_INPUT_NOME_FANTASIALayout = new javax.swing.GroupLayout(BG_INPUT_NOME_FANTASIA);
@@ -224,16 +246,51 @@ public class FormConsultarFornecedor extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        BUTTON_EDITAR.setBackground(new java.awt.Color(0, 204, 204));
+        BUTTON_EDITAR.setBackground(new java.awt.Color(0, 51, 153));
         BUTTON_EDITAR.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         BUTTON_EDITAR.setForeground(new java.awt.Color(255, 255, 255));
-        BUTTON_EDITAR.setText("EDITAR");
+        BUTTON_EDITAR.setText("CADASTRAR");
         BUTTON_EDITAR.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         BUTTON_EDITAR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BUTTON_EDITARActionPerformed(evt);
             }
         });
+
+        TABLE.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Data Compra", "Data Entrada"
+            }
+        ));
+        jScrollPane1.setViewportView(TABLE);
+
+        BUTTON_EDITAR1.setBackground(new java.awt.Color(0, 204, 204));
+        BUTTON_EDITAR1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BUTTON_EDITAR1.setForeground(new java.awt.Color(255, 255, 255));
+        BUTTON_EDITAR1.setText("EDITAR");
+        BUTTON_EDITAR1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BUTTON_EDITAR1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BUTTON_EDITAR1ActionPerformed(evt);
+            }
+        });
+
+        BUTTON_EDITAR2.setBackground(new java.awt.Color(51, 204, 0));
+        BUTTON_EDITAR2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BUTTON_EDITAR2.setForeground(new java.awt.Color(255, 255, 255));
+        BUTTON_EDITAR2.setText("CONSULTAR");
+        BUTTON_EDITAR2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BUTTON_EDITAR2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BUTTON_EDITAR2ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("Notas");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -243,20 +300,31 @@ public class FormConsultarFornecedor extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BG_INPUT_CNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BG_INPUT_IE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(BG_INPUT_NOME_FANTASIA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BG_INPUT_RAZAO_SOCIAL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(148, 148, 148))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(BUTTON_EDITAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(BUTTON_EXCLUIR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(449, 449, 449))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(BUTTON_EDITAR2, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(BUTTON_EDITAR, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(19, 19, 19))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(BG_INPUT_NOME_FANTASIA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(BG_INPUT_RAZAO_SOCIAL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(BG_INPUT_CNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(BG_INPUT_IE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGap(148, 148, 148))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(BUTTON_EDITAR1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(BUTTON_EXCLUIR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(116, 116, 116)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,10 +338,18 @@ public class FormConsultarFornecedor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BG_INPUT_CNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BG_INPUT_IE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BUTTON_EDITAR, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BUTTON_EXCLUIR, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BUTTON_EDITAR2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BUTTON_EXCLUIR, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BUTTON_EDITAR1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(59, 59, 59))
         );
 
@@ -281,12 +357,35 @@ public class FormConsultarFornecedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_EXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EXCLUIRActionPerformed
-        // TODO add your handling code here:
+        try {
+            this.getFornecedor().excluir();
+            this.setVisible(false);
+            FormListarFornecedor.atualizar();
+        } catch (FalhaException ex) {
+        }
     }//GEN-LAST:event_BUTTON_EXCLUIRActionPerformed
 
     private void BUTTON_EDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITARActionPerformed
-        // TODO add your handling code here:
+        formCadastrarNota.setVisible(true);
+        formCadastrarNota.setFornecedor(this.fornecedor);
+        this.setVisible(false);
     }//GEN-LAST:event_BUTTON_EDITARActionPerformed
+
+    private void BUTTON_EDITAR1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITAR1ActionPerformed
+        formAtualizarFornecedor.setFornecedor(fornecedor);
+        formAtualizarFornecedor.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_BUTTON_EDITAR1ActionPerformed
+
+    private void BUTTON_EDITAR2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITAR2ActionPerformed
+       int linha = TABLE.getSelectedRow();
+       int codigoProduto = Integer.parseInt(TABLE.getValueAt(linha,0).toString());
+       Nota nota = DAO.getInstance().find(Nota.class, codigoProduto);
+       if(nota instanceof Nota){
+            this.formConsultarNota.setNota(nota);
+            this.formConsultarNota.setVisible(true);
+       }
+    }//GEN-LAST:event_BUTTON_EDITAR2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -295,16 +394,21 @@ public class FormConsultarFornecedor extends javax.swing.JFrame {
     private javax.swing.JPanel BG_INPUT_NOME_FANTASIA;
     private javax.swing.JPanel BG_INPUT_RAZAO_SOCIAL;
     private javax.swing.JButton BUTTON_EDITAR;
+    private javax.swing.JButton BUTTON_EDITAR1;
+    private javax.swing.JButton BUTTON_EDITAR2;
     private javax.swing.JButton BUTTON_EXCLUIR;
     private javax.swing.JPanel HEADER;
     private javax.swing.JTextPane INPUT_CNPJ;
     private javax.swing.JTextPane INPUT_IE;
     private javax.swing.JTextPane INPUT_NOME_FANTASIA;
     private javax.swing.JTextPane INPUT_RAZAO_SOCIAL;
+    private javax.swing.JTable TABLE;
     private javax.swing.JLabel TEXT_CNPJ;
     private javax.swing.JLabel TEXT_IE;
     private javax.swing.JLabel TEXT_NOME_FANTASIA;
     private javax.swing.JLabel TEXT_RAZAO_SOCIAL;
     private javax.swing.JLabel TEXT_TITLE;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

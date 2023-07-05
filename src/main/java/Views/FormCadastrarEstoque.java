@@ -26,14 +26,8 @@ public class FormCadastrarEstoque extends javax.swing.JFrame {
      */
     public FormCadastrarEstoque() {
         initComponents();
-        carregarNotas();
     }
     
-    private void carregarNotas(){
-        for (Nota nota : Nota.getNotas()) {
-            SELECT_NOTA.addItem(nota.getIdnota()+"");   
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

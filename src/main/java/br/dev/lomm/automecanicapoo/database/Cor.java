@@ -4,6 +4,8 @@
  */
 package br.dev.lomm.automecanicapoo.database;
 
+import Controllers.DAO;
+import Interfaces.FalhaException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -15,8 +17,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,7 +32,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Cor.findAll", query = "SELECT c FROM Cor c"),
     @NamedQuery(name = "Cor.findByIdcor", query = "SELECT c FROM Cor c WHERE c.idcor = :idcor"),
     @NamedQuery(name = "Cor.findByCorDescricao", query = "SELECT c FROM Cor c WHERE c.corDescricao = :corDescricao")})
-public class Cor implements Serializable {
+public class Cor extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,6 +45,20 @@ public class Cor implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiIdcor")
     private List<Veiculo> veiculoList;
 
+    public static Cor buscarOuInserirCor(String nome) throws FalhaException {
+        TypedQuery<Cor> query = DAO.getInstance().createNamedQuery("Cor.findByCorDescricao", Cor.class);
+        query.setParameter("corDescricao", nome);
+
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            Cor novo = new Cor();
+            novo.setCorDescricao(nome);
+            novo.salvar();
+            return novo;
+        }
+    }
+    
     public Cor() {
     }
 

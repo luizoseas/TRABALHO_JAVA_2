@@ -457,7 +457,7 @@ public class FormAtualizarFuncionario extends javax.swing.JFrame {
 
     private void BUTTON_ATUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_ATUALIZARActionPerformed
         try{
-            controllerFuncionario.setCampos(INPUT_NOME, INPUT_CPF, INPUT_DTNASCIMENTO, INPUT_EMAIL, INPUT_LOGRADOURO, INPUT_CEP, INPUT_BAIRRO, INPUT_CIDADE);
+            controllerFuncionario.setCampos(INPUT_NOME, INPUT_CPF, INPUT_DTNASCIMENTO, INPUT_EMAIL, INPUT_LOGRADOURO, INPUT_CEP, INPUT_BAIRRO, INPUT_CIDADE, INPUT_CARGO);
             controllerFuncionario.validarDados();
             controllerFuncionario.salvar();
             this.setVisible(false);

@@ -24,6 +24,8 @@ import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 /**
  *
@@ -40,7 +42,7 @@ public class Nota extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "idnota")
     private Integer idnota;
     @Basic(optional = false)
@@ -59,12 +61,6 @@ public class Nota extends DAO implements Serializable {
 
     public Nota() {
     }
-    
-    public static List<Nota> getNotas(){      
-        Query query = DAO.getInstance().createNamedQuery("Nota.findAll");
-        return query.getResultList();
-    }
-    
 
     public Nota(Integer idnota) {
         this.idnota = idnota;
