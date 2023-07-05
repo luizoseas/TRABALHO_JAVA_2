@@ -4,6 +4,8 @@
  */
 package Controllers;
 
+import Interfaces.EnumMensagem;
+import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
 import br.dev.lomm.automecanicapoo.database.Fornecedor;
 
@@ -21,10 +23,28 @@ public class ControllerFornecedor implements InterfaceController{
 
     @Override
     public boolean validarDados() throws Exception {
-    if (fornecedor.getForNomefantasia() instanceof String){
-
-    }
-    return true;
+        if (!(fornecedor.getForNomefantasia() instanceof String) ||
+                fornecedor.getForNomefantasia().isEmpty() ||
+                fornecedor.getForNomefantasia().length() <= 1){
+            throw new FalhaException(EnumMensagem.MSG008.getDescricao());
+        }
+        if (!(fornecedor.getForRazaosocial() instanceof String) ||
+                fornecedor.getForRazaosocial().isEmpty() ||
+                fornecedor.getForRazaosocial().length() <= 1){
+            throw new FalhaException(EnumMensagem.MSG009.getDescricao());
+        }
+        if (!(fornecedor.getForCnpj() instanceof String) ||
+                fornecedor.getForCnpj().isEmpty() ||
+                fornecedor.getForCnpj().length() != 14 ||
+                !fornecedor.getForCnpj().matches("\\d+")){
+            throw new FalhaException(EnumMensagem.MSG010.getDescricao());
+        }
+        if (!(fornecedor.getForInscricaoestadual() instanceof String) ||
+                fornecedor.getForInscricaoestadual().isEmpty() ||
+                !fornecedor.getForInscricaoestadual().matches("\\d+")){
+            throw new FalhaException(EnumMensagem.MSG011.getDescricao());
+        }
+        return true;
     }
     
 }

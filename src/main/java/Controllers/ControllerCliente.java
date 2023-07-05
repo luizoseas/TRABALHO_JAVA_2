@@ -4,6 +4,7 @@
  */
 package Controllers;
 
+import Interfaces.EnumMensagem;
 import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
 import br.dev.lomm.automecanicapoo.database.Cliente;
@@ -24,7 +25,7 @@ public class ControllerCliente implements InterfaceController {
     
     public boolean validarDados() throws Exception{
         if(!(this.cliente.getCliIdpessoa() instanceof Pessoa)){
-            new FalhaException("Pessoa não informada.");
+            new FalhaException(EnumMensagem.MSG012.getDescricao());
         }
         ControllerPessoa controllerPessoa = new ControllerPessoa();
         controllerPessoa.setPessoa(this.cliente.getCliIdpessoa());

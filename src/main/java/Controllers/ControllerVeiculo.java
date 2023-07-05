@@ -31,34 +31,34 @@ public class ControllerVeiculo {
         if(!(veiculo.getVeiPlaca() instanceof String) ||
                 veiculo.getVeiPlaca().isEmpty() ||
                 veiculo.getVeiPlaca().length() != 7){
-            throw new FalhaException(EnumMensagem.MSG013.getDescricao());
+            throw new FalhaException(EnumMensagem.MSG015.getDescricao());
         }
         if(!(veiculo.getVeiQuilometragem() instanceof String) ||
                 veiculo.getVeiQuilometragem().isEmpty()){
-            throw new FalhaException(EnumMensagem.MSG013.getDescricao());
+            throw new FalhaException(EnumMensagem.MSG016.getDescricao());
         }
         if(!(veiculo.getVeiIdcombustivel().getCombDescricao() instanceof String) ||
                 veiculo.getVeiIdcombustivel().getCombDescricao().isEmpty()){
-            throw new FalhaException(EnumMensagem.MSG013.getDescricao());
+            throw new FalhaException(EnumMensagem.MSG002.getDescricao());
         }
         if(!(veiculo.getVeiIdmodelo().getModDescricao() instanceof String ||
                 veiculo.getVeiIdmodelo().getModDescricao().isEmpty())){
-            throw new FalhaException(EnumMensagem.MSG013.getDescricao());
+            throw new FalhaException(EnumMensagem.MSG002.getDescricao());
         }
         if(!(veiculo.getVeiIdmodelo().getModDescricao() instanceof String ||
                 veiculo.getVeiIdmodelo().getModDescricao().isEmpty())){
-            throw new FalhaException(EnumMensagem.MSG013.getDescricao());
+            throw new FalhaException(EnumMensagem.MSG002.getDescricao());
         }
         if(!(veiculo.getVeiIdcor().getCorDescricao() instanceof String ||
                 veiculo.getVeiIdcor().getCorDescricao().isEmpty())){
-            throw new FalhaException(EnumMensagem.MSG013.getDescricao());
+            throw new FalhaException(EnumMensagem.MSG002.getDescricao());
         }
         if(!(veiculo.getVeiIdcliente() instanceof Cliente)){
-            throw new FalhaException(EnumMensagem.MSG013.getDescricao());
+            throw new FalhaException(EnumMensagem.MSG017.getDescricao());
         }
         if(!(veiculo.getVeiIdclassificacao().getClasDescricao() instanceof String ||
                 veiculo.getVeiIdclassificacao().getClasDescricao().isEmpty())){
-            throw new FalhaException(EnumMensagem.MSG013.getDescricao());
+            throw new FalhaException(EnumMensagem.MSG002.getDescricao());
         }
         return true;
     }

@@ -6,7 +6,6 @@ package Controllers;
 
 import Interfaces.EnumMensagem;
 import Interfaces.InterfaceController;
-import br.dev.lomm.automecanicapoo.database.Cliente;
 import br.dev.lomm.automecanicapoo.database.Pessoa;
 import java.util.Date;
 

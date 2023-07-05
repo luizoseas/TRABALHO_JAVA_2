@@ -23,7 +23,10 @@ public enum EnumMensagem {
     MSG011("Inscrição Estadual inválida."),
     MSG012("Pessoa não informada."),
     MSG013("Data inválida."),
-    MSG014("O valor não pode ser negativo.");
+    MSG014("O valor não pode ser negativo."),
+    MSG015("Placa inválida."),
+    MSG016("Quilometragem inválida."),
+    MSG017("Cliente não registrado.");
     
 
     private String descricao;

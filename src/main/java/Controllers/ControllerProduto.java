@@ -24,14 +24,14 @@ public class ControllerProduto implements InterfaceController {
     
     @Override
     public boolean validarDados() throws Exception {
-        if(produto.getProdNome() instanceof String ||
+        if(!(produto.getProdNome() instanceof String) ||
                 produto.getProdNome().isEmpty() ||
                 produto.getProdNome().length() <= 1){
             throw new FalhaException(EnumMensagem.MSG001.getDescricao());
         }
-        if(produto.getProdValidade() instanceof Date ||
+        if(!(produto.getProdValidade() instanceof Date) ||
                 produto.getProdValidade().toString().isEmpty()){
-                throw new FalhaException(EnumMensagem.MSG013.getDescricao());
+            throw new FalhaException(EnumMensagem.MSG013.getDescricao());
         }
         return true;
     }
