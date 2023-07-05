@@ -4,6 +4,7 @@
  */
 package br.dev.lomm.automecanicapoo.database;
 
+import Controllers.DAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -15,8 +16,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,7 +31,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Bairro.findAll", query = "SELECT b FROM Bairro b"),
     @NamedQuery(name = "Bairro.findByIdbairro", query = "SELECT b FROM Bairro b WHERE b.idbairro = :idbairro"),
     @NamedQuery(name = "Bairro.findByBaiDescricao", query = "SELECT b FROM Bairro b WHERE b.baiDescricao = :baiDescricao")})
-public class Bairro implements Serializable {
+public class Bairro extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,6 +44,20 @@ public class Bairro implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "endIdbairro")
     private List<Endereco> enderecoList;
 
+    public static Bairro buscarOuInserirBairro(String nomeBairro) {
+        TypedQuery<Bairro> query = DAO.getInstance().createNamedQuery("Bairro.findByBaiDescricao", Bairro.class);
+        query.setParameter("baiDescricao", nomeBairro);
+
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            Bairro novoBairro = new Bairro();
+            novoBairro.setBaiDescricao(nomeBairro);
+            novoBairro.salvar();
+            return novoBairro;
+        }
+    }
+    
     public Bairro() {
     }
 

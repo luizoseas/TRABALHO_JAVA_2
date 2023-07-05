@@ -4,6 +4,7 @@
  */
 package br.dev.lomm.automecanicapoo.database;
 
+import Controllers.DAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -15,8 +16,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,7 +31,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Cidade.findAll", query = "SELECT c FROM Cidade c"),
     @NamedQuery(name = "Cidade.findByIdcidade", query = "SELECT c FROM Cidade c WHERE c.idcidade = :idcidade"),
     @NamedQuery(name = "Cidade.findByCidDescricao", query = "SELECT c FROM Cidade c WHERE c.cidDescricao = :cidDescricao")})
-public class Cidade implements Serializable {
+public class Cidade extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,6 +45,21 @@ public class Cidade implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "endIdcidade")
     private List<Endereco> enderecoList;
 
+    public static Cidade buscarOuInserirCidade(String nomeCidade) {
+        TypedQuery<Cidade> query = DAO.getInstance().createNamedQuery("Cidade.findByCidDescricao", Cidade.class);
+        query.setParameter("cidDescricao", nomeCidade);
+
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            Cidade novaCidade = new Cidade();
+            novaCidade.setCidDescricao(nomeCidade);
+            novaCidade.salvar();
+            return novaCidade;
+        }
+    }
+    
+    
     public Cidade() {
     }
 

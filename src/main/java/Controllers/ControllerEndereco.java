@@ -11,6 +11,7 @@ import br.dev.lomm.automecanicapoo.database.Bairro;
 import br.dev.lomm.automecanicapoo.database.Cidade;
 import br.dev.lomm.automecanicapoo.database.Endereco;
 import br.dev.lomm.automecanicapoo.database.Logradouro;
+import javax.swing.JTextPane;
 
 /**
  *
@@ -22,6 +23,18 @@ public class ControllerEndereco implements InterfaceController {
 
     public void setEndereco(Endereco endereco){
         this.endereco = endereco;
+    }
+    
+    public Endereco getEndereco(){
+        return this.endereco;
+    }
+    
+    public void setCampos(JTextPane logradouro,JTextPane cep, JTextPane bairro, JTextPane cidade){
+        endereco = new Endereco();
+        endereco.setEndCep(cep.getText());
+        endereco.setEndIdbairro(Bairro.buscarOuInserirBairro(bairro.getText()));
+        endereco.setEndIdcidade(Cidade.buscarOuInserirCidade(cidade.getText()));
+        endereco.setEndIdlogradouro(Logradouro.buscarOuInserirLogradouro(logradouro.getText()));
     }
 
     @Override

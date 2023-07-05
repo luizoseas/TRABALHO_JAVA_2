@@ -16,8 +16,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -42,6 +44,20 @@ public class Logradouro extends DAO implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "endIdlogradouro")
     private List<Endereco> enderecoList;
 
+    public static Logradouro buscarOuInserirLogradouro(String logradouro) {
+        TypedQuery<Logradouro> query = DAO.getInstance().createNamedQuery("Logradouro.findByLogDescricao", Logradouro.class);
+        query.setParameter("logDescricao", logradouro);
+        
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            Logradouro novoLogradouro = new Logradouro();
+            novoLogradouro.setLogDescricao(logradouro);
+            novoLogradouro.salvar();
+            return novoLogradouro;
+        }
+    }
+    
     public Logradouro() {
     }
 

@@ -4,6 +4,7 @@
  */
 package br.dev.lomm.automecanicapoo.database;
 
+import Controllers.DAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -15,8 +16,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,7 +31,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Combustivel.findAll", query = "SELECT c FROM Combustivel c"),
     @NamedQuery(name = "Combustivel.findByIdcombustivel", query = "SELECT c FROM Combustivel c WHERE c.idcombustivel = :idcombustivel"),
     @NamedQuery(name = "Combustivel.findByCombDescricao", query = "SELECT c FROM Combustivel c WHERE c.combDescricao = :combDescricao")})
-public class Combustivel implements Serializable {
+public class Combustivel extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,6 +44,19 @@ public class Combustivel implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiIdcombustivel")
     private List<Veiculo> veiculoList;
 
+    public static Combustivel buscarOuInserirCombustivel(String descricao) {
+        TypedQuery<Combustivel> query = DAO.getInstance().createNamedQuery("Combustivel.findByCombDescricao", Combustivel.class);
+        query.setParameter("combDescricao", descricao);
+        
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            Combustivel novoCombustivel = new Combustivel();
+            novoCombustivel.salvar(); 
+            return novoCombustivel;
+        }
+    }
+    
     public Combustivel() {
     }
 

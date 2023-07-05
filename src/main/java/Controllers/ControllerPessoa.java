@@ -8,7 +8,9 @@ import Interfaces.EnumMensagem;
 import Interfaces.InterfaceController;
 import br.dev.lomm.automecanicapoo.database.Cliente;
 import br.dev.lomm.automecanicapoo.database.Pessoa;
+import com.toedter.calendar.JDateChooser;
 import java.util.Date;
+import javax.swing.JTextPane;
 
 /**
  *
@@ -20,6 +22,22 @@ public class ControllerPessoa implements InterfaceController {
     
     public void setPessoa(Pessoa pessoa){
            this.pessoa = pessoa;
+    }
+    
+    public Pessoa getPessoa(){
+        return this.pessoa;
+    }
+    public void setCampos(
+        JTextPane nome,
+        JTextPane cpf, 
+        JDateChooser dataNascimento,
+        JTextPane email
+        ){
+        this.pessoa = new Pessoa();
+        this.pessoa.setPesCpf(cpf.getText());
+        this.pessoa.setPesDatanasc(dataNascimento.getDate());
+        this.pessoa.setPesEmail(email.getText());
+        this.pessoa.setPesNome(nome.getText());
     }
     
     public boolean validarDados() throws Exception{

@@ -9,5 +9,5 @@ package Interfaces;
  * @author roger
  */
 public interface InterfaceController {
-    public boolean validarDados() throws Exception;
+    public boolean validarDados();
 }
