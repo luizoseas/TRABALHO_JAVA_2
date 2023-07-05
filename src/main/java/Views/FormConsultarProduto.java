@@ -6,8 +6,11 @@ package Views;
 
 import Controllers.ControllerProduto;
 import Controllers.DAO;
+import Interfaces.FalhaException;
 import br.dev.lomm.automecanicapoo.database.Estoque;
 import br.dev.lomm.automecanicapoo.database.Produto;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -290,9 +293,12 @@ public class FormConsultarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_BUTTON_EDITARActionPerformed
 
     private void BUTTON_EXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EXCLUIRActionPerformed
-        if(this.produto.excluir()){
-            this.setVisible(false);
-            FormListarProduto.atualizarTabela();
+        try {
+            if(this.produto.excluir()){
+                this.setVisible(false);
+                FormListarProduto.atualizarTabela();
+            }
+        } catch (FalhaException ex) {
         }
     }//GEN-LAST:event_BUTTON_EXCLUIRActionPerformed
 

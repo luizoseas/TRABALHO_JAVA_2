@@ -29,7 +29,7 @@ public class ControllerEndereco implements InterfaceController {
         return this.endereco;
     }
     
-    public void setCampos(JTextPane logradouro,JTextPane cep, JTextPane bairro, JTextPane cidade){
+    public void setCampos(JTextPane logradouro,JTextPane cep, JTextPane bairro, JTextPane cidade) throws FalhaException{
         endereco = new Endereco();
         endereco.setEndCep(cep.getText());
         endereco.setEndIdbairro(Bairro.buscarOuInserirBairro(bairro.getText()));
@@ -38,11 +38,11 @@ public class ControllerEndereco implements InterfaceController {
     }
 
     public boolean validarDados() throws FalhaException {
-        if(!(endereco.getEndNumero() instanceof String) ||
-                endereco.getEndNumero().isEmpty() ||
-                endereco.getEndNumero().length() <= 1){
-            throw new FalhaException(EnumMensagem.MSG003.getDescricao());
-        }
+//        if(!(endereco.getEndNumero() instanceof String) ||
+//                endereco.getEndNumero().isEmpty() ||
+//                endereco.getEndNumero().length() <= 1){
+//            throw new FalhaException(EnumMensagem.MSG003.getDescricao());
+//        }
         if(!(endereco.getEndCep() instanceof String) ||
                 endereco.getEndCep().isEmpty() ||
                 endereco.getEndCep().length() != 8 ||

@@ -5,6 +5,7 @@
 package br.dev.lomm.automecanicapoo.database;
 
 import Controllers.DAO;
+import Interfaces.FalhaException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -44,7 +45,7 @@ public class Combustivel extends DAO implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "veiIdcombustivel")
     private List<Veiculo> veiculoList;
 
-    public static Combustivel buscarOuInserirCombustivel(String descricao) {
+    public static Combustivel buscarOuInserirCombustivel(String descricao) throws FalhaException {
         TypedQuery<Combustivel> query = DAO.getInstance().createNamedQuery("Combustivel.findByCombDescricao", Combustivel.class);
         query.setParameter("combDescricao", descricao);
         

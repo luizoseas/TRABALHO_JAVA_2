@@ -5,6 +5,7 @@
 package br.dev.lomm.automecanicapoo.database;
 
 import Controllers.DAO;
+import Interfaces.FalhaException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -35,7 +36,6 @@ public class Cidade extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idcidade")
     private Integer idcidade;
@@ -45,7 +45,7 @@ public class Cidade extends DAO implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "endIdcidade")
     private List<Endereco> enderecoList;
 
-    public static Cidade buscarOuInserirCidade(String nomeCidade) {
+    public static Cidade buscarOuInserirCidade(String nomeCidade) throws FalhaException {
         TypedQuery<Cidade> query = DAO.getInstance().createNamedQuery("Cidade.findByCidDescricao", Cidade.class);
         query.setParameter("cidDescricao", nomeCidade);
 

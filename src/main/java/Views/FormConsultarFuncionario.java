@@ -4,6 +4,8 @@
  */
 package Views;
 
+import Controllers.ControllerFuncionario;
+import Interfaces.FalhaException;
 import br.dev.lomm.automecanicapoo.database.Endereco;
 import br.dev.lomm.automecanicapoo.database.Funcionario;
 
@@ -15,6 +17,7 @@ public class FormConsultarFuncionario extends javax.swing.JFrame {
 
     private static Funcionario funcionario;
     private FormAtualizarFuncionario formAtualizarFuncionario;
+    private final ControllerFuncionario controllerFuncionario = new ControllerFuncionario();
     
     /**
      * Creates new form FormConsultarFuncionario
@@ -22,23 +25,16 @@ public class FormConsultarFuncionario extends javax.swing.JFrame {
     public FormConsultarFuncionario() {
         initComponents();
     }
+
     
-    public void carregarFuncionario(){
-        INPUT_NOME.setText(funcionario.getFunIdpessoa().getPesNome());
-        INPUT_EMAIL.setText(funcionario.getFunIdpessoa().getPesEmail());
-        INPUT_CPF.setText(funcionario.getFunIdpessoa().getPesCpf());
-        INPUT_DTNASCIMENTO.setDate(funcionario.getFunIdpessoa().getPesDatanasc());
-        INPUT_CARGO.setText(funcionario.getFunIdcargo().getCargDescricao());
-        if(funcionario.getFunIdpessoa().getPesIdendereco() instanceof Endereco){
-            INPUT_CIDADE.setText(funcionario.getFunIdpessoa().getPesIdendereco().getEndIdcidade().getCidDescricao());
-            INPUT_LOGRADOURO.setText(funcionario.getFunIdpessoa().getPesIdendereco().getEndIdlogradouro().getLogDescricao());
-            INPUT_BAIRRO.setText(funcionario.getFunIdpessoa().getPesIdendereco().getEndIdbairro().getBaiDescricao());
-            INPUT_CEP.setText(funcionario.getFunIdpessoa().getPesIdendereco().getEndCep());
-        }
-    }
-    
-    public static void setFuncionario(Funcionario funcionario){
+    public void setFuncionario(Funcionario funcionario){
+        try{
         FormConsultarFuncionario.funcionario = funcionario;
+        controllerFuncionario.setFuncionario(funcionario);
+        controllerFuncionario.preencherForm(INPUT_NOME, INPUT_CPF, INPUT_DTNASCIMENTO, INPUT_EMAIL, INPUT_LOGRADOURO, INPUT_CEP, INPUT_BAIRRO, INPUT_CIDADE, INPUT_CARGO);
+        }catch(FalhaException erro){
+            
+        }
     }
 
     /**
@@ -63,9 +59,6 @@ public class FormConsultarFuncionario extends javax.swing.JFrame {
         BG_INPUT_NOME = new javax.swing.JPanel();
         TEXT_NOME = new javax.swing.JLabel();
         INPUT_NOME = new javax.swing.JTextPane();
-        BG_INPUT_LOGIN = new javax.swing.JPanel();
-        TEXT_LOGIN = new javax.swing.JLabel();
-        INPUT_LOGIN = new javax.swing.JTextPane();
         BG_INPUT_LOGRADOURO = new javax.swing.JPanel();
         TEXT_LOGRADOURO = new javax.swing.JLabel();
         INPUT_LOGRADOURO = new javax.swing.JTextPane();
@@ -226,39 +219,6 @@ public class FormConsultarFuncionario extends javax.swing.JFrame {
                 .addGroup(BG_INPUT_NOMELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(INPUT_NOME, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TEXT_NOME, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        BG_INPUT_LOGIN.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        TEXT_LOGIN.setBackground(new java.awt.Color(238, 238, 238));
-        TEXT_LOGIN.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
-        TEXT_LOGIN.setText("Login:");
-
-        INPUT_LOGIN.setBorder(null);
-        INPUT_LOGIN.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
-        INPUT_LOGIN.setToolTipText("Quantidade");
-        INPUT_LOGIN.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        INPUT_LOGIN.setEnabled(false);
-
-        javax.swing.GroupLayout BG_INPUT_LOGINLayout = new javax.swing.GroupLayout(BG_INPUT_LOGIN);
-        BG_INPUT_LOGIN.setLayout(BG_INPUT_LOGINLayout);
-        BG_INPUT_LOGINLayout.setHorizontalGroup(
-            BG_INPUT_LOGINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BG_INPUT_LOGINLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(TEXT_LOGIN)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(INPUT_LOGIN, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        BG_INPUT_LOGINLayout.setVerticalGroup(
-            BG_INPUT_LOGINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BG_INPUT_LOGINLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(BG_INPUT_LOGINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(INPUT_LOGIN, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TEXT_LOGIN, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -471,24 +431,22 @@ public class FormConsultarFuncionario extends javax.swing.JFrame {
                         .addComponent(BUTTON_EXCLUIR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(107, 107, 107))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(BG_INPUT_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(BG_INPUT_DTNASCIMENTO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(BG_INPUT_NOME, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(BG_INPUT_BAIRRO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(BG_INPUT_CIDADE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(BG_INPUT_EMAIL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BG_INPUT_LOGRADOURO, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(BG_INPUT_CARGO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(BG_INPUT_CEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(BG_INPUT_LOGIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(BG_INPUT_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BG_INPUT_DTNASCIMENTO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(BG_INPUT_NOME, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(BG_INPUT_BAIRRO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BG_INPUT_CIDADE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BG_INPUT_EMAIL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BG_INPUT_LOGRADOURO, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(BG_INPUT_CARGO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BG_INPUT_CEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(141, 141, 141))))
         );
         layout.setVerticalGroup(
@@ -513,9 +471,7 @@ public class FormConsultarFuncionario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BG_INPUT_CARGO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BG_INPUT_CEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(BG_INPUT_LOGIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(73, 73, 73)
+                .addGap(144, 144, 144)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BUTTON_EDITAR, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BUTTON_EXCLUIR, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -547,7 +503,6 @@ public class FormConsultarFuncionario extends javax.swing.JFrame {
     private javax.swing.JPanel BG_INPUT_CPF;
     private javax.swing.JPanel BG_INPUT_DTNASCIMENTO;
     private javax.swing.JPanel BG_INPUT_EMAIL;
-    private javax.swing.JPanel BG_INPUT_LOGIN;
     private javax.swing.JPanel BG_INPUT_LOGRADOURO;
     private javax.swing.JPanel BG_INPUT_NOME;
     private javax.swing.JButton BUTTON_EDITAR;
@@ -560,7 +515,6 @@ public class FormConsultarFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextPane INPUT_CPF;
     private com.toedter.calendar.JDateChooser INPUT_DTNASCIMENTO;
     private javax.swing.JTextPane INPUT_EMAIL;
-    private javax.swing.JTextPane INPUT_LOGIN;
     private javax.swing.JTextPane INPUT_LOGRADOURO;
     private javax.swing.JTextPane INPUT_NOME;
     private javax.swing.JLabel TEXT_BAIRRO;
@@ -570,7 +524,6 @@ public class FormConsultarFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel TEXT_CPF;
     private javax.swing.JLabel TEXT_DTNASCIMENTO;
     private javax.swing.JLabel TEXT_EMAIL;
-    private javax.swing.JLabel TEXT_LOGIN;
     private javax.swing.JLabel TEXT_LOGRADOURO;
     private javax.swing.JLabel TEXT_NOME;
     private javax.swing.JLabel TEXT_TITLE;

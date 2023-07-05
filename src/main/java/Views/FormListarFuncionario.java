@@ -182,8 +182,7 @@ public class FormListarFuncionario extends javax.swing.JInternalFrame {
             if(!(this.formConsultarFuncionario instanceof FormConsultarFuncionario)){
                 this.formConsultarFuncionario = new FormConsultarFuncionario();
             }
-            FormConsultarFuncionario.setFuncionario(funcionario);
-            this.formConsultarFuncionario.carregarFuncionario();
+            this.formConsultarFuncionario.setFuncionario(funcionario);
             this.formConsultarFuncionario.setVisible(true);
        }
     }//GEN-LAST:event_BUTTON_CONSULTARActionPerformed

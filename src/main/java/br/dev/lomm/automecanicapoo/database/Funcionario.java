@@ -117,8 +117,5 @@ public class Funcionario extends DAO implements Serializable {
         return "br.dev.lomm.automecanicapoo.database.Funcionario[ idfuncionario=" + idfuncionario + " ]";
     }
 
-    public Pessoa getCliIdpessoa() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     
 }

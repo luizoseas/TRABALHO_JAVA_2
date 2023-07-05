@@ -48,7 +48,7 @@ public class ControllerCliente implements InterfaceController {
         cidade.setText(cliente.getCliIdpessoa().getPesIdendereco().getEndIdcidade().getCidDescricao());
     }
 
-    public void setCampos(
+    public void setCampos (
             JTextPane nome,
             JTextPane cpf,
             JDateChooser dataNascimento,
@@ -57,7 +57,7 @@ public class ControllerCliente implements InterfaceController {
             JTextPane cep,
             JTextPane bairro,
             JTextPane cidade
-            ){
+            )  throws FalhaException{
 
         ControllerEndereco controllerEndereco = new ControllerEndereco();
         controllerEndereco.setCampos(logradouro,cep,bairro,cidade);

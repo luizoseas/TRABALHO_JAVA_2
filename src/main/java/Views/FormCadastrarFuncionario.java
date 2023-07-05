@@ -4,7 +4,11 @@
  */
 package Views;
 
+import Controllers.ControllerCliente;
+import Controllers.ControllerFornecedor;
+import Controllers.ControllerFuncionario;
 import Controllers.DAO;
+import Interfaces.FalhaException;
 import br.dev.lomm.automecanicapoo.database.Cargo;
 import br.dev.lomm.automecanicapoo.database.Endereco;
 import br.dev.lomm.automecanicapoo.database.Funcionario;
@@ -17,6 +21,7 @@ import br.dev.lomm.automecanicapoo.database.Pessoa;
  */
 public class FormCadastrarFuncionario extends javax.swing.JFrame {
 
+        private final ControllerFuncionario controllerFuncionario = new ControllerFuncionario();
     /**
      * Creates new form FormCadastrarFuncionario
      */
@@ -57,15 +62,9 @@ public class FormCadastrarFuncionario extends javax.swing.JFrame {
         BG_INPUT_CARGO = new javax.swing.JPanel();
         TEXT_CARGO = new javax.swing.JLabel();
         INPUT_CARGO = new javax.swing.JComboBox<>();
-        BG_INPUT_SENHA = new javax.swing.JPanel();
-        TEXT_SENHA = new javax.swing.JLabel();
-        INPUT_SENHA = new javax.swing.JTextPane();
         BG_INPUT_LOGRADOURO = new javax.swing.JPanel();
         TEXT_LOGRADOURO = new javax.swing.JLabel();
         INPUT_LOGRADOURO = new javax.swing.JTextPane();
-        BG_INPUT_LOGIN = new javax.swing.JPanel();
-        TEXT_LOGIN = new javax.swing.JLabel();
-        INPUT_LOGIN = new javax.swing.JTextPane();
         BG_INPUT_EMAIL = new javax.swing.JPanel();
         TEXT_EMAIL = new javax.swing.JLabel();
         INPUT_EMAIL = new javax.swing.JTextPane();
@@ -319,38 +318,6 @@ public class FormCadastrarFuncionario extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        BG_INPUT_SENHA.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        TEXT_SENHA.setBackground(new java.awt.Color(238, 238, 238));
-        TEXT_SENHA.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
-        TEXT_SENHA.setText("Senha:");
-
-        INPUT_SENHA.setBorder(null);
-        INPUT_SENHA.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
-        INPUT_SENHA.setToolTipText("Quantidade");
-        INPUT_SENHA.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
-        javax.swing.GroupLayout BG_INPUT_SENHALayout = new javax.swing.GroupLayout(BG_INPUT_SENHA);
-        BG_INPUT_SENHA.setLayout(BG_INPUT_SENHALayout);
-        BG_INPUT_SENHALayout.setHorizontalGroup(
-            BG_INPUT_SENHALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BG_INPUT_SENHALayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(TEXT_SENHA)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(INPUT_SENHA, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        BG_INPUT_SENHALayout.setVerticalGroup(
-            BG_INPUT_SENHALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BG_INPUT_SENHALayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(BG_INPUT_SENHALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(INPUT_SENHA, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TEXT_SENHA, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         BG_INPUT_LOGRADOURO.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         TEXT_LOGRADOURO.setBackground(new java.awt.Color(238, 238, 238));
@@ -380,38 +347,6 @@ public class FormCadastrarFuncionario extends javax.swing.JFrame {
                 .addGroup(BG_INPUT_LOGRADOUROLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(INPUT_LOGRADOURO, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TEXT_LOGRADOURO, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        BG_INPUT_LOGIN.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        TEXT_LOGIN.setBackground(new java.awt.Color(238, 238, 238));
-        TEXT_LOGIN.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
-        TEXT_LOGIN.setText("Login:");
-
-        INPUT_LOGIN.setBorder(null);
-        INPUT_LOGIN.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
-        INPUT_LOGIN.setToolTipText("Quantidade");
-        INPUT_LOGIN.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-
-        javax.swing.GroupLayout BG_INPUT_LOGINLayout = new javax.swing.GroupLayout(BG_INPUT_LOGIN);
-        BG_INPUT_LOGIN.setLayout(BG_INPUT_LOGINLayout);
-        BG_INPUT_LOGINLayout.setHorizontalGroup(
-            BG_INPUT_LOGINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BG_INPUT_LOGINLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(TEXT_LOGIN)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(INPUT_LOGIN, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        BG_INPUT_LOGINLayout.setVerticalGroup(
-            BG_INPUT_LOGINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BG_INPUT_LOGINLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(BG_INPUT_LOGINLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(INPUT_LOGIN, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TEXT_LOGIN, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -456,29 +391,24 @@ public class FormCadastrarFuncionario extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(BG_INPUT_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(BG_INPUT_DTNASCIMENTO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(BG_INPUT_NOME, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(BG_INPUT_BAIRRO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(BG_INPUT_CIDADE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(BG_INPUT_EMAIL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BG_INPUT_LOGRADOURO, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(BG_INPUT_CARGO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(BG_INPUT_CEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(6, 6, 6)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(BG_INPUT_LOGIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(BG_INPUT_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BG_INPUT_DTNASCIMENTO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(BG_INPUT_NOME, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(BG_INPUT_BAIRRO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(BG_INPUT_SENHA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(95, 95, 95))
+                                .addComponent(BG_INPUT_CIDADE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BG_INPUT_EMAIL, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BG_INPUT_LOGRADOURO, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(BG_INPUT_CARGO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BG_INPUT_CEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6)))
+                        .addGap(97, 97, 97))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(BUTTON_CADASTRAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(254, 254, 254))))
@@ -505,11 +435,7 @@ public class FormCadastrarFuncionario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BG_INPUT_CARGO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(BG_INPUT_CEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BG_INPUT_SENHA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BG_INPUT_LOGIN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(96, 96, 96)
+                .addGap(167, 167, 167)
                 .addComponent(BUTTON_CADASTRAR, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103))
         );
@@ -532,24 +458,15 @@ public class FormCadastrarFuncionario extends javax.swing.JFrame {
     }
     
     private void BUTTON_CADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_CADASTRARActionPerformed
-//        Endereco endereco = new Endereco();
-//        endereco.setEndIdcidade(INPUT_CIDADE.getText());
-//        
-        Cargo cargo = DAO.getInstance().find(Cargo.class, Integer.parseInt(INPUT_CARGO.getItemAt(INPUT_CARGO.getSelectedIndex())));
-
-        Pessoa pessoa = new Pessoa();
-        pessoa.setPesCpf(INPUT_CPF.getText());
-        pessoa.setPesDatanasc(INPUT_DTNASCIMENTO.getDate());
-        pessoa.setPesEmail(INPUT_EMAIL.getText());
-        pessoa.setPesNome(INPUT_NOME.getText());
-        if(pessoa.salvar()){
-            Funcionario funcionario = new Funcionario();
-            funcionario.setFunIdpessoa(pessoa);
-            funcionario.setFunIdcargo(cargo);
-            if(funcionario.salvar()){
-                this.setVisible(false);
-                FormListarFuncionario.atualizarTabela();
-            }
+      
+         try{
+            controllerFuncionario.setCampos(INPUT_NOME, INPUT_CPF, INPUT_DTNASCIMENTO, INPUT_EMAIL, INPUT_LOGRADOURO, INPUT_CEP, INPUT_BAIRRO, INPUT_CIDADE);
+            controllerFuncionario.validarDados();
+            controllerFuncionario.salvar();
+            this.setVisible(false);
+            FormListarFuncionario.atualizarTabela();
+        }catch(FalhaException $erro){
+            
         }
     }//GEN-LAST:event_BUTTON_CADASTRARActionPerformed
 
@@ -562,10 +479,8 @@ public class FormCadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JPanel BG_INPUT_CPF;
     private javax.swing.JPanel BG_INPUT_DTNASCIMENTO;
     private javax.swing.JPanel BG_INPUT_EMAIL;
-    private javax.swing.JPanel BG_INPUT_LOGIN;
     private javax.swing.JPanel BG_INPUT_LOGRADOURO;
     private javax.swing.JPanel BG_INPUT_NOME;
-    private javax.swing.JPanel BG_INPUT_SENHA;
     private javax.swing.JButton BUTTON_CADASTRAR;
     private javax.swing.JPanel HEADER;
     private javax.swing.JTextPane INPUT_BAIRRO;
@@ -575,10 +490,8 @@ public class FormCadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextPane INPUT_CPF;
     private com.toedter.calendar.JDateChooser INPUT_DTNASCIMENTO;
     private javax.swing.JTextPane INPUT_EMAIL;
-    private javax.swing.JTextPane INPUT_LOGIN;
     private javax.swing.JTextPane INPUT_LOGRADOURO;
     private javax.swing.JTextPane INPUT_NOME;
-    private javax.swing.JTextPane INPUT_SENHA;
     private javax.swing.JLabel TEXT_BAIRRO;
     private javax.swing.JLabel TEXT_CARGO;
     private javax.swing.JLabel TEXT_CEP;
@@ -586,10 +499,8 @@ public class FormCadastrarFuncionario extends javax.swing.JFrame {
     private javax.swing.JLabel TEXT_CPF;
     private javax.swing.JLabel TEXT_DTNASCIMENTO;
     private javax.swing.JLabel TEXT_EMAIL;
-    private javax.swing.JLabel TEXT_LOGIN;
     private javax.swing.JLabel TEXT_LOGRADOURO;
     private javax.swing.JLabel TEXT_NOME;
-    private javax.swing.JLabel TEXT_SENHA;
     private javax.swing.JLabel TEXT_TITLE;
     // End of variables declaration//GEN-END:variables
 }

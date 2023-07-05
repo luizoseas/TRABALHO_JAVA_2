@@ -5,6 +5,7 @@
 package br.dev.lomm.automecanicapoo.database;
 
 import Controllers.DAO;
+import Interfaces.FalhaException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -44,7 +45,7 @@ public class Logradouro extends DAO implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "endIdlogradouro")
     private List<Endereco> enderecoList;
 
-    public static Logradouro buscarOuInserirLogradouro(String logradouro) {
+    public static Logradouro buscarOuInserirLogradouro(String logradouro) throws FalhaException{
         TypedQuery<Logradouro> query = DAO.getInstance().createNamedQuery("Logradouro.findByLogDescricao", Logradouro.class);
         query.setParameter("logDescricao", logradouro);
         
