@@ -10,10 +10,9 @@ package Interfaces;
  */
 public enum EnumMensagem {
     
-    MSG001("Nome inválido, deve ter mais de 3 caracteres."),
-    MSG002("Descrição inválida, deve ter mais de 3 ter caracteres."),
-
-    MSG003("Número invalido, deve ser maior que 0"),
+    MSG001("Nome inválido, deve ter mais de 1 caracteres."),
+    MSG002("Descrição inválida, deve ter mais de 1 ter caracteres."),
+    MSG003("Número invalido, deve ser maior que 0."),
     MSG004("CEP inválido."),
     MSG005("Cidade inválida"),
     MSG006("Bairro inválido."),
@@ -21,7 +20,10 @@ public enum EnumMensagem {
     MSG008("Nome Fantasia inválida."),
     MSG009("Razão Social inválido."),
     MSG010("CNPJ inválido."),
-    MSG011("Inscrição Estadual inválida.");
+    MSG011("Inscrição Estadual inválida."),
+    MSG012("Pessoa não informada."),
+    MSG013("Data inválida."),
+    MSG014("O valor não pode ser negativo.");
     
 
     private String descricao;

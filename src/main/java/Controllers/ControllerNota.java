@@ -4,9 +4,11 @@
  */
 package Controllers;
 
+import Interfaces.EnumMensagem;
+import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
-import br.dev.lomm.automecanicapoo.database.Conserto;
 import br.dev.lomm.automecanicapoo.database.Nota;
+import java.util.Date;
 
 /**
  *
@@ -22,6 +24,14 @@ public class ControllerNota implements InterfaceController {
 
     @Override
     public boolean validarDados() throws Exception {
-        return false;
+        if(nota.getNotaDatacompra() instanceof Date ||
+                nota.getNotaDatacompra().toString().isEmpty()){
+            throw new FalhaException(EnumMensagem.MSG013.getDescricao());
+        }
+        if(nota.getNotaDataentrada() instanceof Date ||
+                nota.getNotaDataentrada().toString().isEmpty()){
+            throw new FalhaException(EnumMensagem.MSG013.getDescricao());
+        }
+        return true;
     }
 }
