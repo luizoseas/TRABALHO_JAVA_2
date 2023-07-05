@@ -4,6 +4,7 @@
  */
 package br.dev.lomm.automecanicapoo.database;
 
+import Controllers.DAO;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,7 +34,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Nota.findByIdnota", query = "SELECT n FROM Nota n WHERE n.idnota = :idnota"),
     @NamedQuery(name = "Nota.findByNotaDatacompra", query = "SELECT n FROM Nota n WHERE n.notaDatacompra = :notaDatacompra"),
     @NamedQuery(name = "Nota.findByNotaDataentrada", query = "SELECT n FROM Nota n WHERE n.notaDataentrada = :notaDataentrada")})
-public class Nota implements Serializable {
+public class Nota extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,6 +57,12 @@ public class Nota implements Serializable {
 
     public Nota() {
     }
+    
+    public static List<Nota> getNotas(){      
+        Query query = DAO.getInstance().createNamedQuery("Nota.findAll");
+        return query.getResultList();
+    }
+    
 
     public Nota(Integer idnota) {
         this.idnota = idnota;

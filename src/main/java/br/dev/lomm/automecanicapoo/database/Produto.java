@@ -4,6 +4,7 @@
  */
 package br.dev.lomm.automecanicapoo.database;
 
+import Controllers.DAO;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -11,10 +12,16 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,13 +35,13 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p"),
     @NamedQuery(name = "Produto.findByIdproduto", query = "SELECT p FROM Produto p WHERE p.idproduto = :idproduto"),
-    @NamedQuery(name = "Produto.findByProdNome", query = "SELECT p FROM Produto p WHERE p.prodNome = :prodNome"),
+    @NamedQuery(name = "Produto.findByProdNome", query = "SELECT p FROM Produto p WHERE p.prodNome like :prodNome"),
     @NamedQuery(name = "Produto.findByProdValidade", query = "SELECT p FROM Produto p WHERE p.prodValidade = :prodValidade")})
-public class Produto implements Serializable {
+public class Produto extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idproduto")
     private Integer idproduto;
     @Basic(optional = false)
@@ -49,6 +56,18 @@ public class Produto implements Serializable {
 
     public Produto() {
     }
+    
+    public List<Produto> getProdutos(){        
+        Query query = DAO.getInstance().createNamedQuery("Produto.findAll");
+        return query.getResultList();
+    }
+    
+    public List<Produto> getProdutoPorDescricao(){
+        Query query = DAO.getInstance().createNamedQuery("Produto.findByProdNome");
+        query.setParameter("prodNome",this);
+        return query.getResultList();
+    }
+    
 
     public Produto(Integer idproduto) {
         this.idproduto = idproduto;

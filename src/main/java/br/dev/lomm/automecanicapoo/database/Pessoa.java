@@ -4,6 +4,7 @@
  */
 package br.dev.lomm.automecanicapoo.database;
 
+import Controllers.DAO;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -11,12 +12,15 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -34,11 +38,11 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Pessoa.findByPesNome", query = "SELECT p FROM Pessoa p WHERE p.pesNome = :pesNome"),
     @NamedQuery(name = "Pessoa.findByPesDatanasc", query = "SELECT p FROM Pessoa p WHERE p.pesDatanasc = :pesDatanasc"),
     @NamedQuery(name = "Pessoa.findByPesEmail", query = "SELECT p FROM Pessoa p WHERE p.pesEmail = :pesEmail")})
-public class Pessoa implements Serializable {
+public class Pessoa extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idpessoa")
     private Integer idpessoa;
     @Basic(optional = false)
@@ -56,7 +60,7 @@ public class Pessoa implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "telIdpessoa")
     private List<Telefone> telefoneList;
     @JoinColumn(name = "pes_idendereco", referencedColumnName = "idendereco")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     private Endereco pesIdendereco;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliIdpessoa")
     private List<Cliente> clienteList;
@@ -65,6 +69,7 @@ public class Pessoa implements Serializable {
 
     public Pessoa() {
     }
+    
 
     public Pessoa(Integer idpessoa) {
         this.idpessoa = idpessoa;

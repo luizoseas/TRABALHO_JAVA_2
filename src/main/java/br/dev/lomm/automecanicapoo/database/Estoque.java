@@ -4,18 +4,22 @@
  */
 package br.dev.lomm.automecanicapoo.database;
 
+import Controllers.DAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 
 /**
@@ -29,11 +33,11 @@ import javax.persistence.Table;
     @NamedQuery(name = "Estoque.findByIdestoque", query = "SELECT e FROM Estoque e WHERE e.idestoque = :idestoque"),
     @NamedQuery(name = "Estoque.findByEstQuantidade", query = "SELECT e FROM Estoque e WHERE e.estQuantidade = :estQuantidade"),
     @NamedQuery(name = "Estoque.findByEstPreco", query = "SELECT e FROM Estoque e WHERE e.estPreco = :estPreco")})
-public class Estoque implements Serializable {
+public class Estoque extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idestoque")
     private Integer idestoque;
     @Basic(optional = false)
@@ -54,6 +58,11 @@ public class Estoque implements Serializable {
     public Estoque() {
     }
 
+    public List<Estoque> getEstoques(Produto produto){      
+        Query query = DAO.getInstance().createNativeQuery("Estoque.findAll");
+        return query.getResultList();
+    }
+    
     public Estoque(Integer idestoque) {
         this.idestoque = idestoque;
     }

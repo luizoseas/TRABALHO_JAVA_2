@@ -4,6 +4,7 @@
  */
 package br.dev.lomm.automecanicapoo.database;
 
+import Controllers.DAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 
 /**
@@ -43,6 +45,11 @@ public class Cargo implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funIdcargo")
     private List<Funcionario> funcionarioList;
 
+    public static List<Cargo> getCargos(){        
+        Query query = DAO.getInstance().createNamedQuery("Cargo.findAll");
+        return query.getResultList();
+    }
+    
     public Cargo() {
     }
 

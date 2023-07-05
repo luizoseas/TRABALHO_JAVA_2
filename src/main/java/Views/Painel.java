@@ -4,6 +4,8 @@
  */
 package Views;
 
+import java.awt.Component;
+
 /**
  *
  * @author oseas
@@ -28,15 +30,16 @@ public class Painel extends javax.swing.JFrame {
 
         ButtonClientes = new javax.swing.JButton();
         ButtonFuncionarios = new javax.swing.JButton();
-        ButtonPecas = new javax.swing.JButton();
+        ButtonFornecedor = new javax.swing.JButton();
         ButtonProdutos = new javax.swing.JButton();
-        ButtonOrcamentos = new javax.swing.JButton();
-        ButtonOrdemPedido = new javax.swing.JButton();
+        ButtonServicos = new javax.swing.JButton();
         TextTitle = new javax.swing.JLabel();
         ButtonSair = new javax.swing.JButton();
         Painel = new javax.swing.JPanel();
+        PainelFrame = new javax.swing.JDesktopPane();
 
         setTitle("AUTO MECANICA");
+        setResizable(false);
 
         ButtonClientes.setText("Clientes");
         ButtonClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -52,10 +55,10 @@ public class Painel extends javax.swing.JFrame {
             }
         });
 
-        ButtonPecas.setText("Peças");
-        ButtonPecas.addActionListener(new java.awt.event.ActionListener() {
+        ButtonFornecedor.setText("Fornecedor");
+        ButtonFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonPecasActionPerformed(evt);
+                ButtonFornecedorActionPerformed(evt);
             }
         });
 
@@ -66,17 +69,10 @@ public class Painel extends javax.swing.JFrame {
             }
         });
 
-        ButtonOrcamentos.setText("Orçamentos");
-        ButtonOrcamentos.addActionListener(new java.awt.event.ActionListener() {
+        ButtonServicos.setText("Serviços");
+        ButtonServicos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonOrcamentosActionPerformed(evt);
-            }
-        });
-
-        ButtonOrdemPedido.setText("Pedidos");
-        ButtonOrdemPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonOrdemPedidoActionPerformed(evt);
+                ButtonServicosActionPerformed(evt);
             }
         });
 
@@ -93,15 +89,31 @@ public class Painel extends javax.swing.JFrame {
 
         Painel.setMaximumSize(new java.awt.Dimension(100, 100));
 
+        PainelFrame.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        PainelFrame.setDesktopManager(null);
+        PainelFrame.setDragMode(javax.swing.JDesktopPane.OUTLINE_DRAG_MODE);
+        PainelFrame.setPreferredSize(new java.awt.Dimension(999, 630));
+
+        javax.swing.GroupLayout PainelFrameLayout = new javax.swing.GroupLayout(PainelFrame);
+        PainelFrame.setLayout(PainelFrameLayout);
+        PainelFrameLayout.setHorizontalGroup(
+            PainelFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 999, Short.MAX_VALUE)
+        );
+        PainelFrameLayout.setVerticalGroup(
+            PainelFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 630, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout PainelLayout = new javax.swing.GroupLayout(Painel);
         Painel.setLayout(PainelLayout);
         PainelLayout.setHorizontalGroup(
             PainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 676, Short.MAX_VALUE)
+            .addComponent(PainelFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         PainelLayout.setVerticalGroup(
             PainelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(PainelFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -110,74 +122,73 @@ public class Painel extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ButtonFuncionarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButtonProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButtonOrdemPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButtonPecas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButtonClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButtonOrcamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ButtonProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ButtonFuncionarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ButtonClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ButtonFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(TextTitle))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(Painel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(TextTitle))
+                            .addComponent(ButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(ButtonServicos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Painel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(TextTitle)
-                .addGap(47, 47, 47)
+                .addGap(26, 26, 26)
                 .addComponent(ButtonProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ButtonOrdemPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ButtonPecas, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ButtonFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ButtonOrcamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addComponent(ButtonServicos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
-            .addComponent(Painel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Painel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void adicionarComponente(Component componente){
+        this.PainelFrame.removeAll();
+        this.PainelFrame.add(componente);
+        componente.setVisible(true);
+    }
+    
     private void ButtonClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonClientesActionPerformed
-        // TODO add your handling code here:
+        this.adicionarComponente(new FormListarCliente());
     }//GEN-LAST:event_ButtonClientesActionPerformed
 
     private void ButtonFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonFuncionariosActionPerformed
-        // TODO add your handling code here:
+        this.adicionarComponente(new FormListarFuncionario());
     }//GEN-LAST:event_ButtonFuncionariosActionPerformed
 
-    private void ButtonPecasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonPecasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonPecasActionPerformed
+    private void ButtonFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonFornecedorActionPerformed
+        this.adicionarComponente(new FormListarFornecedor());
+    }//GEN-LAST:event_ButtonFornecedorActionPerformed
 
     private void ButtonProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonProdutosActionPerformed
-        // TODO add your handling code here:
+        this.adicionarComponente(new FormListarProduto());
     }//GEN-LAST:event_ButtonProdutosActionPerformed
 
-    private void ButtonOrcamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonOrcamentosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonOrcamentosActionPerformed
+    private void ButtonServicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonServicosActionPerformed
 
-    private void ButtonOrdemPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonOrdemPedidoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ButtonOrdemPedidoActionPerformed
+    }//GEN-LAST:event_ButtonServicosActionPerformed
 
     private void ButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSairActionPerformed
         // TODO add your handling code here:
@@ -221,13 +232,13 @@ public class Painel extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonClientes;
+    private javax.swing.JButton ButtonFornecedor;
     private javax.swing.JButton ButtonFuncionarios;
-    private javax.swing.JButton ButtonOrcamentos;
-    private javax.swing.JButton ButtonOrdemPedido;
-    private javax.swing.JButton ButtonPecas;
     private javax.swing.JButton ButtonProdutos;
     private javax.swing.JButton ButtonSair;
+    private javax.swing.JButton ButtonServicos;
     private javax.swing.JPanel Painel;
+    private javax.swing.JDesktopPane PainelFrame;
     private javax.swing.JLabel TextTitle;
     // End of variables declaration//GEN-END:variables
 }
