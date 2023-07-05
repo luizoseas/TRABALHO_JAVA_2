@@ -4,6 +4,7 @@
  */
 package Controllers;
 
+import Interfaces.EnumMensagem;
 import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
 import br.dev.lomm.automecanicapoo.database.Cliente;
@@ -27,10 +28,10 @@ public class ControllerCliente implements InterfaceController {
     public Cliente getCliente(){
         return this.cliente;
     }
-    
+
     public void preencherForm(
             JTextPane nome,
-            JTextPane cpf, 
+            JTextPane cpf,
             JDateChooser dataNascimento,
             JTextPane email,
             JTextPane logradouro,
@@ -46,10 +47,10 @@ public class ControllerCliente implements InterfaceController {
         bairro.setText(cliente.getCliIdpessoa().getPesIdendereco().getEndIdbairro().getBaiDescricao());
         cidade.setText(cliente.getCliIdpessoa().getPesIdendereco().getEndIdcidade().getCidDescricao());
     }
-    
+
     public void setCampos(
             JTextPane nome,
-            JTextPane cpf, 
+            JTextPane cpf,
             JDateChooser dataNascimento,
             JTextPane email,
             JTextPane logradouro,
@@ -57,21 +58,21 @@ public class ControllerCliente implements InterfaceController {
             JTextPane bairro,
             JTextPane cidade
             ){
-        
+
         ControllerEndereco controllerEndereco = new ControllerEndereco();
         controllerEndereco.setCampos(logradouro,cep,bairro,cidade);
-        
+
         ControllerPessoa controllerPessoa = new ControllerPessoa();
         controllerPessoa.setCampos(nome,cpf,dataNascimento,email);
         controllerPessoa.getPessoa().setPesIdendereco(controllerEndereco.getEndereco());
-        
+
         cliente = new Cliente();
         cliente.setCliIdpessoa(controllerPessoa.getPessoa());
     }
-    
+
     public boolean validarDados() throws FalhaException{
         if(!(this.cliente.getCliIdpessoa() instanceof Pessoa)){
-            throw new FalhaException("Pessoa não informada.");
+            new FalhaException(EnumMensagem.MSG012.getDescricao());
         }
         ControllerPessoa controllerPessoa = new ControllerPessoa();
         controllerPessoa.setPessoa(this.cliente.getCliIdpessoa());

@@ -23,12 +23,12 @@ public class ControllerNota implements InterfaceController {
     }
 
     @Override
-    public boolean validarDados() throws FalhaException {
-        if(nota.getNotaDatacompra() instanceof Date ||
+    public boolean validarDados() throws Exception {
+        if(!(nota.getNotaDatacompra() instanceof Date) ||
                 nota.getNotaDatacompra().toString().isEmpty()){
             throw new FalhaException(EnumMensagem.MSG013.getDescricao());
         }
-        if(nota.getNotaDataentrada() instanceof Date ||
+        if(!(nota.getNotaDataentrada() instanceof Date) ||
                 nota.getNotaDataentrada().toString().isEmpty()){
             throw new FalhaException(EnumMensagem.MSG013.getDescricao());
         }
