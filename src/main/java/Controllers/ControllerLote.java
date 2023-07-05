@@ -4,10 +4,23 @@
  */
 package Controllers;
 
+import Interfaces.InterfaceController;
+import br.dev.lomm.automecanicapoo.database.Conserto;
+
 /**
  *
  * @author roger
  */
-public class ControllerLote {
-    
+public class ControllerLote implements InterfaceController {
+
+    private Lote lote;
+
+    public void setLote(Lote lote){
+        this.lote = lote;
+    }
+
+    @Override
+    public boolean validarDados() throws Exception {
+        return false;
+    }
 }

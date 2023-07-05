@@ -10,8 +10,13 @@ package Interfaces;
  */
 public enum EnumMensagem {
     
-    MSG001("Nome inválido deve ter mais de 3 caracteres.");
-    
+    MSG001("Nome inválido, deve ter mais de 3 caracteres.");
+    MSG002("Descrição inválida, deve ter mais de 3 ter caracteres.");
+
+    MSG003("Número invalido, deve ser maior que 0");
+
+
+
     private String descricao;
     
     EnumMensagem(String descricao){

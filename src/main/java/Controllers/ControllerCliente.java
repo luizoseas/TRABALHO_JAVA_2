@@ -4,6 +4,7 @@
  */
 package Controllers;
 
+import Interfaces.InterfaceController;
 import br.dev.lomm.automecanicapoo.database.Cliente;
 import br.dev.lomm.automecanicapoo.database.Pessoa;
 
@@ -11,7 +12,7 @@ import br.dev.lomm.automecanicapoo.database.Pessoa;
  *
  * @author roger
  */
-public class ControllerCliente {
+public class ControllerCliente implements InterfaceController {
     
     private Cliente cliente;
     

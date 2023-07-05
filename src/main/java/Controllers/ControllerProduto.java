@@ -4,10 +4,16 @@
  */
 package Controllers;
 
+import Interfaces.InterfaceController;
+
 /**
  *
  * @author roger
  */
-public class ControllerProduto {
-    
+public class ControllerProduto implements InterfaceController {
+
+    @Override
+    public boolean validarDados() throws Exception {
+        return false;
+    }
 }
