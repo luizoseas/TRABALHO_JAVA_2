@@ -4,7 +4,11 @@
  */
 package Views;
 
+import Controllers.ControllerLote;
+import Interfaces.FalhaException;
 import br.dev.lomm.automecanicapoo.database.Estoque;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,6 +18,7 @@ public class FormConsultarEstoque extends javax.swing.JFrame {
 
     private Estoque estoque;
     private FormAtualizarEstoque formAtualizarEstoque;
+    private final ControllerLote controllerLote = new ControllerLote();
     
     /**
      * Creates new form FormConsultarEstoque
@@ -24,12 +29,9 @@ public class FormConsultarEstoque extends javax.swing.JFrame {
 
     public void setEstoque(Estoque estoque){
         this.estoque = estoque;
-        INPUT_PRODUTO.disable();
-        INPUT_PRODUTO.setText(estoque.getEstIdproduto().getProdNome());
-        INPUT_PRECO.setText("R$"+estoque.getEstPreco());
-        INPUT_QUANTIDADE.setText(estoque.getEstQuantidade()+"");
-        INPUT_NOTA.disable();
-        INPUT_NOTA.setText(estoque.getEstIdnota().getIdnota()+"");
+        controllerLote.setEstoque(estoque);
+        controllerLote.setProduto(estoque.getEstIdproduto());
+        controllerLote.preencherForm(INPUT_PRODUTO, INPUT_QUANTIDADE, INPUT_PRECO, INPUT_NOTA);
     }
     
     /**
@@ -282,8 +284,12 @@ public class FormConsultarEstoque extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_EXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EXCLUIRActionPerformed
-        if(this.estoque.excluir()){
-            this.setVisible(false);
+        try {
+            if(this.estoque.excluir()){
+                this.setVisible(false);
+            }
+        } catch (FalhaException ex) {
+            Logger.getLogger(FormConsultarEstoque.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BUTTON_EXCLUIRActionPerformed
 

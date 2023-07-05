@@ -4,6 +4,7 @@
  */
 package Views;
 
+import Controllers.ControllerProduto;
 import Controllers.DAO;
 import br.dev.lomm.automecanicapoo.database.Estoque;
 import br.dev.lomm.automecanicapoo.database.Produto;
@@ -20,6 +21,7 @@ public class FormConsultarProduto extends javax.swing.JFrame {
     private static DefaultTableModel Tabela;
     private FormConsultarEstoque formConsultarEstoque;
     private FormCadastrarEstoque formCadastrarEstoque;
+    private final ControllerProduto controllerProduto = new ControllerProduto();
     /**
      * Creates new form FormConsultarProduto
      */
@@ -319,8 +321,9 @@ public class FormConsultarProduto extends javax.swing.JFrame {
 
     public void setProduto(Produto produto){
         this.produto = produto;
-        INPUT_NOME.setText(this.produto.getProdNome());
-        INPUT_DTVALIDADE.setDate(this.produto.getProdValidade());
+        controllerProduto.setProduto(produto);
+        controllerProduto.preencherForm(INPUT_NOME, INPUT_DTVALIDADE);
+
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

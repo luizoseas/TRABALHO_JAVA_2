@@ -33,7 +33,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Fornecedor.findByForRazaosocial", query = "SELECT f FROM Fornecedor f WHERE f.forRazaosocial = :forRazaosocial"),
     @NamedQuery(name = "Fornecedor.findByForCnpj", query = "SELECT f FROM Fornecedor f WHERE f.forCnpj = :forCnpj"),
     @NamedQuery(name = "Fornecedor.findByForInscricaoestadual", query = "SELECT f FROM Fornecedor f WHERE f.forInscricaoestadual = :forInscricaoestadual")})
-public class Fornecedor implements Serializable {
+public class Fornecedor extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

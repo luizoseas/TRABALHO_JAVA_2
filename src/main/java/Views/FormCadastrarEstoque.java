@@ -4,7 +4,10 @@
  */
 package Views;
 
+import Controllers.ControllerLote;
+import Controllers.ControllerProduto;
 import Controllers.DAO;
+import Interfaces.FalhaException;
 import br.dev.lomm.automecanicapoo.database.Estoque;
 import br.dev.lomm.automecanicapoo.database.Nota;
 import br.dev.lomm.automecanicapoo.database.Produto;
@@ -17,7 +20,7 @@ public class FormCadastrarEstoque extends javax.swing.JFrame {
 
     private Produto produto;
     private Estoque estoque;
-    
+    private final ControllerLote controllerLote = new ControllerLote();
     /**
      * Creates new form FormCadastrarEstoque
      */
@@ -258,27 +261,20 @@ public class FormCadastrarEstoque extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_CADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_CADASTRARActionPerformed
-        String codigoNota = SELECT_NOTA.getItemAt(SELECT_NOTA.getSelectedIndex());
-        System.out.println(codigoNota);
-        Nota notaSelecionada = DAO.getInstance().find(Nota.class, Integer.parseInt(codigoNota));
-        System.out.println(notaSelecionada.getIdnota()+"");
-        if(notaSelecionada instanceof Nota && notaSelecionada.getIdnota() > 0){
-            this.estoque = new Estoque();
-            this.estoque.setEstPreco(Double.parseDouble(INPUT_QUANTIDADE.getText()));
-            this.estoque.setEstQuantidade(Integer.parseInt(INPUT_QUANTIDADE.getText()));
-            this.estoque.setEstIdproduto(this.produto);
-            this.estoque.setEstIdnota(notaSelecionada);
-            if(this.estoque.salvar()){
-                this.setVisible(false);
-                FormConsultarProduto.atualizarTabelaLote(this.produto);
-            }
+        try{
+            controllerLote.setCampos(INPUT_QUANTIDADE, INPUT_PRECO,SELECT_NOTA);
+            controllerLote.validarDados();
+            controllerLote.getEstoque().salvar();
+            this.setVisible(false);
+            FormConsultarProduto.atualizarTabelaLote(this.produto);
+        }catch(FalhaException $erro){
+            
         }
     }//GEN-LAST:event_BUTTON_CADASTRARActionPerformed
 
     public void setProduto(Produto produto){
         this.produto = produto;
-        INPUT_PRODUTO.disable();
-        INPUT_PRODUTO.setText(this.produto.getProdNome());
+        controllerLote.setProduto(produto);
     }
     
 

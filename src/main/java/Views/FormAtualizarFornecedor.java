@@ -4,12 +4,27 @@
  */
 package Views;
 
+import Controllers.ControllerFornecedor;
+import Interfaces.FalhaException;
+import br.dev.lomm.automecanicapoo.database.Fornecedor;
+
 /**
  *
  * @author oseas
  */
 public class FormAtualizarFornecedor extends javax.swing.JFrame {
 
+    private final ControllerFornecedor controllerFornecedor = new ControllerFornecedor();
+    private Fornecedor fornecedor;
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+        controllerFornecedor.preencherForm(INPUT_NOME_FANTASIA, INPUT_RAZAO_SOCIAL, INPUT_CNPJ, INPUT_IE);
+    }
     /**
      * Creates new form FormAtualizarFornecedor
      */
@@ -246,7 +261,15 @@ public class FormAtualizarFornecedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_ATUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_ATUALIZARActionPerformed
-        // TODO add your handling code here:
+        try{
+            controllerFornecedor.setCampos(INPUT_NOME_FANTASIA, INPUT_RAZAO_SOCIAL, INPUT_CNPJ, INPUT_IE);
+            controllerFornecedor.validarDados();
+            controllerFornecedor.getFornecedor().atualizar();
+            this.setVisible(false);
+            FormListarProduto.atualizarTabela();
+        }catch(FalhaException $erro){
+            
+        }
     }//GEN-LAST:event_BUTTON_ATUALIZARActionPerformed
 
 

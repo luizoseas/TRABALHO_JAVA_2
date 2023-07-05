@@ -21,8 +21,8 @@ import javax.persistence.EntityManager;
 public class AutoMecanicaPOO {
 
     public static void main(String[] args) {
-//        Painel painel = new Painel();
-//        painel.show();
+        Painel painel = new Painel();
+        painel.show();
         
 
 //        Pessoa pessoa = new Pessoa();
@@ -34,13 +34,13 @@ public class AutoMecanicaPOO {
 //        cliente1.setCliIdpessoa(pessoa);
 //        ControllerPessoa controllerCliente= new ControllerPessoa();
     //    controllerCliente.setCliente(cliente1);
-        try{
-            throw new FalhaException("asd");
-          //  controllerCliente.validarDados();
-            //System.out.println("Suceeso");
-        }catch(FalhaException erro){
-            System.out.println("Erro: "+erro.getMessage());
-        }
+//        try{
+//            throw new FalhaException("asd");
+//          //  controllerCliente.validarDados();
+//            //System.out.println("Suceeso");
+//        }catch(FalhaException erro){
+//            System.out.println("Erro: "+erro.getMessage());
+//        }
         
         
 //        EntityManagerFactory factory = Persistence.createEntityManagerFactory("automecanica");

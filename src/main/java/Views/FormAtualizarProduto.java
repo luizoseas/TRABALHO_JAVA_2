@@ -4,6 +4,8 @@
  */
 package Views;
 
+import Controllers.ControllerProduto;
+import Interfaces.FalhaException;
 import br.dev.lomm.automecanicapoo.database.Produto;
 
 /**
@@ -13,6 +15,7 @@ import br.dev.lomm.automecanicapoo.database.Produto;
 public class FormAtualizarProduto extends javax.swing.JFrame {
 
     private Produto produto;
+    private final ControllerProduto controllerProduto = new ControllerProduto();
     /**
      * Creates new form FormAtualizarProduto
      */
@@ -168,17 +171,20 @@ public class FormAtualizarProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_ATUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_ATUALIZARActionPerformed
-        this.produto.setProdNome(INPUT_NOME.getText());
-        this.produto.setProdValidade(INPUT_DTVALIDADE.getDate());
-        if(this.produto.atualizar()){
+        try{
+            controllerProduto.setCampos(INPUT_NOME, INPUT_DTVALIDADE);
+            controllerProduto.validarDados();
+            controllerProduto.getProduto().atualizar();
             this.setVisible(false);
             FormListarProduto.atualizarTabela();
+        }catch(FalhaException $erro){
+            
         }
     }//GEN-LAST:event_BUTTON_ATUALIZARActionPerformed
     public void setProduto(Produto produto){
         this.produto = produto;
-        INPUT_NOME.setText(this.produto.getProdNome());
-        INPUT_DTVALIDADE.setDate(this.produto.getProdValidade());
+        controllerProduto.setProduto(produto);
+        controllerProduto.preencherForm(INPUT_NOME, INPUT_DTVALIDADE);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

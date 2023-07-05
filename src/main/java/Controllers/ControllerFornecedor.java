@@ -8,6 +8,7 @@ import Interfaces.EnumMensagem;
 import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
 import br.dev.lomm.automecanicapoo.database.Fornecedor;
+import javax.swing.JTextPane;
 
 /**
  *
@@ -20,9 +21,40 @@ public class ControllerFornecedor implements InterfaceController{
     public void setFornecedor(Fornecedor fornecedor){
         this.fornecedor = fornecedor;
     }
+    
+    public Fornecedor getFornecedor(){
+        return this.fornecedor;
+    }
+    
+    public void preencherForm(
+        JTextPane nomeFantasia,
+        JTextPane razaoSocial,
+        JTextPane cnpj,
+        JTextPane ie
+    ){
+        nomeFantasia.setText(fornecedor.getForNomefantasia());
+        razaoSocial.setText(fornecedor.getForRazaosocial());
+        cnpj.setText(fornecedor.getForCnpj());
+        ie.setText(fornecedor.getForInscricaoestadual());
+    }
+    
+    public void setCampos(
+        JTextPane nomeFantasia,
+        JTextPane razaoSocial,
+        JTextPane cnpj,
+        JTextPane ie
+    ){
+        if(!(this.fornecedor instanceof Fornecedor)){
+            fornecedor = new Fornecedor();
+        }
+        fornecedor.setForCnpj(cnpj.getText());
+        fornecedor.setForRazaosocial(razaoSocial.getText());
+        fornecedor.setForInscricaoestadual(ie.getText());
+        fornecedor.setForNomefantasia(nomeFantasia.getText());
+    }
 
     @Override
-    public boolean validarDados() throws Exception {
+    public boolean validarDados() throws FalhaException {
         if (!(fornecedor.getForNomefantasia() instanceof String) ||
                 fornecedor.getForNomefantasia().isEmpty() ||
                 fornecedor.getForNomefantasia().length() <= 1){

@@ -66,13 +66,15 @@ public class ControllerCliente implements InterfaceController {
         controllerPessoa.setCampos(nome,cpf,dataNascimento,email);
         controllerPessoa.getPessoa().setPesIdendereco(controllerEndereco.getEndereco());
 
-        cliente = new Cliente();
+        if(!(cliente instanceof Cliente)){
+            cliente = new Cliente();
+        }
         cliente.setCliIdpessoa(controllerPessoa.getPessoa());
     }
 
     public boolean validarDados() throws FalhaException{
         if(!(this.cliente.getCliIdpessoa() instanceof Pessoa)){
-            new FalhaException(EnumMensagem.MSG012.getDescricao());
+            throw new FalhaException(EnumMensagem.MSG012.getDescricao());
         }
         ControllerPessoa controllerPessoa = new ControllerPessoa();
         controllerPessoa.setPessoa(this.cliente.getCliIdpessoa());

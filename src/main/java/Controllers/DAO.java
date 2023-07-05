@@ -4,6 +4,7 @@
  */
 package Controllers;
 
+import Interfaces.FalhaException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -37,7 +38,7 @@ abstract public class DAO {
     }
     
     
-    public boolean salvar(){
+    public boolean salvar() throws FalhaException{
         try{
             manager.getTransaction().begin();
             manager.persist(this);
@@ -45,12 +46,11 @@ abstract public class DAO {
             return true;
         }catch(Exception erro){
             manager.getTransaction().rollback();
-            System.out.println(erro.getMessage());
-            return false;
+            throw new FalhaException(erro.getMessage());
         }
     }
     
-    public boolean excluir(){
+    public boolean excluir() throws FalhaException{
         try{
             manager.getTransaction().begin();
             manager.remove(this);
@@ -58,8 +58,7 @@ abstract public class DAO {
             return true;
         }catch(Exception erro){
             manager.getTransaction().rollback();
-            System.out.println(erro.getMessage());
-            return false;
+            throw new FalhaException(erro.getMessage());
         }
     }
     
@@ -76,14 +75,13 @@ abstract public class DAO {
         }
     }
     
-    public static boolean close(){
+    public static boolean close() throws FalhaException{
         try{
             manager.close();
             factory.close();
             return true;
         }catch(Exception erro){
-            System.out.println(erro.getMessage());
-            return false;
+            throw new FalhaException(erro.getMessage());
         }
     }
     

@@ -4,6 +4,8 @@
  */
 package Views;
 
+import Controllers.ControllerProduto;
+import Interfaces.FalhaException;
 import br.dev.lomm.automecanicapoo.database.Produto;
 
 /**
@@ -167,14 +169,17 @@ public class FormCadastrarProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_CADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_CADASTRARActionPerformed
-        Produto produto = new Produto();
-        produto.setProdNome(INPUT_NOME.getText().toString());
-        produto.setProdValidade(INPUT_DTVALIDADE.getDate());
-        if(produto.salvar()){
-           FormListarProduto.atualizarTabela();
-           this.setVisible(false);
-           INPUT_DTVALIDADE.cleanup();
-           INPUT_NOME.setText("");
+        
+        try{
+            ControllerProduto controllerProduto = new ControllerProduto();
+            controllerProduto.setCampos(INPUT_NOME, INPUT_DTVALIDADE);
+            controllerProduto.validarDados();
+            controllerProduto.getProduto().salvar();
+            this.setVisible(false);
+            INPUT_DTVALIDADE.cleanup();
+            INPUT_NOME.setText("");
+        }catch(FalhaException $erro){
+            
         }
     }//GEN-LAST:event_BUTTON_CADASTRARActionPerformed
 

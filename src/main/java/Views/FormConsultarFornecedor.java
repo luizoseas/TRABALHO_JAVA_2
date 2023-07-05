@@ -4,6 +4,9 @@
  */
 package Views;
 
+import Controllers.ControllerFornecedor;
+import br.dev.lomm.automecanicapoo.database.Fornecedor;
+
 /**
  *
  * @author oseas
@@ -13,6 +16,21 @@ public class FormConsultarFornecedor extends javax.swing.JFrame {
     /**
      * Creates new form FormConsultarFornecedor
      */
+    
+    private Fornecedor fornecedor;
+    private final ControllerFornecedor controllerFornecedor = new ControllerFornecedor();
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+        controllerFornecedor.setFornecedor(fornecedor);
+        controllerFornecedor.preencherForm(INPUT_NOME_FANTASIA, INPUT_RAZAO_SOCIAL, INPUT_CNPJ, INPUT_IE);
+        
+    }
+    
     public FormConsultarFornecedor() {
         initComponents();
     }

@@ -5,6 +5,7 @@
 package br.dev.lomm.automecanicapoo.database;
 
 import Controllers.DAO;
+import Interfaces.FalhaException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -44,7 +45,7 @@ public class Bairro extends DAO implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "endIdbairro")
     private List<Endereco> enderecoList;
 
-    public static Bairro buscarOuInserirBairro(String nomeBairro) {
+    public static Bairro buscarOuInserirBairro(String nomeBairro) throws FalhaException {
         TypedQuery<Bairro> query = DAO.getInstance().createNamedQuery("Bairro.findByBaiDescricao", Bairro.class);
         query.setParameter("baiDescricao", nomeBairro);
 

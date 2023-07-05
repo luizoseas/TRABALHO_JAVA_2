@@ -4,12 +4,16 @@
  */
 package Views;
 
+import Controllers.ControllerFornecedor;
+import Controllers.ControllerProduto;
+import Interfaces.FalhaException;
+
 /**
  *
  * @author oseas
  */
 public class FormCadastrarFornecedor extends javax.swing.JFrame {
-
+    private final ControllerFornecedor controllerFornecedor = new ControllerFornecedor();
     /**
      * Creates new form FormCadastrarFornecedor
      */
@@ -246,7 +250,14 @@ public class FormCadastrarFornecedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_CADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_CADASTRARActionPerformed
-        // TODO add your handling code here:
+        try{
+            controllerFornecedor.setCampos(INPUT_NOME_FANTASIA, INPUT_RAZAO_SOCIAL, INPUT_CNPJ, INPUT_IE);
+            controllerFornecedor.validarDados();
+            controllerFornecedor.getFornecedor().salvar();
+            this.setVisible(false);
+        }catch(FalhaException $erro){
+            
+        }
     }//GEN-LAST:event_BUTTON_CADASTRARActionPerformed
 
 

@@ -4,6 +4,8 @@
  */
 package Views;
 
+import Controllers.ControllerLote;
+import Interfaces.FalhaException;
 import br.dev.lomm.automecanicapoo.database.Estoque;
 
 /**
@@ -13,7 +15,8 @@ import br.dev.lomm.automecanicapoo.database.Estoque;
 public class FormAtualizarEstoque extends javax.swing.JFrame {
 
     private Estoque estoque;
-    
+    private final ControllerLote controllerLote = new ControllerLote();
+        
     /**
      * Creates new form FormAtualizarEstoque
      */
@@ -252,10 +255,12 @@ public class FormAtualizarEstoque extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_ATUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_ATUALIZARActionPerformed
-        this.estoque.setEstPreco(Double.parseDouble(INPUT_PRECO.getText()));
-        this.estoque.setEstQuantidade(Integer.parseInt(INPUT_QUANTIDADE.getText()));
-        if(this.estoque.atualizar()){
+        try{
+            controllerLote.setCampos(INPUT_QUANTIDADE, INPUT_PRECO);
+            controllerLote.validarDados();
+            controllerLote.getEstoque().atualizar();
             this.setVisible(false);
+        }catch(FalhaException $erro){
             
         }
     }//GEN-LAST:event_BUTTON_ATUALIZARActionPerformed
@@ -263,12 +268,7 @@ public class FormAtualizarEstoque extends javax.swing.JFrame {
     
     public void setEstoque(Estoque estoque){
         this.estoque = estoque;
-        INPUT_PRODUTO.setText(estoque.getEstIdproduto().getProdNome());
-        INPUT_PRODUTO.disable();
-        INPUT_NOTA.setText(estoque.getEstIdnota().getIdnota()+"");
-        INPUT_NOTA.disable();
-        INPUT_PRECO.setText(estoque.getEstPreco()+"");
-        INPUT_QUANTIDADE.setText(estoque.getEstQuantidade()+"");
+        controllerLote.preencherForm(INPUT_PRODUTO, INPUT_QUANTIDADE, INPUT_PRECO, INPUT_NOTA);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

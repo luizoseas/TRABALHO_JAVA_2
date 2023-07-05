@@ -28,15 +28,18 @@ public class ControllerProduto implements InterfaceController {
         return this.produto;
     }
 
-    public void preencherForm(
+    public void setCampos(
         JTextPane nome,
         JDateChooser dataValidade
     ){
+        if(!(produto instanceof Produto)){
+            produto = new Produto();
+        }
         produto.setProdNome(nome.getText());
         produto.setProdValidade(dataValidade.getDate());
     }
 
-    public void setCampos(
+    public void preencherForm(
         JTextPane nome,
         JDateChooser dataValidade
     ){
@@ -45,7 +48,7 @@ public class ControllerProduto implements InterfaceController {
     }
 
     @Override
-    public boolean validarDados() throws Exception {
+    public boolean validarDados() throws FalhaException {
         if(!(produto.getProdNome() instanceof String) ||
                 produto.getProdNome().isEmpty() ||
                 produto.getProdNome().length() <= 1){
