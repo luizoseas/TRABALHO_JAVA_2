@@ -9,6 +9,7 @@ br\dev\lomm\automecanicapoo\database\Conserto.class
 br\dev\lomm\automecanicapoo\database\Cargo.class
 Views\FormListarVeiculo.class
 Views\FormConsultarCliente$4.class
+Controllers\ControllerCliente.class
 Views\FormConsultarProduto$3.class
 br\dev\lomm\automecanicapoo\database\Modelo.class
 Views\FormListarEstoque$1.class
