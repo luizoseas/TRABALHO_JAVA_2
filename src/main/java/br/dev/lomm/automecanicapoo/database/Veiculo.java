@@ -4,6 +4,7 @@
  */
 package br.dev.lomm.automecanicapoo.database;
 
+import Controllers.DAO;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -71,6 +73,11 @@ public class Veiculo implements Serializable {
     private List<Conserto> consertoList;
 
     public Veiculo() {
+    }
+    
+    public List<Veiculo> getVeiculo(){        
+        Query query = DAO.getInstance().createNamedQuery("Veiculo.findAll");
+        return query.getResultList();
     }
 
     public Veiculo(Integer idveiculo) {

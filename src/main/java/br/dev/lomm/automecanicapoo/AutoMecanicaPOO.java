@@ -5,6 +5,7 @@
 package br.dev.lomm.automecanicapoo;
 
 import Controllers.ControllerPessoa;
+import Interfaces.FalhaException;
 import Views.Painel;
 import br.dev.lomm.automecanicapoo.database.Cidade;
 import br.dev.lomm.automecanicapoo.database.Cliente;
@@ -24,19 +25,20 @@ public class AutoMecanicaPOO {
 //        painel.show();
         
 
-        Pessoa pessoa = new Pessoa();
-        pessoa.setPesCpf("05525587297");
-        pessoa.setPesNome("ASD2");
-        pessoa.setPesDatanasc(new Date(2002,11,1));
-        pessoa.setPesEmail("EMAIL@com.COM");
-        Cliente cliente1 = new Cliente();
-        cliente1.setCliIdpessoa(pessoa);
-        ControllerPessoa controllerCliente= new ControllerPessoa();
-        controllerCliente.setCliente(cliente1);
+//        Pessoa pessoa = new Pessoa();
+//        pessoa.setPesCpf("05525587297");
+//        pessoa.setPesNome("ASD2");
+//        pessoa.setPesDatanasc(new Date(2002,11,1));
+//        pessoa.setPesEmail("EMAIL@com.COM");
+//        Cliente cliente1 = new Cliente();
+//        cliente1.setCliIdpessoa(pessoa);
+//        ControllerPessoa controllerCliente= new ControllerPessoa();
+    //    controllerCliente.setCliente(cliente1);
         try{
-            controllerCliente.validarDados();
-            System.out.println("Suceeso");
-        }catch(Exception erro){
+            throw new FalhaException("asd");
+          //  controllerCliente.validarDados();
+            //System.out.println("Suceeso");
+        }catch(FalhaException erro){
             System.out.println("Erro: "+erro.getMessage());
         }
         

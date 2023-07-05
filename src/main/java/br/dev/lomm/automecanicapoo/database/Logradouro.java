@@ -4,6 +4,7 @@
  */
 package br.dev.lomm.automecanicapoo.database;
 
+import Controllers.DAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -28,7 +29,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Logradouro.findAll", query = "SELECT l FROM Logradouro l"),
     @NamedQuery(name = "Logradouro.findByIdlogradouro", query = "SELECT l FROM Logradouro l WHERE l.idlogradouro = :idlogradouro"),
     @NamedQuery(name = "Logradouro.findByLogDescricao", query = "SELECT l FROM Logradouro l WHERE l.logDescricao = :logDescricao")})
-public class Logradouro implements Serializable {
+public class Logradouro extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id

@@ -4,6 +4,7 @@
  */
 package br.dev.lomm.automecanicapoo.database;
 
+import Controllers.DAO;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -16,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
 
 /**
@@ -53,6 +55,12 @@ public class Fornecedor implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "notaIdfornecedor")
     private List<Nota> notaList;
 
+    
+    public List<Fornecedor> getFornecedor(){        
+        Query query = DAO.getInstance().createNamedQuery("Fornecedor.findAll");
+        return query.getResultList();
+    }
+        
     public Fornecedor() {
     }
 
