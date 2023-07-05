@@ -17,9 +17,12 @@ public enum EnumMensagem {
     MSG004("CEP inválido."),
     MSG005("Cidade inválida"),
     MSG006("Bairro inválido."),
-    MSG007("Logradouro inválido.");
-
-
+    MSG007("Logradouro inválido."),
+    MSG008("Nome Fantasia inválida."),
+    MSG009("Razão Social inválido."),
+    MSG010("CNPJ inválido."),
+    MSG011("Inscrição Estadual inválida.");
+    
 
     private String descricao;
     
