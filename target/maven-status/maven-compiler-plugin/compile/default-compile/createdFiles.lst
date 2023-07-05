@@ -3,6 +3,7 @@ br\dev\lomm\automecanicapoo\database\Fornecedor_.class
 Views\Painel$3.class
 br\dev\lomm\automecanicapoo\database\Nota.class
 Views\FormCadastrarVeiculo.class
+Controllers\ControllerEndereco.class
 Views\FormCadastrarEstoque$1.class
 Views\FormCadastrarFuncionario.class
 br\dev\lomm\automecanicapoo\database\Conserto.class
@@ -12,16 +13,22 @@ Views\FormConsultarCliente$4.class
 Controllers\ControllerCliente.class
 Views\FormConsultarProduto$3.class
 br\dev\lomm\automecanicapoo\database\Modelo.class
+Controllers\ControllerProduto.class
 Views\FormListarEstoque$1.class
+Views\FormErro.class
 br\dev\lomm\automecanicapoo\database\Endereco_.class
+Interfaces\EnumMensagem.class
 Views\FormConsultarEstoque.class
 Views\FormListarNota.class
 Views\FormAtualizarCliente.class
 Views\FormAtualizarProduto.class
+Controllers\ControllerConserto.class
 Views\FormConsultarCliente$1.class
+Views\FormErro$2.class
 Views\FormListarProduto$1.class
 br\dev\lomm\automecanicapoo\database\Cor_.class
 br\dev\lomm\automecanicapoo\database\Estoque_.class
+Controllers\ControllerFuncionario.class
 Views\FormConsultarOrdemDeServico$2.class
 Views\FormListarFornecedor$3.class
 Views\FormCadastrarProduto$1.class
@@ -34,6 +41,7 @@ Views\FormCadastrarFornecedor.class
 Views\FormAtualizarFuncionario.class
 Views\FormListarVeiculo$2.class
 Views\Login$2.class
+Interfaces\FalhaException.class
 Views\FormConsultarFuncionario$2.class
 br\dev\lomm\automecanicapoo\database\Modelo_.class
 Views\FormCadastrarNota$1.class
@@ -52,6 +60,7 @@ br\dev\lomm\automecanicapoo\database\Cliente.class
 br\dev\lomm\automecanicapoo\database\Cor.class
 Views\FormAtualizarEstoque.class
 Views\FormAtualizarFornecedor$1.class
+Controllers\ControllerVeiculo.class
 Views\FormConsultarNota$2.class
 Views\FormConsultarFuncionario$1.class
 br\dev\lomm\automecanicapoo\database\Bairro.class
@@ -64,6 +73,7 @@ Views\FormConsultarProduto.class
 Views\FormListarFuncionario$3.class
 Views\FormListarProduto.class
 Views\FormConsultarProduto$2.class
+Controllers\ControllerPessoa.class
 br\dev\lomm\automecanicapoo\database\Fornecedor.class
 br\dev\lomm\automecanicapoo\database\Nota_.class
 br\dev\lomm\automecanicapoo\database\Status_.class
@@ -72,6 +82,7 @@ br\dev\lomm\automecanicapoo\database\Bairro_.class
 Views\FormListarFornecedor.class
 Views\FormAtualizarNota$1.class
 Views\FormConsultarOrdemDeServico$3.class
+Views\FormErro$1.class
 Views\FormCadastrarNota.class
 Views\FormCadastrarFornecedor$1.class
 Views\Painel.class
@@ -97,6 +108,7 @@ Views\FormListarFuncionario$1.class
 Views\Painel$4.class
 br\dev\lomm\automecanicapoo\database\Combustivel.class
 br\dev\lomm\automecanicapoo\database\Estoque.class
+Controllers\ControllerLote.class
 Views\FormListarNota$3.class
 Views\FormConsultarEstoque$2.class
 br\dev\lomm\automecanicapoo\database\Funcionario_.class
@@ -104,6 +116,7 @@ Views\FormListarEstoque.class
 Views\FormCadastrarOrdemDeServico$1.class
 br\dev\lomm\automecanicapoo\database\Classificacao_.class
 Views\Painel$1.class
+Controllers\ControllerFornecedor.class
 Views\FormCadastrarCliente.class
 Views\FormConsultarProduto$4.class
 Views\Painel$5.class
@@ -124,7 +137,9 @@ br\dev\lomm\automecanicapoo\database\Classificacao.class
 Views\FormAtualizarEstoque$1.class
 br\dev\lomm\automecanicapoo\database\Produto.class
 br\dev\lomm\automecanicapoo\database\Status.class
+Interfaces\InterfaceController.class
 Views\FormConsultarCliente.class
+Controllers\ControllerNota.class
 br\dev\lomm\automecanicapoo\database\Conserto_.class
 Views\FormConsultarOrdemDeServico.class
 Views\FormListarCliente.class
