@@ -8,8 +8,8 @@ import Controllers.ControllerFornecedor;
 import Controllers.ControllerFuncionario;
 import Controllers.DAO;
 import Interfaces.FalhaException;
-import br.dev.lomm.automecanicapoo.database.Cargo;
-import br.dev.lomm.automecanicapoo.database.Funcionario;
+import Models.Cargo;
+import Models.Funcionario;
 
 /**
  *

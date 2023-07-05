@@ -1,7 +1,8 @@
 package br.dev.lomm.automecanicapoo.database;
 
-import br.dev.lomm.automecanicapoo.database.Estoque;
-import br.dev.lomm.automecanicapoo.database.Fornecedor;
+import Dao.Nota;
+import Dao.Estoque;
+import Dao.Fornecedor;
 import java.util.Date;
 import javax.annotation.processing.Generated;
 import javax.persistence.metamodel.ListAttribute;

@@ -8,9 +8,9 @@ import Controllers.ControllerLote;
 import Controllers.ControllerProduto;
 import Controllers.DAO;
 import Interfaces.FalhaException;
-import br.dev.lomm.automecanicapoo.database.Estoque;
-import br.dev.lomm.automecanicapoo.database.Nota;
-import br.dev.lomm.automecanicapoo.database.Produto;
+import Models.Estoque;
+import Models.Nota;
+import Models.Produto;
 
 /**
  *

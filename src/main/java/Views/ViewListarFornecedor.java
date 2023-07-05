@@ -6,8 +6,8 @@ package Views;
 
 import Controllers.DAO;
 import Forms.FormListarFornecedor;
-import br.dev.lomm.automecanicapoo.database.Fornecedor;
-import br.dev.lomm.automecanicapoo.database.Funcionario;
+import Models.Fornecedor;
+import Models.Funcionario;
 
 /**
  *

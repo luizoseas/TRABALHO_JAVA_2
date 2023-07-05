@@ -6,7 +6,7 @@ package Views;
 
 import Controllers.DAO;
 import Forms.FormListarCliente;
-import br.dev.lomm.automecanicapoo.database.Cliente;
+import Models.Cliente;
 
 /**
  *

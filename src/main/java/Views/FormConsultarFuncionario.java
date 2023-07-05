@@ -5,9 +5,10 @@
 package Views;
 
 import Controllers.ControllerFuncionario;
+import Forms.FormListarFuncionario;
 import Interfaces.FalhaException;
-import br.dev.lomm.automecanicapoo.database.Endereco;
-import br.dev.lomm.automecanicapoo.database.Funcionario;
+import Models.Endereco;
+import Models.Funcionario;
 
 /**
  *
@@ -15,7 +16,7 @@ import br.dev.lomm.automecanicapoo.database.Funcionario;
  */
 public class FormConsultarFuncionario extends javax.swing.JFrame {
 
-    private static Funcionario funcionario;
+    private Funcionario funcionario;
     private FormAtualizarFuncionario formAtualizarFuncionario;
     private final ControllerFuncionario controllerFuncionario = new ControllerFuncionario();
     
@@ -29,7 +30,7 @@ public class FormConsultarFuncionario extends javax.swing.JFrame {
     
     public void setFuncionario(Funcionario funcionario){
         try{
-        FormConsultarFuncionario.funcionario = funcionario;
+        this.funcionario = funcionario;
         controllerFuncionario.setFuncionario(funcionario);
         controllerFuncionario.preencherForm(INPUT_NOME, INPUT_CPF, INPUT_DTNASCIMENTO, INPUT_EMAIL, INPUT_LOGRADOURO, INPUT_CEP, INPUT_BAIRRO, INPUT_CIDADE, INPUT_CARGO);
         }catch(FalhaException erro){
@@ -491,7 +492,12 @@ public class FormConsultarFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_BUTTON_EDITARActionPerformed
 
     private void BUTTON_EXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EXCLUIRActionPerformed
-        // TODO add your handling code here:
+        try {
+            this.funcionario.excluir();
+            this.setVisible(false);
+            FormListarFuncionario.atualizar();
+        } catch (FalhaException ex) {
+        }
     }//GEN-LAST:event_BUTTON_EXCLUIRActionPerformed
 
 

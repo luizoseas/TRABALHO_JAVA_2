@@ -4,7 +4,11 @@
  */
 package Views;
 
-import br.dev.lomm.automecanicapoo.database.Cliente;
+import Controllers.ControllerConserto;
+import Forms.FormListarProdutoConserto;
+import Forms.FormListarVeiculo;
+import Interfaces.FalhaException;
+import Models.Cliente;
 
 /**
  *
@@ -12,6 +16,7 @@ import br.dev.lomm.automecanicapoo.database.Cliente;
  */
 public class FormCadastrarOrdemDeServico extends javax.swing.JFrame {
 
+    private final ControllerConserto controllerConserto = new ControllerConserto();
     private static Cliente cliente;
     /**
      * Creates new form FormCadastrarOrdemDeServico
@@ -20,8 +25,12 @@ public class FormCadastrarOrdemDeServico extends javax.swing.JFrame {
         initComponents();
     }
     
-    public static void setCliente(Cliente cliente){
+    
+    
+    public void setCliente(Cliente cliente){
         FormCadastrarOrdemDeServico.cliente = cliente;
+        controllerConserto.setCliente(cliente);
+        CLIENTE_INPUT.setText(cliente.getCliIdpessoa().getPesNome());
     }
 
     /**
@@ -35,20 +44,20 @@ public class FormCadastrarOrdemDeServico extends javax.swing.JFrame {
 
         BG_INPUT_VEICULO = new javax.swing.JPanel();
         TEXT_VEICULO = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        SELECT_VEICULO = new javax.swing.JComboBox<>();
         BG_INPUT_CLIENTE = new javax.swing.JPanel();
         TEXT_CLIENTE = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        CLIENTE_INPUT = new javax.swing.JTextField();
         HEADER = new javax.swing.JPanel();
         TEXT_TITLE = new javax.swing.JLabel();
         BUTTON_CADASTRAR = new javax.swing.JButton();
         BG_INPUT_DESCRICAO = new javax.swing.JPanel();
         TEXT_DESCRICAO = new javax.swing.JLabel();
         INPUT_DESCRICAO = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        DESCRICAO = new javax.swing.JTextPane();
         BG_INPUT_VEICULO1 = new javax.swing.JPanel();
         TEXT_VEICULO1 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        SELECT_STATUS = new javax.swing.JComboBox<>();
 
         BG_INPUT_VEICULO.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -64,7 +73,7 @@ public class FormCadastrarOrdemDeServico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(TEXT_VEICULO, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(SELECT_VEICULO, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8))
         );
         BG_INPUT_VEICULOLayout.setVerticalGroup(
@@ -73,7 +82,7 @@ public class FormCadastrarOrdemDeServico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(BG_INPUT_VEICULOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(TEXT_VEICULO, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
-                    .addComponent(jComboBox2))
+                    .addComponent(SELECT_VEICULO))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -83,6 +92,8 @@ public class FormCadastrarOrdemDeServico extends javax.swing.JFrame {
         TEXT_CLIENTE.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
         TEXT_CLIENTE.setText("Cliente:");
 
+        CLIENTE_INPUT.setEnabled(false);
+
         javax.swing.GroupLayout BG_INPUT_CLIENTELayout = new javax.swing.GroupLayout(BG_INPUT_CLIENTE);
         BG_INPUT_CLIENTE.setLayout(BG_INPUT_CLIENTELayout);
         BG_INPUT_CLIENTELayout.setHorizontalGroup(
@@ -91,19 +102,17 @@ public class FormCadastrarOrdemDeServico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(TEXT_CLIENTE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, 0, 214, Short.MAX_VALUE)
+                .addComponent(CLIENTE_INPUT, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                 .addContainerGap())
         );
         BG_INPUT_CLIENTELayout.setVerticalGroup(
             BG_INPUT_CLIENTELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BG_INPUT_CLIENTELayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(BG_INPUT_CLIENTELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1)
-                    .addGroup(BG_INPUT_CLIENTELayout.createSequentialGroup()
-                        .addComponent(TEXT_CLIENTE, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGroup(BG_INPUT_CLIENTELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(CLIENTE_INPUT)
+                    .addComponent(TEXT_CLIENTE, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         HEADER.setBackground(new java.awt.Color(159, 172, 172));
@@ -146,7 +155,7 @@ public class FormCadastrarOrdemDeServico extends javax.swing.JFrame {
         TEXT_DESCRICAO.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
         TEXT_DESCRICAO.setText("Descrição:");
 
-        INPUT_DESCRICAO.setViewportView(jTextPane1);
+        INPUT_DESCRICAO.setViewportView(DESCRICAO);
 
         javax.swing.GroupLayout BG_INPUT_DESCRICAOLayout = new javax.swing.GroupLayout(BG_INPUT_DESCRICAO);
         BG_INPUT_DESCRICAO.setLayout(BG_INPUT_DESCRICAOLayout);
@@ -187,7 +196,7 @@ public class FormCadastrarOrdemDeServico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(TEXT_VEICULO1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox3, 0, 214, Short.MAX_VALUE)
+                .addComponent(SELECT_STATUS, 0, 214, Short.MAX_VALUE)
                 .addGap(27, 27, 27))
         );
         BG_INPUT_VEICULO1Layout.setVerticalGroup(
@@ -195,7 +204,7 @@ public class FormCadastrarOrdemDeServico extends javax.swing.JFrame {
             .addGroup(BG_INPUT_VEICULO1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(BG_INPUT_VEICULO1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox3)
+                    .addComponent(SELECT_STATUS)
                     .addGroup(BG_INPUT_VEICULO1Layout.createSequentialGroup()
                         .addComponent(TEXT_VEICULO1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -243,7 +252,15 @@ public class FormCadastrarOrdemDeServico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_CADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_CADASTRARActionPerformed
-        // TODO add your handling code here:
+        try {
+            controllerConserto.setCampos(SELECT_VEICULO, SELECT_STATUS, DESCRICAO);
+            controllerConserto.setCliente(cliente);
+            controllerConserto.validarDados();
+            controllerConserto.getConserto().salvar();
+            FormListarProdutoConserto.atualizar();
+            this.setVisible(false);
+        } catch (FalhaException ex) {
+        }
     }//GEN-LAST:event_BUTTON_CADASTRARActionPerformed
 
 
@@ -253,16 +270,16 @@ public class FormCadastrarOrdemDeServico extends javax.swing.JFrame {
     private javax.swing.JPanel BG_INPUT_VEICULO;
     private javax.swing.JPanel BG_INPUT_VEICULO1;
     private javax.swing.JButton BUTTON_CADASTRAR;
+    private javax.swing.JTextField CLIENTE_INPUT;
+    private javax.swing.JTextPane DESCRICAO;
     private javax.swing.JPanel HEADER;
     private javax.swing.JScrollPane INPUT_DESCRICAO;
+    private javax.swing.JComboBox<String> SELECT_STATUS;
+    private javax.swing.JComboBox<String> SELECT_VEICULO;
     private javax.swing.JLabel TEXT_CLIENTE;
     private javax.swing.JLabel TEXT_DESCRICAO;
     private javax.swing.JLabel TEXT_TITLE;
     private javax.swing.JLabel TEXT_VEICULO;
     private javax.swing.JLabel TEXT_VEICULO1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,27 +2,27 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="automecanica" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <class>br.dev.lomm.automecanicapoo.database.Endereco</class>
-    <class>br.dev.lomm.automecanicapoo.database.Status</class>
-    <class>br.dev.lomm.automecanicapoo.database.Conserto</class>
-    <class>br.dev.lomm.automecanicapoo.database.Produto</class>
-    <class>br.dev.lomm.automecanicapoo.database.Cidade</class>
-    <class>br.dev.lomm.automecanicapoo.database.Cliente</class>
-    <class>br.dev.lomm.automecanicapoo.database.Nota</class>
-    <class>br.dev.lomm.automecanicapoo.database.Veiculo</class>
-    <class>br.dev.lomm.automecanicapoo.database.Classificacao</class>
-    <class>br.dev.lomm.automecanicapoo.database.Logradouro</class>
-    <class>br.dev.lomm.automecanicapoo.database.Telefone</class>
-    <class>br.dev.lomm.automecanicapoo.database.Cargo</class>
-    <class>br.dev.lomm.automecanicapoo.database.Bairro</class>
-    <class>br.dev.lomm.automecanicapoo.database.Pessoa</class>
-    <class>br.dev.lomm.automecanicapoo.database.Combustivel</class>
-    <class>br.dev.lomm.automecanicapoo.database.Fornecedor</class>
-    <class>br.dev.lomm.automecanicapoo.database.Estoque</class>
-    <class>br.dev.lomm.automecanicapoo.database.Pecasconserto</class>
-    <class>br.dev.lomm.automecanicapoo.database.Funcionario</class>
-    <class>br.dev.lomm.automecanicapoo.database.Cor</class>
-    <class>br.dev.lomm.automecanicapoo.database.Modelo</class>
+    <class>Dao.Produto</class>
+    <class>Dao.Status</class>
+    <class>Dao.Cor</class>
+    <class>Dao.Endereco</class>
+    <class>Dao.Funcionario</class>
+    <class>Dao.Classificacao</class>
+    <class>Dao.Modelo</class>
+    <class>Dao.Telefone</class>
+    <class>Dao.Logradouro</class>
+    <class>Dao.Cliente</class>
+    <class>Dao.Estoque</class>
+    <class>Dao.Pecasconserto</class>
+    <class>Dao.Veiculo</class>
+    <class>Dao.Pessoa</class>
+    <class>Dao.Cargo</class>
+    <class>Dao.Combustivel</class>
+    <class>Dao.Nota</class>
+    <class>Dao.Fornecedor</class>
+    <class>Dao.Conserto</class>
+    <class>Dao.Cidade</class>
+    <class>Dao.Bairro</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.30.111:5432/automecanica"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

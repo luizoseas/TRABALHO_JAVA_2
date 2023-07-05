@@ -6,7 +6,7 @@ package Views;
 
 import Controllers.DAO;
 import Forms.FormListarProduto;
-import br.dev.lomm.automecanicapoo.database.Produto;
+import Models.Produto;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

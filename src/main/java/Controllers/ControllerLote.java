@@ -7,10 +7,10 @@ package Controllers;
 import Interfaces.EnumMensagem;
 import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
-import br.dev.lomm.automecanicapoo.database.Estoque;
-import br.dev.lomm.automecanicapoo.database.Fornecedor;
-import br.dev.lomm.automecanicapoo.database.Nota;
-import br.dev.lomm.automecanicapoo.database.Produto;
+import Models.Estoque;
+import Models.Fornecedor;
+import Models.Nota;
+import Models.Produto;
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 

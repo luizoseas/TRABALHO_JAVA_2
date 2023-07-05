@@ -7,7 +7,7 @@ package Views;
 import Controllers.ControllerProduto;
 import Forms.FormListarProduto;
 import Interfaces.FalhaException;
-import br.dev.lomm.automecanicapoo.database.Produto;
+import Models.Produto;
 
 /**
  *

@@ -1,7 +1,8 @@
 package br.dev.lomm.automecanicapoo.database;
 
-import br.dev.lomm.automecanicapoo.database.Pessoa;
-import br.dev.lomm.automecanicapoo.database.Veiculo;
+import Dao.Cliente;
+import Dao.Pessoa;
+import Dao.Veiculo;
 import javax.annotation.processing.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;

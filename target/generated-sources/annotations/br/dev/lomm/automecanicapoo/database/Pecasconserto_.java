@@ -1,8 +1,9 @@
 package br.dev.lomm.automecanicapoo.database;
 
-import br.dev.lomm.automecanicapoo.database.Conserto;
-import br.dev.lomm.automecanicapoo.database.Estoque;
-import br.dev.lomm.automecanicapoo.database.PecasconsertoPK;
+import Dao.Pecasconserto;
+import Dao.Conserto;
+import Dao.Estoque;
+import Dao.PecasconsertoPK;
 import javax.annotation.processing.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;

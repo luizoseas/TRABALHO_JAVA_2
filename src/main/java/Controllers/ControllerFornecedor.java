@@ -7,7 +7,7 @@ package Controllers;
 import Interfaces.EnumMensagem;
 import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
-import br.dev.lomm.automecanicapoo.database.Fornecedor;
+import Models.Fornecedor;
 import javax.swing.JTextPane;
 
 /**

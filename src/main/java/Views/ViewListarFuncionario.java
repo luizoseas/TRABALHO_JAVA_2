@@ -6,7 +6,7 @@ package Views;
 
 import Controllers.DAO;
 import Forms.FormListarFuncionario;
-import br.dev.lomm.automecanicapoo.database.Funcionario;
+import Models.Funcionario;
 import javax.swing.table.DefaultTableModel;
 
 /**

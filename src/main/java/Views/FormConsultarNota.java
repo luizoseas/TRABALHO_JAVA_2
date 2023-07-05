@@ -7,7 +7,7 @@ package Views;
 import Controllers.ControllerNota;
 import Forms.FormListarNota;
 import Interfaces.FalhaException;
-import br.dev.lomm.automecanicapoo.database.Nota;
+import Models.Nota;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

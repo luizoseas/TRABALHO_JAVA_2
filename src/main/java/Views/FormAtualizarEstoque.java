@@ -6,7 +6,7 @@ package Views;
 
 import Controllers.ControllerLote;
 import Interfaces.FalhaException;
-import br.dev.lomm.automecanicapoo.database.Estoque;
+import Models.Estoque;
 
 /**
  *

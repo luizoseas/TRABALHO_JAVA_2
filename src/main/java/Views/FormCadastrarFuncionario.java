@@ -10,11 +10,11 @@ import Controllers.ControllerFuncionario;
 import Controllers.DAO;
 import Forms.FormListarFuncionario;
 import Interfaces.FalhaException;
-import br.dev.lomm.automecanicapoo.database.Cargo;
-import br.dev.lomm.automecanicapoo.database.Endereco;
-import br.dev.lomm.automecanicapoo.database.Funcionario;
-import br.dev.lomm.automecanicapoo.database.Nota;
-import br.dev.lomm.automecanicapoo.database.Pessoa;
+import Models.Cargo;
+import Models.Endereco;
+import Models.Funcionario;
+import Models.Nota;
+import Models.Pessoa;
 
 /**
  *

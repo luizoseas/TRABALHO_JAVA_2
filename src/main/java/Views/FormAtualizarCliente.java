@@ -6,7 +6,7 @@ package Views;
 
 import Controllers.ControllerCliente;
 import Interfaces.FalhaException;
-import br.dev.lomm.automecanicapoo.database.Cliente;
+import Models.Cliente;
 
 /**
  *

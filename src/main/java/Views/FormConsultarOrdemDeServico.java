@@ -62,6 +62,7 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
         INPUT_VEICULO.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_VEICULO.setToolTipText("Quantidade");
         INPUT_VEICULO.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_VEICULO.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_VEICULOLayout = new javax.swing.GroupLayout(BG_INPUT_VEICULO);
         BG_INPUT_VEICULO.setLayout(BG_INPUT_VEICULOLayout);
@@ -117,6 +118,7 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
         INPUT_CLIENTE.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_CLIENTE.setToolTipText("Quantidade");
         INPUT_CLIENTE.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_CLIENTE.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_CLIENTELayout = new javax.swing.GroupLayout(BG_INPUT_CLIENTE);
         BG_INPUT_CLIENTE.setLayout(BG_INPUT_CLIENTELayout);

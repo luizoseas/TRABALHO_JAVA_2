@@ -5,9 +5,13 @@
 package Views;
 
 import Controllers.ControllerCliente;
+import Controllers.DAO;
+import Forms.FormListarConsertoCliente;
+import Forms.FormListarVeiculo;
 import Interfaces.FalhaException;
-import br.dev.lomm.automecanicapoo.database.Cliente;
-import br.dev.lomm.automecanicapoo.database.Funcionario;
+import Models.Cliente;
+import Models.Funcionario;
+import Models.Veiculo;
 
 /**
  *
@@ -16,6 +20,8 @@ import br.dev.lomm.automecanicapoo.database.Funcionario;
 public class FormConsultarCliente extends javax.swing.JFrame {
 
     private FormCadastrarOrdemDeServico formCadastrarOrdemDeServico = new FormCadastrarOrdemDeServico();
+    private FormConsultarOrdemDeServico formConsultarOrdemDeServico = new FormConsultarOrdemDeServico();
+    private FormCadastrarVeiculo formCadastrarVeiculo = new FormCadastrarVeiculo();
     private final ControllerCliente controllerCliente = new ControllerCliente();
     private Cliente cliente;
     
@@ -30,6 +36,14 @@ public class FormConsultarCliente extends javax.swing.JFrame {
         this.cliente = cliente;
         controllerCliente.setCliente(cliente);
         controllerCliente.preencherForm(INPUT_NOME, INPUT_CPF, INPUT_DTNASCIMENTO, INPUT_EMAIL, INPUT_LOGRADOURO, INPUT_CEP, INPUT_BAIRRO, INPUT_CIDADE);
+        FormListarConsertoCliente.setTabela(tabelaServicos);
+        FormListarConsertoCliente.setCliente(cliente);
+        FormListarConsertoCliente.atualizar();
+        FormListarVeiculo.setTabela(TABELA_VEICULO);
+        FormListarVeiculo.setCliente(cliente);
+        FormListarVeiculo.atualizar();
+        
+    
     }
     
     /**
@@ -70,10 +84,10 @@ public class FormConsultarCliente extends javax.swing.JFrame {
         TEXT_CIDADE = new javax.swing.JLabel();
         INPUT_CIDADE = new javax.swing.JTextPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TABELA_VEICULO = new javax.swing.JTable();
         TEXT_TITLE1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabelaServicos = new javax.swing.JTable();
         TEXT_TITLE2 = new javax.swing.JLabel();
         BUTTON_EDITAR1 = new javax.swing.JButton();
         BUTTON_EDITAR2 = new javax.swing.JButton();
@@ -385,7 +399,7 @@ public class FormConsultarCliente extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TABELA_VEICULO.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -393,12 +407,12 @@ public class FormConsultarCliente extends javax.swing.JFrame {
                 "Placa", "KM", "Modelo"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TABELA_VEICULO);
 
         TEXT_TITLE1.setFont(new java.awt.Font("Arial", 1, 35)); // NOI18N
         TEXT_TITLE1.setText("Veiculos");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaServicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -409,7 +423,7 @@ public class FormConsultarCliente extends javax.swing.JFrame {
                 "Código", "Status", "Veiculo", "Data"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tabelaServicos);
 
         TEXT_TITLE2.setFont(new java.awt.Font("Arial", 1, 35)); // NOI18N
         TEXT_TITLE2.setText("Serviços");
@@ -569,7 +583,16 @@ public class FormConsultarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_BUTTON_EDITAR1ActionPerformed
 
     private void BUTTON_EDITAR2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITAR2ActionPerformed
-        // TODO add your handling code here:
+       int linha = TABELA_VEICULO.getSelectedRow();
+       int codigoV = Integer.parseInt(TABELA_VEICULO.getValueAt(linha,0).toString());
+       Veiculo veiculo = DAO.getInstance().find(Veiculo.class, codigoV);
+       if(veiculo instanceof Veiculo){
+            if(!(this.formConsultarCliente instanceof FormConsultarCliente)){
+                this.formConsultarCliente = new FormConsultarCliente();
+            }
+            this.formConsultarCliente.setCliente(cliente);
+            this.formConsultarCliente.setVisible(true);
+       }
     }//GEN-LAST:event_BUTTON_EDITAR2ActionPerformed
 
     private void BUTTON_EDITAR3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITAR3ActionPerformed
@@ -600,6 +623,7 @@ public class FormConsultarCliente extends javax.swing.JFrame {
     private javax.swing.JTextPane INPUT_EMAIL;
     private javax.swing.JTextPane INPUT_LOGRADOURO;
     private javax.swing.JTextPane INPUT_NOME;
+    private javax.swing.JTable TABELA_VEICULO;
     private javax.swing.JLabel TEXT_BAIRRO;
     private javax.swing.JLabel TEXT_CEP;
     private javax.swing.JLabel TEXT_CIDADE;
@@ -613,7 +637,6 @@ public class FormConsultarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel TEXT_TITLE2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tabelaServicos;
     // End of variables declaration//GEN-END:variables
 }

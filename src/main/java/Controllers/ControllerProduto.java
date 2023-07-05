@@ -7,7 +7,7 @@ package Controllers;
 import Interfaces.EnumMensagem;
 import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
-import br.dev.lomm.automecanicapoo.database.Produto;
+import Models.Produto;
 import com.toedter.calendar.JDateChooser;
 import java.util.Date;
 import javax.swing.JTextPane;

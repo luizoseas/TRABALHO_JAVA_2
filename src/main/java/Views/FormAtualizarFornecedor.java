@@ -8,7 +8,7 @@ import Controllers.ControllerFornecedor;
 import Forms.FormListarFornecedor;
 import Forms.FormListarProduto;
 import Interfaces.FalhaException;
-import br.dev.lomm.automecanicapoo.database.Fornecedor;
+import Models.Fornecedor;
 
 /**
  *

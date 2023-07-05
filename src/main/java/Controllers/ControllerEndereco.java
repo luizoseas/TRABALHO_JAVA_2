@@ -7,10 +7,10 @@ package Controllers;
 import Interfaces.EnumMensagem;
 import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
-import br.dev.lomm.automecanicapoo.database.Bairro;
-import br.dev.lomm.automecanicapoo.database.Cidade;
-import br.dev.lomm.automecanicapoo.database.Endereco;
-import br.dev.lomm.automecanicapoo.database.Logradouro;
+import Models.Bairro;
+import Models.Cidade;
+import Models.Endereco;
+import Models.Logradouro;
 import javax.swing.JTextPane;
 
 /**

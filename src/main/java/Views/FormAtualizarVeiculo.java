@@ -4,12 +4,24 @@
  */
 package Views;
 
+import Models.Veiculo;
+
 /**
  *
  * @author oseas
  */
 public class FormAtualizarVeiculo extends javax.swing.JFrame {
 
+    private Veiculo veiculo;
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+    
     /**
      * Creates new form FormAtualizarVeiculo
      */

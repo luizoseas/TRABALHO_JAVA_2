@@ -8,7 +8,7 @@ import Controllers.ControllerNota;
 import Forms.FormListarFornecedor;
 import Forms.FormListarNota;
 import Interfaces.FalhaException;
-import br.dev.lomm.automecanicapoo.database.Fornecedor;
+import Models.Fornecedor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -265,7 +265,6 @@ public class FormCadastrarNota extends javax.swing.JFrame {
             FormListarFornecedor.atualizar();
             this.setVisible(false);
         } catch (FalhaException ex) {
-            System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_BUTTON_CADASTRARActionPerformed
 
