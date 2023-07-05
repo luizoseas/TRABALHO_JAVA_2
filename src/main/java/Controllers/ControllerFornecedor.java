@@ -5,7 +5,6 @@
 package Controllers;
 
 import Interfaces.InterfaceController;
-import br.dev.lomm.automecanicapoo.database.Conserto;
 import br.dev.lomm.automecanicapoo.database.Fornecedor;
 
 /**

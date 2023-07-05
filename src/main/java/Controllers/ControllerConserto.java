@@ -5,9 +5,10 @@
 package Controllers;
 
 import Interfaces.EnumMensagem;
+import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
 import br.dev.lomm.automecanicapoo.database.Conserto;
-import br.dev.lomm.automecanicapoo.database.Pessoa;
+
 
 /**
  *
@@ -23,8 +24,10 @@ public class ControllerConserto implements InterfaceController {
 
     @Override
     public boolean validarDados() throws Exception {
-        if (!(conserto.getConsDescricao() instanceof String) || conserto.getConsDescricao().length() <= 3){
-            throw new Exception(EnumMensagem.MSG002.getDescricao());
+        if (!(conserto.getConsDescricao() instanceof String) ||
+                conserto.getConsDescricao().length() <= 1 ||
+                conserto.getConsDescricao().isEmpty()){
+            throw new FalhaException(EnumMensagem.MSG002.getDescricao());
         }
 
         return true;
