@@ -8,8 +8,6 @@ import Interfaces.EnumMensagem;
 import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
 import br.dev.lomm.automecanicapoo.database.Estoque;
-import java.util.Date;
-
 
 /**
  *
@@ -23,24 +21,13 @@ public class ControllerLote implements InterfaceController {
     }
 
     @Override
-    public boolean validarDados() throws FalhaException {
-        if(estoque.getEstIdnota().getNotaDatacompra() instanceof Date ||
-                estoque.getEstIdnota().getNotaDatacompra().toString().isEmpty()){
-            throw new FalhaException(EnumMensagem.MSG013.getDescricao());
+    public boolean validarDados() throws Exception {
+        if(estoque.getEstPreco() < 0){
+            throw new FalhaException(EnumMensagem.MSG014.getDescricao());
         }
-        if(estoque.getEstIdnota().getNotaDataentrada() instanceof Date ||
-                estoque.getEstIdnota().getNotaDataentrada().toString().isEmpty()){
-            throw new FalhaException(EnumMensagem.MSG013.getDescricao());
+        if(estoque.getEstQuantidade() < 0){
+            throw new FalhaException(EnumMensagem.MSG014.getDescricao());
         }
-        if(estoque.getEstIdproduto().getProdNome() instanceof String ||
-                estoque.getEstIdproduto().getProdNome().isEmpty() ||
-                estoque.getEstIdproduto().getProdNome().length() <= 1){
-            throw new FalhaException(EnumMensagem.MSG001.getDescricao());
-        }
-        if(estoque.getEstIdproduto().getProdValidade() instanceof Date ||
-                estoque.getEstIdproduto().getProdValidade().toString().isEmpty())
-            new FalhaException(EnumMensagem.MSG013.getDescricao());
-        
         return true;
     }
 }

@@ -4,8 +4,11 @@
  */
 package Controllers;
 
+import Interfaces.EnumMensagem;
 import Interfaces.FalhaException;
 import Interfaces.InterfaceController;
+import br.dev.lomm.automecanicapoo.database.Produto;
+import java.util.Date;
 
 /**
  *
@@ -13,8 +16,23 @@ import Interfaces.InterfaceController;
  */
 public class ControllerProduto implements InterfaceController {
 
+    private Produto produto;
+
+    public void setProduto(Produto produto){
+        this.produto = produto;
+    }
+    
     @Override
-    public boolean validarDados() throws FalhaException {
-        return false;
+    public boolean validarDados() throws Exception {
+        if(produto.getProdNome() instanceof String ||
+                produto.getProdNome().isEmpty() ||
+                produto.getProdNome().length() <= 1){
+            throw new FalhaException(EnumMensagem.MSG001.getDescricao());
+        }
+        if(produto.getProdValidade() instanceof Date ||
+                produto.getProdValidade().toString().isEmpty()){
+                throw new FalhaException(EnumMensagem.MSG013.getDescricao());
+        }
+        return true;
     }
 }
