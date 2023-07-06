@@ -28,11 +28,9 @@ public class Login extends javax.swing.JFrame {
 
         PainelLogin = new javax.swing.JPanel();
         ButtonEntrar = new javax.swing.JButton();
-        InputUsuario = new javax.swing.JTextField();
         TextInputUsuario = new javax.swing.JLabel();
-        InputSenha = new javax.swing.JTextField();
-        TextInputSenha = new javax.swing.JLabel();
         TextTitle = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -47,18 +45,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        InputUsuario.setToolTipText("usuario@email.com");
-
         TextInputUsuario.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        TextInputUsuario.setText("Usuário:");
-
-        InputSenha.setToolTipText("********");
-        InputSenha.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        InputSenha.setFocusable(false);
-        InputSenha.setKeymap(null);
-
-        TextInputSenha.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        TextInputSenha.setText("Senha:");
+        TextInputUsuario.setText("Funcionário:");
 
         TextTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         TextTitle.setText("AUTO MECANICA");
@@ -70,21 +58,20 @@ public class Login extends javax.swing.JFrame {
             .addGroup(PainelLoginLayout.createSequentialGroup()
                 .addContainerGap(236, Short.MAX_VALUE)
                 .addGroup(PainelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelLoginLayout.createSequentialGroup()
-                        .addGroup(PainelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PainelLoginLayout.createSequentialGroup()
+                            .addGap(134, 134, 134)
+                            .addComponent(ButtonEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(343, 343, 343))
+                        .addGroup(PainelLoginLayout.createSequentialGroup()
                             .addComponent(TextInputUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PainelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelLoginLayout.createSequentialGroup()
-                                    .addComponent(ButtonEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(123, 123, 123))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TextInputSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(InputSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(InputUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(220, 220, 220))
+                            .addGap(220, 220, 220)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelLoginLayout.createSequentialGroup()
                         .addComponent(TextTitle)
-                        .addGap(322, 322, 322))))
+                        .addGap(322, 322, 322))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelLoginLayout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(225, 225, 225))))
         );
         PainelLoginLayout.setVerticalGroup(
             PainelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -93,18 +80,12 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(TextTitle)
                 .addGap(55, 55, 55)
                 .addComponent(TextInputUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(InputUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(TextInputSenha)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(InputSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113)
                 .addComponent(ButtonEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(114, 114, 114))
         );
-
-        InputUsuario.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,11 +142,9 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonEntrar;
-    private javax.swing.JTextField InputSenha;
-    private javax.swing.JTextField InputUsuario;
     private javax.swing.JPanel PainelLogin;
-    private javax.swing.JLabel TextInputSenha;
     private javax.swing.JLabel TextInputUsuario;
     private javax.swing.JLabel TextTitle;
+    private javax.swing.JComboBox<String> jComboBox1;
     // End of variables declaration//GEN-END:variables
 }
