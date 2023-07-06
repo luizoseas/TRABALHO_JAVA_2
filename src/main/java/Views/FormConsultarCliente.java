@@ -6,10 +6,12 @@ package Views;
 
 import Controllers.ControllerCliente;
 import Controllers.DAO;
+import Forms.FormListarCliente;
 import Forms.FormListarConsertoCliente;
 import Forms.FormListarVeiculo;
 import Interfaces.FalhaException;
 import Models.Cliente;
+import Models.Conserto;
 import Models.Funcionario;
 import Models.Veiculo;
 
@@ -22,6 +24,8 @@ public class FormConsultarCliente extends javax.swing.JFrame {
     private FormCadastrarOrdemDeServico formCadastrarOrdemDeServico = new FormCadastrarOrdemDeServico();
     private FormConsultarOrdemDeServico formConsultarOrdemDeServico = new FormConsultarOrdemDeServico();
     private FormCadastrarVeiculo formCadastrarVeiculo = new FormCadastrarVeiculo();
+    private FormConsultarVeiculo formConsultarVeiculo;
+    private FormAtualizarCliente formAtualizarCliente = new FormAtualizarCliente();
     private final ControllerCliente controllerCliente = new ControllerCliente();
     private Cliente cliente;
     
@@ -92,6 +96,7 @@ public class FormConsultarCliente extends javax.swing.JFrame {
         BUTTON_EDITAR1 = new javax.swing.JButton();
         BUTTON_EDITAR2 = new javax.swing.JButton();
         BUTTON_EDITAR3 = new javax.swing.JButton();
+        BUTTON_EDITAR4 = new javax.swing.JButton();
 
         BG_INPUT_DTNASCIMENTO.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -461,6 +466,17 @@ public class FormConsultarCliente extends javax.swing.JFrame {
             }
         });
 
+        BUTTON_EDITAR4.setBackground(new java.awt.Color(0, 102, 153));
+        BUTTON_EDITAR4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BUTTON_EDITAR4.setForeground(new java.awt.Color(255, 255, 255));
+        BUTTON_EDITAR4.setText("CADASTRAR VEICULO");
+        BUTTON_EDITAR4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BUTTON_EDITAR4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BUTTON_EDITAR4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -489,27 +505,30 @@ public class FormConsultarCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(BG_INPUT_CIDADE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(BUTTON_EDITAR1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TEXT_TITLE2)
-                                    .addGap(228, 228, 228))))
-                        .addContainerGap(15, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(TEXT_TITLE1)
-                        .addGap(244, 244, 244))))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(913, Short.MAX_VALUE)
-                    .addComponent(BUTTON_EDITAR2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(196, 196, 196)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 636, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(TEXT_TITLE2)
+                                            .addGap(228, 228, 228))))
+                                .addContainerGap(15, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(TEXT_TITLE1)
+                                .addGap(244, 244, 244))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(BUTTON_EDITAR2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addComponent(BUTTON_EDITAR4, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(929, Short.MAX_VALUE)
@@ -526,7 +545,11 @@ public class FormConsultarCliente extends javax.swing.JFrame {
                         .addComponent(TEXT_TITLE1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(71, 71, 71)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BUTTON_EDITAR2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BUTTON_EDITAR4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TEXT_TITLE2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -556,11 +579,6 @@ public class FormConsultarCliente extends javax.swing.JFrame {
                 .addContainerGap(103, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(401, Short.MAX_VALUE)
-                    .addComponent(BUTTON_EDITAR2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(375, 375, 375)))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addContainerGap(742, Short.MAX_VALUE)
                     .addComponent(BUTTON_EDITAR3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(34, 34, 34)))
@@ -570,11 +588,18 @@ public class FormConsultarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_EDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITARActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        formAtualizarCliente.setCliente(cliente);
+        formAtualizarCliente.setVisible(true);
     }//GEN-LAST:event_BUTTON_EDITARActionPerformed
 
     private void BUTTON_EXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EXCLUIRActionPerformed
-        // TODO add your handling code here:
+        try {
+            this.cliente.excluir();
+            this.setVisible(false);
+            FormListarCliente.atualizar();
+        } catch (FalhaException ex) {
+        }
     }//GEN-LAST:event_BUTTON_EXCLUIRActionPerformed
 
     private void BUTTON_EDITAR1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITAR1ActionPerformed
@@ -587,17 +612,34 @@ public class FormConsultarCliente extends javax.swing.JFrame {
        int codigoV = Integer.parseInt(TABELA_VEICULO.getValueAt(linha,0).toString());
        Veiculo veiculo = DAO.getInstance().find(Veiculo.class, codigoV);
        if(veiculo instanceof Veiculo){
-            if(!(this.formConsultarCliente instanceof FormConsultarCliente)){
-                this.formConsultarCliente = new FormConsultarCliente();
+            if(!(this.formConsultarVeiculo instanceof FormConsultarVeiculo)){
+                this.formConsultarVeiculo = new FormConsultarVeiculo();
             }
-            this.formConsultarCliente.setCliente(cliente);
-            this.formConsultarCliente.setVisible(true);
+            this.formConsultarVeiculo.setVeiculo(veiculo);
+            this.formConsultarVeiculo.setVisible(true);
+            this.setVisible(false);
        }
     }//GEN-LAST:event_BUTTON_EDITAR2ActionPerformed
 
     private void BUTTON_EDITAR3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITAR3ActionPerformed
-        // TODO add your handling code here:
+       int linha = tabelaServicos.getSelectedRow();
+       int codigoV = Integer.parseInt(tabelaServicos.getValueAt(linha,0).toString());
+       Conserto conserto = DAO.getInstance().find(Conserto.class, codigoV);
+       if(conserto instanceof Conserto){
+            if(!(this.formConsultarOrdemDeServico instanceof FormConsultarOrdemDeServico)){
+                this.formConsultarOrdemDeServico = new FormConsultarOrdemDeServico();
+            }
+            this.formConsultarOrdemDeServico.setConserto(conserto);
+            this.formConsultarOrdemDeServico.setVisible(true);
+            this.setVisible(false);
+       }
     }//GEN-LAST:event_BUTTON_EDITAR3ActionPerformed
+
+    private void BUTTON_EDITAR4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITAR4ActionPerformed
+        this.setVisible(false);
+        this.formCadastrarVeiculo.setCliente(cliente);
+        this.formCadastrarVeiculo.setVisible(true);
+    }//GEN-LAST:event_BUTTON_EDITAR4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -613,6 +655,7 @@ public class FormConsultarCliente extends javax.swing.JFrame {
     private javax.swing.JButton BUTTON_EDITAR1;
     private javax.swing.JButton BUTTON_EDITAR2;
     private javax.swing.JButton BUTTON_EDITAR3;
+    private javax.swing.JButton BUTTON_EDITAR4;
     private javax.swing.JButton BUTTON_EXCLUIR;
     private javax.swing.JPanel HEADER;
     private javax.swing.JTextPane INPUT_BAIRRO;

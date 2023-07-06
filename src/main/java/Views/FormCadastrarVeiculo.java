@@ -4,12 +4,30 @@
  */
 package Views;
 
+import Controllers.ControllerVeiculo;
+import Forms.FormListarFornecedor;
+import Forms.FormListarNota;
+import Forms.FormListarVeiculo;
+import Interfaces.FalhaException;
+import Models.Cliente;
+
 /**
  *
  * @author oseas
  */
 public class FormCadastrarVeiculo extends javax.swing.JFrame {
 
+    private Cliente cliente;
+    private final ControllerVeiculo controllerVeiculo = new ControllerVeiculo();
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+    
     /**
      * Creates new form FormCadastrarVeiculo
      */
@@ -359,7 +377,15 @@ public class FormCadastrarVeiculo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_CADASTRARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_CADASTRARActionPerformed
-        // TODO add your handling code here:
+ try {
+            controllerVeiculo.setCampos(INPUT_PLACA, INPUT_QUILOMETRAGEM, INPUT_COR, INPUT_COMBUSTIVEL, INPUT_MODELO, INPUT_CLASSIFICACAO, INPUT_DTFABRICACAO);
+            controllerVeiculo.getVeiculo().setVeiIdcliente(cliente);
+            controllerVeiculo.validarDados();
+            controllerVeiculo.getVeiculo().salvar();
+            FormListarVeiculo.atualizar();
+            this.setVisible(false);
+        } catch (FalhaException ex) {
+        }
     }//GEN-LAST:event_BUTTON_CADASTRARActionPerformed
 
 

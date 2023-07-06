@@ -73,7 +73,7 @@ public class ControllerVeiculo {
         classificacao.setText(veiculo.getVeiIdclassificacao().getClasDescricao());
     }
 
-    public boolean validarDados() throws Exception{
+    public boolean validarDados() throws FalhaException{
         if(!(veiculo.getVeiDatafabric() instanceof Date) ||
                 veiculo.getVeiDatafabric().toString().isEmpty()){
             throw new FalhaException(EnumMensagem.MSG013.getDescricao());

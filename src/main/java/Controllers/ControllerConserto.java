@@ -59,15 +59,15 @@ public class ControllerConserto implements InterfaceController {
     }
 
     public void preencherForm(
-        JComboBox veic,
-        JComboBox cliente,
-        JComboBox status,
+        JTextPane veic,
+        JTextPane cliente,
+        JTextPane status,
         JTextPane descricao,
         JTextPane total
     ) {
-        veic.setSelectedItem(conserto.getConsIdveiculo());
-        cliente.setSelectedItem(conserto.getConsIdveiculo().getVeiIdcliente());
-        status.setSelectedItem(conserto.getConsIdstatus());
+        veic.setText(conserto.getConsIdveiculo().getVeiPlaca());
+        cliente.setText(conserto.getConsIdveiculo().getVeiIdcliente().getCliIdpessoa().getPesNome());
+        status.setText(conserto.getConsIdstatus().getStatDescricao());
         descricao.setText(conserto.getConsDescricao());
         double valortotal = 0;
         for (Pecasconserto pecaconcerto : conserto.getPecasconsertoList()) {

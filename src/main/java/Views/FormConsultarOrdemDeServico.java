@@ -4,17 +4,32 @@
  */
 package Views;
 
+import Controllers.ControllerConserto;
+import Forms.FormListarProduto;
+import Forms.FormListarProdutoConserto;
+import Models.Conserto;
+
 /**
  *
  * @author oseas
  */
 public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
 
+
+    private final ControllerConserto controllerConserto = new ControllerConserto();
+    private Conserto conserto;
     /**
      * Creates new form FormConsultarOrdemDeServico
      */
     public FormConsultarOrdemDeServico() {
         initComponents();
+    }
+    
+    public void setConserto(Conserto conserto){
+        controllerConserto.setConserto(conserto);
+        controllerConserto.preencherForm(INPUT_DESC, INPUT_CLIENTE, INPUT_STATUS, INPUT_DESC, INPUT_TOTAL);
+        FormListarProdutoConserto.setTabela(jTable1);
+        FormListarProdutoConserto.setConserto(conserto);
     }
 
     /**
@@ -38,19 +53,19 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
         BG_INPUT_DESCRICAO = new javax.swing.JPanel();
         TEXT_DESCRICAO = new javax.swing.JLabel();
         INPUT_DESCRICAO = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        INPUT_DESC = new javax.swing.JTextPane();
         BUTTON_EXCLUIR = new javax.swing.JButton();
         BG_INPUT_VEICULO1 = new javax.swing.JPanel();
         TEXT_VEICULO1 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        INPUT_STATUS = new javax.swing.JTextPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         TEXT_TITLE1 = new javax.swing.JLabel();
         BUTTON_EDITAR1 = new javax.swing.JButton();
-        BUTTON_EDITAR2 = new javax.swing.JButton();
         BG_INPUT_CLIENTE1 = new javax.swing.JPanel();
         TEXT_CLIENTE1 = new javax.swing.JLabel();
-        INPUT_CLIENTE1 = new javax.swing.JTextPane();
+        INPUT_TOTAL = new javax.swing.JTextPane();
+        BUTTON_EDITAR2 = new javax.swing.JButton();
 
         BG_INPUT_VEICULO.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -159,7 +174,8 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
         TEXT_DESCRICAO.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
         TEXT_DESCRICAO.setText("Descrição:");
 
-        INPUT_DESCRICAO.setViewportView(jTextPane1);
+        INPUT_DESC.setEnabled(false);
+        INPUT_DESCRICAO.setViewportView(INPUT_DESC);
 
         javax.swing.GroupLayout BG_INPUT_DESCRICAOLayout = new javax.swing.GroupLayout(BG_INPUT_DESCRICAO);
         BG_INPUT_DESCRICAO.setLayout(BG_INPUT_DESCRICAOLayout);
@@ -203,6 +219,12 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
         TEXT_VEICULO1.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
         TEXT_VEICULO1.setText("Status:");
 
+        INPUT_STATUS.setBorder(null);
+        INPUT_STATUS.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
+        INPUT_STATUS.setToolTipText("Quantidade");
+        INPUT_STATUS.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_STATUS.setEnabled(false);
+
         javax.swing.GroupLayout BG_INPUT_VEICULO1Layout = new javax.swing.GroupLayout(BG_INPUT_VEICULO1);
         BG_INPUT_VEICULO1.setLayout(BG_INPUT_VEICULO1Layout);
         BG_INPUT_VEICULO1Layout.setHorizontalGroup(
@@ -211,19 +233,17 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(TEXT_VEICULO1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox3, 0, 214, Short.MAX_VALUE)
-                .addGap(27, 27, 27))
+                .addComponent(INPUT_STATUS, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addGap(19, 19, 19))
         );
         BG_INPUT_VEICULO1Layout.setVerticalGroup(
             BG_INPUT_VEICULO1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BG_INPUT_VEICULO1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(BG_INPUT_VEICULO1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox3)
-                    .addGroup(BG_INPUT_VEICULO1Layout.createSequentialGroup()
-                        .addComponent(TEXT_VEICULO1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGroup(BG_INPUT_VEICULO1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(INPUT_STATUS, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TEXT_VEICULO1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -252,29 +272,17 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
             }
         });
 
-        BUTTON_EDITAR2.setBackground(new java.awt.Color(0, 102, 102));
-        BUTTON_EDITAR2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        BUTTON_EDITAR2.setForeground(new java.awt.Color(255, 255, 255));
-        BUTTON_EDITAR2.setText("CONSULTAR PRODUTO");
-        BUTTON_EDITAR2.setToolTipText("");
-        BUTTON_EDITAR2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        BUTTON_EDITAR2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BUTTON_EDITAR2ActionPerformed(evt);
-            }
-        });
-
         BG_INPUT_CLIENTE1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         TEXT_CLIENTE1.setBackground(new java.awt.Color(238, 238, 238));
         TEXT_CLIENTE1.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
         TEXT_CLIENTE1.setText("Total:");
 
-        INPUT_CLIENTE1.setBorder(null);
-        INPUT_CLIENTE1.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
-        INPUT_CLIENTE1.setToolTipText("Quantidade");
-        INPUT_CLIENTE1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        INPUT_CLIENTE1.setEnabled(false);
+        INPUT_TOTAL.setBorder(null);
+        INPUT_TOTAL.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
+        INPUT_TOTAL.setToolTipText("Quantidade");
+        INPUT_TOTAL.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_TOTAL.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_CLIENTE1Layout = new javax.swing.GroupLayout(BG_INPUT_CLIENTE1);
         BG_INPUT_CLIENTE1.setLayout(BG_INPUT_CLIENTE1Layout);
@@ -284,7 +292,7 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(TEXT_CLIENTE1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(INPUT_CLIENTE1, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                .addComponent(INPUT_TOTAL, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
                 .addContainerGap())
         );
         BG_INPUT_CLIENTE1Layout.setVerticalGroup(
@@ -292,10 +300,23 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
             .addGroup(BG_INPUT_CLIENTE1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(BG_INPUT_CLIENTE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(INPUT_CLIENTE1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(INPUT_TOTAL, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TEXT_CLIENTE1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        BUTTON_EDITAR2.setBackground(new java.awt.Color(204, 0, 102));
+        BUTTON_EDITAR2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BUTTON_EDITAR2.setForeground(new java.awt.Color(255, 255, 255));
+        BUTTON_EDITAR2.setText("REMOVER PRODUTO");
+        BUTTON_EDITAR2.setToolTipText("");
+        BUTTON_EDITAR2.setActionCommand("REMOVER PRODUTO");
+        BUTTON_EDITAR2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BUTTON_EDITAR2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BUTTON_EDITAR2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -333,10 +354,10 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
                                 .addComponent(BG_INPUT_CLIENTE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(BUTTON_EDITAR1, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BUTTON_EDITAR2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(88, 88, 88)
+                .addComponent(BUTTON_EDITAR1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BUTTON_EDITAR2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -363,11 +384,11 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
                         .addComponent(BUTTON_EXCLUIR, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(95, 95, 95)
                         .addComponent(BG_INPUT_CLIENTE1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-                .addComponent(BUTTON_EDITAR2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(BUTTON_EDITAR1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BUTTON_EDITAR1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BUTTON_EDITAR2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(123, 123, 123))
         );
 
         pack();
@@ -402,8 +423,10 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
     private javax.swing.JButton BUTTON_EXCLUIR;
     private javax.swing.JPanel HEADER;
     private javax.swing.JTextPane INPUT_CLIENTE;
-    private javax.swing.JTextPane INPUT_CLIENTE1;
+    private javax.swing.JTextPane INPUT_DESC;
     private javax.swing.JScrollPane INPUT_DESCRICAO;
+    private javax.swing.JTextPane INPUT_STATUS;
+    private javax.swing.JTextPane INPUT_TOTAL;
     private javax.swing.JTextPane INPUT_VEICULO;
     private javax.swing.JLabel TEXT_CLIENTE;
     private javax.swing.JLabel TEXT_CLIENTE1;
@@ -412,9 +435,7 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
     private javax.swing.JLabel TEXT_TITLE1;
     private javax.swing.JLabel TEXT_VEICULO;
     private javax.swing.JLabel TEXT_VEICULO1;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,9 +4,8 @@
  */
 package Forms;
 
-import Models.Cliente;
 import Models.Conserto;
-import Models.Veiculo;
+import Models.Pecasconserto;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,14 +15,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FormListarProdutoConserto {
     private static DefaultTableModel tabela;
-    private static Cliente cliente;
+    private static Conserto conserto;
 
-    public static Cliente getCliente() {
-        return cliente;
+    public static Conserto getConserto() {
+        return conserto;
     }
 
-    public static void setCliente(Cliente cliente) {
-        FormListarProdutoConserto.cliente = cliente;
+    public static void setConserto(Conserto conserto) {
+        FormListarProdutoConserto.conserto = conserto;
     }
 
     public static DefaultTableModel getTabela() {
@@ -36,11 +35,9 @@ public class FormListarProdutoConserto {
     
     public static void atualizar(){
         FormListarProdutoConserto.tabela.getDataVector().removeAllElements();
-        for (Veiculo vei : FormListarProdutoConserto.getCliente().getVeiculoList()) {
-            for (Conserto con : vei.getConsertoList()) {
-                String data[] = {con.getIdconserto()+"",con.getConsIdstatus().getStatDescricao(),vei.getIdveiculo()+"",con.getConsDatainicio().toString()};
-                FormListarProdutoConserto.tabela.addRow(data);   
-            }
+        for (Pecasconserto con : conserto.getPecasconsertoList()) {
+            String data[] = {con.getEstoque().getEstIdproduto().getProdNome(),con.getEstoque().getIdestoque()+"",con.getPcQuantidade()+""};
+            FormListarProdutoConserto.tabela.addRow(data);   
         }
     }
 }

@@ -4,14 +4,20 @@
  */
 package Views;
 
+import Controllers.ControllerVeiculo;
+import Forms.FormListarConsertoCliente;
+import Forms.FormListarVeiculo;
+import Interfaces.FalhaException;
 import Models.Veiculo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author oseas
  */
 public class FormAtualizarVeiculo extends javax.swing.JFrame {
-
+    private final ControllerVeiculo controllerVeiculo = new ControllerVeiculo();
     private Veiculo veiculo;
 
     public Veiculo getVeiculo() {
@@ -20,6 +26,12 @@ public class FormAtualizarVeiculo extends javax.swing.JFrame {
 
     public void setVeiculo(Veiculo veiculo) {
         this.veiculo = veiculo;
+        controllerVeiculo.setVeiculo(veiculo);
+        try {
+            controllerVeiculo.preencherForm(INPUT_PLACA, INPUT_QUILOMETRAGEM, INPUT_COR, INPUT_COMBUSTIVEL, INPUT_MODELO, INPUT_CLASSIFICACAO, INPUT_DTFABRICACAO);
+        } catch (FalhaException ex) {
+          
+        }
     }
     
     /**
@@ -371,7 +383,16 @@ public class FormAtualizarVeiculo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_ATUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_ATUALIZARActionPerformed
-        // TODO add your handling code here:
+        try{
+            controllerVeiculo.setCampos(INPUT_PLACA, INPUT_QUILOMETRAGEM, INPUT_COR, INPUT_COMBUSTIVEL, INPUT_MODELO, INPUT_CLASSIFICACAO, INPUT_DTFABRICACAO);
+            controllerVeiculo.validarDados();
+            controllerVeiculo.getVeiculo().atualizar();
+            this.setVisible(false);
+            FormListarVeiculo.atualizar();
+            FormListarConsertoCliente.atualizar();
+        }catch(FalhaException $erro){
+            
+        }
     }//GEN-LAST:event_BUTTON_ATUALIZARActionPerformed
 
 
