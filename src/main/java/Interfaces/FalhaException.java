@@ -16,6 +16,7 @@ public class FalhaException extends Exception {
     
     public FalhaException(String mensagem) {
         super(mensagem);
+        System.out.println(mensagem);
         formErro.setVisible(true, mensagem);
     }
     

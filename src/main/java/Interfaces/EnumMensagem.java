@@ -26,7 +26,10 @@ public enum EnumMensagem {
     MSG014("O valor não pode ser negativo."),
     MSG015("Placa inválida."),
     MSG016("Quilometragem inválida."),
-    MSG017("Cliente não registrado.");
+    MSG017("Cliente não registrado."),
+    MSG018("Veiculo não encontrado."),
+    MSG019("Status não encontrado."),
+    MSG020("Nota não encontrada.");
     
 
     private String descricao;

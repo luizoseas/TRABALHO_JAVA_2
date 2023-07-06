@@ -4,6 +4,9 @@
  */
 package Models;
 
+import Controllers.DAO;
+import Interfaces.EnumMensagem;
+import Interfaces.FalhaException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -13,8 +16,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
+import javax.persistence.Query;
 import javax.persistence.Table;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -39,6 +45,23 @@ public class Status implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "consIdstatus")
     private List<Conserto> consertoList;
 
+    
+    public static List<Status> getStatus(){        
+        Query query = DAO.getInstance().createNamedQuery("Status.findAll");
+        return query.getResultList();
+    }
+    
+     public static Status buscarVeiculo(String nome) throws FalhaException {
+        TypedQuery<Status> query = DAO.getInstance().createNamedQuery("Status.findByStatDescricao", Status.class);
+        query.setParameter("statDescricao", nome);
+
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new FalhaException(EnumMensagem.MSG019.getDescricao());
+        }
+    }
+        
     public Status() {
     }
 

@@ -45,7 +45,7 @@ public class Modelo extends DAO implements Serializable {
     private List<Veiculo> veiculoList;
 
     public static Modelo buscarOuInserirModelo(String nome) throws FalhaException {
-        TypedQuery<Modelo> query = DAO.getInstance().createNamedQuery("Cor.findByModDescricao", Modelo.class);
+        TypedQuery<Modelo> query = DAO.getInstance().createNamedQuery("Modelo.findByModDescricao", Modelo.class);
         query.setParameter("modDescricao", nome);
 
         try {

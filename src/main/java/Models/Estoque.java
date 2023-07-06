@@ -56,6 +56,12 @@ public class Estoque extends DAO implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estoque")
     private List<Pecasconserto> pecasconsertoList;
 
+    public static List<Estoque> getEstoques(){        
+        Query query = DAO.getInstance().createNamedQuery("Estoque.findAll");
+        return query.getResultList();
+    }
+    
+    
     public Estoque() {
     }
 

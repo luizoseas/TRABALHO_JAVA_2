@@ -15,6 +15,7 @@ import Models.Produto;
 import Models.Status;
 import Models.Veiculo;
 import com.toedter.calendar.JDateChooser;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 
@@ -49,13 +50,14 @@ public class ControllerConserto implements InterfaceController {
         JComboBox veic,
         JComboBox sta,
         JTextPane descricao
-    ){
+    ) throws FalhaException{
         if(!(conserto instanceof Conserto)){
             conserto = new Conserto();
         }
-        conserto.setConsIdveiculo(DAO.getInstance().find(Veiculo.class, Integer.parseInt((String) veic.getItemAt(veic.getSelectedIndex()))));
-        conserto.setConsIdstatus(DAO.getInstance().find(Status.class, Integer.parseInt((String) sta.getItemAt(sta.getSelectedIndex()))));
+        conserto.setConsIdveiculo(Veiculo.buscarVeiculo((String) veic.getItemAt(veic.getSelectedIndex())));
+        conserto.setConsIdstatus(Status.buscarVeiculo((String) sta.getItemAt(sta.getSelectedIndex())));
         conserto.setConsDescricao(descricao.getText());
+        conserto.setConsDatainicio(new Date());
     }
 
     public void preencherForm(
@@ -74,6 +76,18 @@ public class ControllerConserto implements InterfaceController {
             valortotal += pecaconcerto.getEstoque().getEstPreco();
         }
         total.setText("R$ "+valortotal);
+    }
+    
+    public void preencherForm(
+        JTextPane veic,
+        JTextPane cliente,
+        JTextPane status,
+        JTextPane descricao
+    ) {
+        veic.setText(conserto.getConsIdveiculo().getVeiPlaca());
+        cliente.setText(conserto.getConsIdveiculo().getVeiIdcliente().getCliIdpessoa().getPesNome());
+        status.setText(conserto.getConsIdstatus().getStatDescricao());
+        descricao.setText(conserto.getConsDescricao());
     }
 
     

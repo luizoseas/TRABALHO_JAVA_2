@@ -8,7 +8,11 @@ import Controllers.ControllerConserto;
 import Forms.FormListarProdutoConserto;
 import Forms.FormListarVeiculo;
 import Interfaces.FalhaException;
+import Interfaces.ObjetoSelecionavel;
 import Models.Cliente;
+import Models.Status;
+import Models.Veiculo;
+import java.awt.event.ItemListener;
 
 /**
  *
@@ -31,6 +35,20 @@ public class FormCadastrarOrdemDeServico extends javax.swing.JFrame {
         FormCadastrarOrdemDeServico.cliente = cliente;
         controllerConserto.setCliente(cliente);
         CLIENTE_INPUT.setText(cliente.getCliIdpessoa().getPesNome());
+        setCampoVeiculo();
+        setCampoStatus();
+    }
+    
+    public void setCampoStatus(){
+        for (Status status : Status.getStatus()) {
+            SELECT_STATUS.addItem(status.getStatDescricao());
+        }
+    }
+    
+    public void setCampoVeiculo(){
+        for (Veiculo veiculo : cliente.getVeiculoList()) {
+            SELECT_VEICULO.addItem(veiculo.getVeiPlaca());
+        }
     }
 
     /**

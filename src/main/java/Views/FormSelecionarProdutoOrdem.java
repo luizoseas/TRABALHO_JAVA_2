@@ -5,9 +5,14 @@
 package Views;
 
 import Controllers.DAO;
+import Forms.FormListarEstoqueDisponivel;
+import Interfaces.FalhaException;
 import Models.Conserto;
+import Models.Estoque;
 import Models.Pecasconserto;
 import Models.Produto;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,6 +28,8 @@ public class FormSelecionarProdutoOrdem extends javax.swing.JFrame {
 
     public void setConserto(Conserto conserto) {
         this.conserto = conserto;
+        FormListarEstoqueDisponivel.setTabela(TABLE_PRODUTOS);
+        FormListarEstoqueDisponivel.atualizar();
     }
     
     /**
@@ -81,7 +88,7 @@ public class FormSelecionarProdutoOrdem extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Nome", "Data Validade"
+                "Codigo Lote", "Nome Produto", "Qnt Disponível", "Valor"
             }
         ));
         TABLE_PRODUTOS.setToolTipText("");
@@ -140,12 +147,25 @@ public class FormSelecionarProdutoOrdem extends javax.swing.JFrame {
 
     private void BUTTON_CONSULTARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_CONSULTARActionPerformed
         int linha = TABLE_PRODUTOS.getSelectedRow();
-       int codigoProduto = Integer.parseInt(TABLE_PRODUTOS.getValueAt(linha,0).toString());
-       Produto produto = DAO.getInstance().find(Produto.class, codigoProduto);
-       if(produto instanceof Produto){
+       int codigoLote = Integer.parseInt(TABLE_PRODUTOS.getValueAt(linha,0).toString());
+       Estoque estoque = DAO.getInstance().find(Estoque.class, codigoLote);
+       if(estoque instanceof Estoque && (Integer.parseInt(INPUT_QUANTIDADE.getText()) > 0) && (Integer.parseInt(INPUT_QUANTIDADE.getText()) <= estoque.getEstQuantidade()) ){
          Pecasconserto pecasconserto = new Pecasconserto();
          pecasconserto.setConserto(conserto);
-        this.setVisible(false);
+         pecasconserto.setEstoque(estoque);
+         pecasconserto.setPcQuantidade(Integer.parseInt(INPUT_QUANTIDADE.getText()));
+            try {
+                DAO.getInstance().getTransaction().begin();
+                pecasconserto.salvar();
+                estoque.setEstQuantidade(estoque.getEstQuantidade() - (Integer.parseInt(INPUT_QUANTIDADE.getText())));
+                estoque.salvar();
+                DAO.getInstance().getTransaction().commit();
+                this.setVisible(false);
+            } catch (FalhaException ex) {
+                if(DAO.getInstance().getTransaction().isActive()){
+                    DAO.getInstance().getTransaction().rollback();
+                }
+            }
        }
     }//GEN-LAST:event_BUTTON_CONSULTARActionPerformed
 

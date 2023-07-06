@@ -603,6 +603,7 @@ public class FormConsultarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_BUTTON_EXCLUIRActionPerformed
 
     private void BUTTON_EDITAR1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITAR1ActionPerformed
+        this.formCadastrarOrdemDeServico.setCliente(cliente);
         this.formCadastrarOrdemDeServico.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_BUTTON_EDITAR1ActionPerformed

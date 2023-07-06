@@ -5,9 +5,14 @@
 package Views;
 
 import Controllers.ControllerConserto;
+import Controllers.DAO;
+import Forms.FormListarCliente;
+import Forms.FormListarConsertoCliente;
 import Forms.FormListarProduto;
 import Forms.FormListarProdutoConserto;
+import Interfaces.FalhaException;
 import Models.Conserto;
+import Models.Estoque;
 
 /**
  *
@@ -17,6 +22,8 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
 
 
     private final ControllerConserto controllerConserto = new ControllerConserto();
+    private final FormAtualizarOrdemDeServico formAtualizarOrdemDeServico = new FormAtualizarOrdemDeServico();
+    private final FormSelecionarProdutoOrdem formSelecionarProdutoOrdem = new FormSelecionarProdutoOrdem();
     private Conserto conserto;
     /**
      * Creates new form FormConsultarOrdemDeServico
@@ -395,19 +402,37 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_EDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITARActionPerformed
-        // TODO add your handling code here:
+        formAtualizarOrdemDeServico.setConserto(conserto);
+        formAtualizarOrdemDeServico.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BUTTON_EDITARActionPerformed
 
     private void BUTTON_EXCLUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EXCLUIRActionPerformed
-        // TODO add your handling code here:
+        try {
+            conserto.excluir();
+            FormListarConsertoCliente.atualizar();
+            this.setVisible(false);
+        } catch (FalhaException ex) {
+        }
     }//GEN-LAST:event_BUTTON_EXCLUIRActionPerformed
 
     private void BUTTON_EDITAR1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITAR1ActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
+        formSelecionarProdutoOrdem.setConserto(conserto);
+        formSelecionarProdutoOrdem.setVisible(true);
     }//GEN-LAST:event_BUTTON_EDITAR1ActionPerformed
 
     private void BUTTON_EDITAR2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITAR2ActionPerformed
-        // TODO add your handling code here:
+        int linha = jTable1.getSelectedRow();
+       int codigoLote = Integer.parseInt(jTable1.getValueAt(linha,0).toString());
+        Estoque estoque = DAO.getInstance().find(Estoque.class, codigoLote);
+       if(estoque instanceof Estoque){
+        try {
+            estoque.excluir();
+            FormListarProdutoConserto.atualizar();;
+        } catch (FalhaException ex) {
+        }
+       }
     }//GEN-LAST:event_BUTTON_EDITAR2ActionPerformed
 
 

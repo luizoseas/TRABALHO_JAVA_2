@@ -53,6 +53,7 @@ public class Combustivel extends DAO implements Serializable {
             return query.getSingleResult();
         } catch (NoResultException e) {
             Combustivel novoCombustivel = new Combustivel();
+            novoCombustivel.setCombDescricao(descricao);
             novoCombustivel.salvar(); 
             return novoCombustivel;
         }

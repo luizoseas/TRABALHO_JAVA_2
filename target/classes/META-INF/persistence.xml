@@ -2,27 +2,27 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="automecanica" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <class>Dao.Produto</class>
-    <class>Dao.Status</class>
-    <class>Dao.Cor</class>
-    <class>Dao.Endereco</class>
-    <class>Dao.Funcionario</class>
-    <class>Dao.Classificacao</class>
-    <class>Dao.Modelo</class>
-    <class>Dao.Telefone</class>
-    <class>Dao.Logradouro</class>
-    <class>Dao.Cliente</class>
-    <class>Dao.Estoque</class>
-    <class>Dao.Pecasconserto</class>
-    <class>Dao.Veiculo</class>
-    <class>Dao.Pessoa</class>
-    <class>Dao.Cargo</class>
-    <class>Dao.Combustivel</class>
-    <class>Dao.Nota</class>
-    <class>Dao.Fornecedor</class>
-    <class>Dao.Conserto</class>
-    <class>Dao.Cidade</class>
-    <class>Dao.Bairro</class>
+    <class>Models.Bairro</class>
+    <class>Models.Cor</class>
+    <class>Models.Estoque</class>
+    <class>Models.Cargo</class>
+    <class>Models.Conserto</class>
+    <class>Models.Combustivel</class>
+    <class>Models.Fornecedor</class>
+    <class>Models.Modelo</class>
+    <class>Models.Classificacao</class>
+    <class>Models.Logradouro</class>
+    <class>Models.Funcionario</class>
+    <class>Models.Produto</class>
+    <class>Models.Cliente</class>
+    <class>Models.Nota</class>
+    <class>Models.Pecasconserto</class>
+    <class>Models.Pessoa</class>
+    <class>Models.Veiculo</class>
+    <class>Models.Cidade</class>
+    <class>Models.Status</class>
+    <class>Models.Endereco</class>
+    <class>Models.Telefone</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.168.30.111:5432/automecanica"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

@@ -4,12 +4,43 @@
  */
 package Views;
 
+import Controllers.ControllerConserto;
+import Forms.FormListarConsertoCliente;
+import Forms.FormListarProduto;
+import Interfaces.FalhaException;
+import Interfaces.ObjetoSelecionavel;
+import Models.Conserto;
+import Models.Status;
+import java.awt.event.ItemListener;
+
 /**
  *
  * @author oseas
  */
 public class FormAtualizarOrdemDeServico extends javax.swing.JFrame {
 
+    private final ControllerConserto controllerConserto = new ControllerConserto();
+    private Conserto conserto;
+
+    public Conserto getConserto() {
+        return conserto;
+    }
+
+    public void setConserto(Conserto conserto) {
+        this.conserto = conserto;
+        controllerConserto.setConserto(conserto);
+        controllerConserto.preencherForm(INPUT_DESC, INPUT_CLIENTE, INPUT_DESC, INPUT_DESC);
+        INPUT_CLIENTE.setText(conserto.getConsIdveiculo().getVeiIdcliente().getCliIdpessoa().getPesNome());
+        INPUT_VEICULO.setText(conserto.getConsIdveiculo().getVeiPlaca());
+        this.setCampoStatus();
+    }
+    
+    public void setCampoStatus(){
+        for (Status status : Status.getStatus()) {
+            INPUT_STATUS.addItem(status.getStatDescricao());
+        }
+    }
+    
     /**
      * Creates new form FormAtualizarOrdemDeServico
      */
@@ -37,11 +68,11 @@ public class FormAtualizarOrdemDeServico extends javax.swing.JFrame {
         BG_INPUT_DESCRICAO = new javax.swing.JPanel();
         TEXT_DESCRICAO = new javax.swing.JLabel();
         INPUT_DESCRICAO = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        INPUT_DESC = new javax.swing.JTextPane();
         BUTTON_EDITAR = new javax.swing.JButton();
         BG_INPUT_VEICULO1 = new javax.swing.JPanel();
         TEXT_VEICULO1 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        INPUT_STATUS = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,7 +171,7 @@ public class FormAtualizarOrdemDeServico extends javax.swing.JFrame {
         TEXT_DESCRICAO.setFont(new java.awt.Font("Arial", 0, 23)); // NOI18N
         TEXT_DESCRICAO.setText("Descrição:");
 
-        INPUT_DESCRICAO.setViewportView(jTextPane1);
+        INPUT_DESCRICAO.setViewportView(INPUT_DESC);
 
         javax.swing.GroupLayout BG_INPUT_DESCRICAOLayout = new javax.swing.GroupLayout(BG_INPUT_DESCRICAO);
         BG_INPUT_DESCRICAO.setLayout(BG_INPUT_DESCRICAOLayout);
@@ -193,7 +224,7 @@ public class FormAtualizarOrdemDeServico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(TEXT_VEICULO1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox3, 0, 214, Short.MAX_VALUE)
+                .addComponent(INPUT_STATUS, 0, 214, Short.MAX_VALUE)
                 .addGap(27, 27, 27))
         );
         BG_INPUT_VEICULO1Layout.setVerticalGroup(
@@ -201,7 +232,7 @@ public class FormAtualizarOrdemDeServico extends javax.swing.JFrame {
             .addGroup(BG_INPUT_VEICULO1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(BG_INPUT_VEICULO1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox3)
+                    .addComponent(INPUT_STATUS)
                     .addGroup(BG_INPUT_VEICULO1Layout.createSequentialGroup()
                         .addComponent(TEXT_VEICULO1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -249,7 +280,15 @@ public class FormAtualizarOrdemDeServico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BUTTON_EDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITARActionPerformed
-        // TODO add your handling code here:
+        try{
+            controllerConserto.setCampos(INPUT_STATUS, INPUT_STATUS, INPUT_DESC);
+            controllerConserto.validarDados();
+            controllerConserto.getConserto().salvar();
+            this.setVisible(false);
+            FormListarConsertoCliente.atualizar();
+        }catch(FalhaException $erro){
+            
+        }
     }//GEN-LAST:event_BUTTON_EDITARActionPerformed
 
     /**
@@ -295,14 +334,14 @@ public class FormAtualizarOrdemDeServico extends javax.swing.JFrame {
     private javax.swing.JButton BUTTON_EDITAR;
     private javax.swing.JPanel HEADER;
     private javax.swing.JTextPane INPUT_CLIENTE;
+    private javax.swing.JTextPane INPUT_DESC;
     private javax.swing.JScrollPane INPUT_DESCRICAO;
+    private javax.swing.JComboBox<String> INPUT_STATUS;
     private javax.swing.JTextPane INPUT_VEICULO;
     private javax.swing.JLabel TEXT_CLIENTE;
     private javax.swing.JLabel TEXT_DESCRICAO;
     private javax.swing.JLabel TEXT_TITLE;
     private javax.swing.JLabel TEXT_VEICULO;
     private javax.swing.JLabel TEXT_VEICULO1;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }

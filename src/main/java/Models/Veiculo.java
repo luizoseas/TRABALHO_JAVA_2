@@ -5,6 +5,8 @@
 package Models;
 
 import Controllers.DAO;
+import Interfaces.EnumMensagem;
+import Interfaces.FalhaException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -19,11 +21,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.NoResultException;
 import javax.persistence.OneToMany;
 import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -80,6 +84,17 @@ public class Veiculo extends DAO implements Serializable {
         return query.getResultList();
     }
 
+    public static Veiculo buscarVeiculo(String nome) throws FalhaException {
+        TypedQuery<Veiculo> query = DAO.getInstance().createNamedQuery("Veiculo.findByVeiPlaca", Veiculo.class);
+        query.setParameter("veiPlaca", nome);
+
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new FalhaException(EnumMensagem.MSG018.getDescricao());
+        }
+    }
+    
     public Veiculo(Integer idveiculo) {
         this.idveiculo = idveiculo;
     }

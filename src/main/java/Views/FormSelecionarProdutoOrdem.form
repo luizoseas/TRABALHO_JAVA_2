@@ -115,10 +115,11 @@
         <Component class="javax.swing.JTable" name="TABLE_PRODUTOS">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="3" rowCount="0">
-                <Column editable="true" title="Codigo" type="java.lang.Object"/>
-                <Column editable="true" title="Nome" type="java.lang.Object"/>
-                <Column editable="true" title="Data Validade" type="java.lang.Object"/>
+              <Table columnCount="4" rowCount="0">
+                <Column editable="true" title="Codigo Lote" type="java.lang.Object"/>
+                <Column editable="true" title="Nome Produto" type="java.lang.Object"/>
+                <Column editable="true" title="Qnt Dispon&#xed;vel" type="java.lang.Object"/>
+                <Column editable="true" title="Valor" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value=""/>
