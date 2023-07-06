@@ -4,6 +4,9 @@
  */
 package Views;
 
+import Controllers.ControllerFuncionarioLogado;
+import Models.Funcionario;
+
 /**
  *
  * @author oseas
@@ -15,6 +18,13 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+    }
+    
+    
+    public void carregarFuncionarios(){
+        for (Funcionario funcionario : Funcionario.getFuncionarios()) {
+            INPUTFUN.addItem(funcionario.getFunIdpessoa().getPesNome());
+        }
     }
 
     /**
@@ -30,7 +40,7 @@ public class Login extends javax.swing.JFrame {
         ButtonEntrar = new javax.swing.JButton();
         TextInputUsuario = new javax.swing.JLabel();
         TextTitle = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        INPUTFUN = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -70,7 +80,7 @@ public class Login extends javax.swing.JFrame {
                         .addComponent(TextTitle)
                         .addGap(322, 322, 322))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PainelLoginLayout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(INPUTFUN, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(225, 225, 225))))
         );
         PainelLoginLayout.setVerticalGroup(
@@ -81,7 +91,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(55, 55, 55)
                 .addComponent(TextInputUsuario)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(INPUTFUN, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(113, 113, 113)
                 .addComponent(ButtonEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(114, 114, 114))
@@ -102,7 +112,15 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEntrarActionPerformed
-        // TODO add your handling code here:
+        for (Funcionario funcionario : Funcionario.getFuncionarios()) {
+            if(funcionario.getFunIdpessoa().getPesNome().matches((String) INPUTFUN.getItemAt(INPUTFUN.getSelectedIndex()))){
+                ControllerFuncionarioLogado.setFuncionario(funcionario);
+                this.setVisible(false);
+                Painel painel = new Painel();
+                painel.carregarUsuario();
+                painel.show();
+            }
+        }
     }//GEN-LAST:event_ButtonEntrarActionPerformed
 
     /**
@@ -142,9 +160,9 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonEntrar;
+    private javax.swing.JComboBox<String> INPUTFUN;
     private javax.swing.JPanel PainelLogin;
     private javax.swing.JLabel TextInputUsuario;
     private javax.swing.JLabel TextTitle;
-    private javax.swing.JComboBox<String> jComboBox1;
     // End of variables declaration//GEN-END:variables
 }

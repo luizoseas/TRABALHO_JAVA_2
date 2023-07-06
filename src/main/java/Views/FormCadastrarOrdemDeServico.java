@@ -5,6 +5,7 @@
 package Views;
 
 import Controllers.ControllerConserto;
+import Forms.FormListarConsertoCliente;
 import Forms.FormListarProdutoConserto;
 import Forms.FormListarVeiculo;
 import Interfaces.FalhaException;
@@ -275,7 +276,7 @@ public class FormCadastrarOrdemDeServico extends javax.swing.JFrame {
             controllerConserto.setCliente(cliente);
             controllerConserto.validarDados();
             controllerConserto.getConserto().salvar();
-            FormListarProdutoConserto.atualizar();
+            FormListarConsertoCliente.atualizar();
             this.setVisible(false);
         } catch (FalhaException ex) {
         }

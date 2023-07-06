@@ -6,10 +6,12 @@ package Views;
 
 import Controllers.DAO;
 import Forms.FormListarEstoqueDisponivel;
+import Forms.FormListarProdutoConserto;
 import Interfaces.FalhaException;
 import Models.Conserto;
 import Models.Estoque;
 import Models.Pecasconserto;
+import Models.PecasconsertoPK;
 import Models.Produto;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +52,7 @@ public class FormSelecionarProdutoOrdem extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BUTTON_ATUALIZAR2 = new javax.swing.JButton();
         HEADER1 = new javax.swing.JPanel();
         TEXT_TITLE1 = new javax.swing.JLabel();
         TABLE = new javax.swing.JScrollPane();
@@ -59,6 +62,17 @@ public class FormSelecionarProdutoOrdem extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        BUTTON_ATUALIZAR2.setBackground(new java.awt.Color(0, 204, 255));
+        BUTTON_ATUALIZAR2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BUTTON_ATUALIZAR2.setForeground(new java.awt.Color(255, 255, 255));
+        BUTTON_ATUALIZAR2.setText("Atualizar");
+        BUTTON_ATUALIZAR2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BUTTON_ATUALIZAR2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BUTTON_ATUALIZAR2ActionPerformed(evt);
+            }
+        });
 
         HEADER1.setBackground(new java.awt.Color(159, 172, 172));
 
@@ -118,14 +132,17 @@ public class FormSelecionarProdutoOrdem extends javax.swing.JFrame {
                         .addGap(83, 83, 83)
                         .addComponent(TABLE, javax.swing.GroupLayout.PREFERRED_SIZE, 785, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(305, 305, 305)
-                        .addComponent(BUTTON_CONSULTAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(358, 358, 358)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(INPUT_QUANTIDADE, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(102, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(305, 305, 305)
+                .addComponent(BUTTON_CONSULTAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BUTTON_ATUALIZAR2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,13 +150,19 @@ public class FormSelecionarProdutoOrdem extends javax.swing.JFrame {
                 .addComponent(HEADER1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(TABLE, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(INPUT_QUANTIDADE, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(BUTTON_CONSULTAR, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(INPUT_QUANTIDADE, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(BUTTON_CONSULTAR, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(23, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BUTTON_ATUALIZAR2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -153,21 +176,31 @@ public class FormSelecionarProdutoOrdem extends javax.swing.JFrame {
          Pecasconserto pecasconserto = new Pecasconserto();
          pecasconserto.setConserto(conserto);
          pecasconserto.setEstoque(estoque);
+         PecasconsertoPK pecasconsertoPK = new PecasconsertoPK();
+         pecasconsertoPK.setPcIdconserto(conserto.getIdconserto());
+         pecasconsertoPK.setPcIdestoque(estoque.getIdestoque());
+         pecasconserto.setPecasconsertoPK(pecasconsertoPK);
          pecasconserto.setPcQuantidade(Integer.parseInt(INPUT_QUANTIDADE.getText()));
             try {
                 DAO.getInstance().getTransaction().begin();
-                pecasconserto.salvar();
+         //       DAO.getInstance().persist(pecasconsertoPK);
+                DAO.getInstance().persist(pecasconserto);
                 estoque.setEstQuantidade(estoque.getEstQuantidade() - (Integer.parseInt(INPUT_QUANTIDADE.getText())));
-                estoque.salvar();
+                DAO.getInstance().persist(estoque);
                 DAO.getInstance().getTransaction().commit();
                 this.setVisible(false);
-            } catch (FalhaException ex) {
+                FormListarProdutoConserto.atualizar();
+            } catch (NumberFormatException ex) {
                 if(DAO.getInstance().getTransaction().isActive()){
                     DAO.getInstance().getTransaction().rollback();
                 }
             }
        }
     }//GEN-LAST:event_BUTTON_CONSULTARActionPerformed
+
+    private void BUTTON_ATUALIZAR2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_ATUALIZAR2ActionPerformed
+        FormListarEstoqueDisponivel.atualizar();
+    }//GEN-LAST:event_BUTTON_ATUALIZAR2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,6 +238,9 @@ public class FormSelecionarProdutoOrdem extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BUTTON_ATUALIZAR;
+    private javax.swing.JButton BUTTON_ATUALIZAR1;
+    private javax.swing.JButton BUTTON_ATUALIZAR2;
     private javax.swing.JButton BUTTON_CONSULTAR;
     private javax.swing.JPanel HEADER1;
     private javax.swing.JTextField INPUT_QUANTIDADE;

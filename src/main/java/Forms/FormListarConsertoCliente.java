@@ -38,7 +38,7 @@ public class FormListarConsertoCliente {
         FormListarConsertoCliente.tabela.getDataVector().removeAllElements();
         for (Veiculo veiculo : cliente.getVeiculoList()) {
             for (Conserto conserto : veiculo.getConsertoList()) {
-                String data[] = {conserto.getConsIdveiculo()+"",conserto.getConsIdstatus().getStatDescricao(),veiculo.getVeiPlaca(),conserto.getConsDatainicio().toString()};
+                String data[] = {conserto.getIdconserto()+"",conserto.getConsIdstatus().getStatDescricao(),veiculo.getVeiPlaca(),conserto.getConsDatainicio().toString()};
                 FormListarConsertoCliente.tabela.addRow(data);          
             }
 

@@ -4,7 +4,9 @@
  */
 package Views;
 
+import Controllers.ControllerFuncionarioLogado;
 import java.awt.Component;
+import static java.lang.System.exit;
 
 /**
  *
@@ -36,6 +38,7 @@ public class Painel extends javax.swing.JFrame {
         ButtonSair = new javax.swing.JButton();
         Painel = new javax.swing.JPanel();
         PainelFrame = new javax.swing.JDesktopPane();
+        NOMEUSUARIOLOGADO = new javax.swing.JLabel();
 
         setTitle("AUTO MECANICA");
         setResizable(false);
@@ -108,24 +111,29 @@ public class Painel extends javax.swing.JFrame {
             .addComponent(PainelFrame, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        NOMEUSUARIOLOGADO.setBackground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ButtonProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButtonFuncionarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButtonClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButtonFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ButtonProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ButtonFuncionarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ButtonClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ButtonFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(TextTitle))
-                            .addComponent(ButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addComponent(TextTitle))
+                                    .addComponent(ButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(NOMEUSUARIOLOGADO, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Painel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -142,6 +150,8 @@ public class Painel extends javax.swing.JFrame {
                 .addComponent(ButtonFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ButtonClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(141, 141, 141)
+                .addComponent(NOMEUSUARIOLOGADO)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
@@ -153,6 +163,10 @@ public class Painel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void carregarUsuario(){
+        NOMEUSUARIOLOGADO.setText("["+ControllerFuncionarioLogado.getFuncionario().getFunIdcargo().getCargDescricao()+"]"+ControllerFuncionarioLogado.getFuncionario().getFunIdpessoa().getPesNome());
+    }
+    
     private void adicionarComponente(Component componente){
         this.PainelFrame.removeAll();
         this.PainelFrame.add(componente);
@@ -176,7 +190,7 @@ public class Painel extends javax.swing.JFrame {
     }//GEN-LAST:event_ButtonProdutosActionPerformed
 
     private void ButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSairActionPerformed
-        // TODO add your handling code here:
+        exit(0);
     }//GEN-LAST:event_ButtonSairActionPerformed
 
     /**
@@ -221,6 +235,7 @@ public class Painel extends javax.swing.JFrame {
     private javax.swing.JButton ButtonFuncionarios;
     private javax.swing.JButton ButtonProdutos;
     private javax.swing.JButton ButtonSair;
+    private javax.swing.JLabel NOMEUSUARIOLOGADO;
     private javax.swing.JPanel Painel;
     private javax.swing.JDesktopPane PainelFrame;
     private javax.swing.JLabel TextTitle;

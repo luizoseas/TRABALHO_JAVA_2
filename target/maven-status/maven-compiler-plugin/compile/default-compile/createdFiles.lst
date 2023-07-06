@@ -68,6 +68,7 @@ Views\FormConsultarFornecedor$4.class
 Views\Painel$2.class
 Views\FormConsultarOrdemDeServico$4.class
 Views\FormAtualizarVeiculo.class
+Controllers\ControllerFuncionarioLogado.class
 Views\FormCadastrarProduto.class
 Views\FormConsultarCliente$6.class
 Views\FormAtualizarEstoque.class
@@ -100,6 +101,7 @@ Views\FormErro$1.class
 Models\Telefone.class
 Views\FormCadastrarNota.class
 Views\FormCadastrarFornecedor$1.class
+Views\ViewCarregando.class
 Models\Combustivel.class
 Views\Painel.class
 Views\FormCadastrarVeiculo$1.class
@@ -124,7 +126,9 @@ Views\FormConsultarNota$1.class
 Views\Painel$4.class
 Controllers\ControllerLote.class
 Views\FormConsultarEstoque$2.class
+Views\ViewCarregando$1.class
 Views\ViewListarCliente$3.class
+Views\FormSelecionarProdutoOrdem$3.class
 Views\FormCadastrarOrdemDeServico$1.class
 Views\ViewListarProduto$2.class
 Views\Painel$1.class
@@ -151,6 +155,7 @@ Views\ViewListarProduto$1.class
 Models\Produto.class
 Models\Estoque_.class
 Models\Produto_.class
+Views\FormConsultarProduto$5.class
 Models\Conserto_.class
 Forms\FormListarFuncionario.class
 Views\FormAtualizarEstoque$1.class

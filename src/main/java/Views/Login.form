@@ -63,7 +63,7 @@
                           <EmptySpace min="-2" pref="322" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jComboBox1" min="-2" pref="331" max="-2" attributes="0"/>
+                          <Component id="INPUTFUN" min="-2" pref="331" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="225" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -78,7 +78,7 @@
                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                   <Component id="TextInputUsuario" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" min="-2" pref="51" max="-2" attributes="0"/>
+                  <Component id="INPUTFUN" min="-2" pref="51" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
                   <Component id="ButtonEntrar" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
@@ -114,7 +114,7 @@
             <Property name="text" type="java.lang.String" value="AUTO MECANICA"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="INPUTFUN">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="0"/>

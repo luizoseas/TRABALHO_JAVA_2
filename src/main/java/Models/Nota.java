@@ -65,6 +65,11 @@ public class Nota extends DAO implements Serializable {
     public Nota(Integer idnota) {
         this.idnota = idnota;
     }
+    
+    public static List<Nota> getNotas(){        
+        Query query = DAO.getInstance().createNamedQuery("Nota.findAll");
+        return query.getResultList();
+    }
 
     public Nota(Integer idnota, Date notaDatacompra, Date notaDataentrada) {
         this.idnota = idnota;

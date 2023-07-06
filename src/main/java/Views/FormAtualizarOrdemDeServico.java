@@ -281,7 +281,8 @@ public class FormAtualizarOrdemDeServico extends javax.swing.JFrame {
 
     private void BUTTON_EDITARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITARActionPerformed
         try{
-            controllerConserto.setCampos(INPUT_STATUS, INPUT_STATUS, INPUT_DESC);
+            controllerConserto.setConserto(conserto);
+            controllerConserto.setCampos(INPUT_STATUS, INPUT_DESC);
             controllerConserto.validarDados();
             controllerConserto.getConserto().salvar();
             this.setVisible(false);

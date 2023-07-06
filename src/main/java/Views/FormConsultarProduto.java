@@ -76,6 +76,7 @@ public class FormConsultarProduto extends javax.swing.JFrame {
         BUTTON_CONSULTAR_LOTE = new javax.swing.JButton();
         TEXT_TITLELOTE = new javax.swing.JLabel();
         BUTTON_CADASTRAR_LOTE = new javax.swing.JButton();
+        BUTTON_ATUALIZAR = new javax.swing.JButton();
 
         BG_INPUT_DTVALIDADE.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -219,21 +220,27 @@ public class FormConsultarProduto extends javax.swing.JFrame {
             }
         });
 
+        BUTTON_ATUALIZAR.setBackground(new java.awt.Color(0, 204, 255));
+        BUTTON_ATUALIZAR.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        BUTTON_ATUALIZAR.setForeground(new java.awt.Color(255, 255, 255));
+        BUTTON_ATUALIZAR.setText("Atualizar");
+        BUTTON_ATUALIZAR.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        BUTTON_ATUALIZAR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BUTTON_ATUALIZARActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(HEADER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(358, 358, 358)
-                        .addComponent(TEXT_TITLELOTE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(BUTTON_EDITAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(BUTTON_EXCLUIR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(75, 75, 75)
+                .addComponent(BUTTON_EDITAR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(BUTTON_EXCLUIR, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -246,13 +253,19 @@ public class FormConsultarProduto extends javax.swing.JFrame {
                             .addComponent(BG_INPUT_DTVALIDADE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addContainerGap()))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(BUTTON_CONSULTAR_LOTE, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(BUTTON_CADASTRAR_LOTE, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(260, 260, 260)
+                                .addComponent(TEXT_TITLELOTE)
+                                .addGap(185, 185, 185)
+                                .addComponent(BUTTON_ATUALIZAR, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(6, 6, 6)
+                                    .addComponent(BUTTON_CONSULTAR_LOTE, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(BUTTON_CADASTRAR_LOTE, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -264,7 +277,9 @@ public class FormConsultarProduto extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(BG_INPUT_DTVALIDADE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(TEXT_TITLELOTE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TEXT_TITLELOTE)
+                    .addComponent(BUTTON_ATUALIZAR, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -325,6 +340,10 @@ public class FormConsultarProduto extends javax.swing.JFrame {
         formCadastrarEstoque.setVisible(true);
     }//GEN-LAST:event_BUTTON_CADASTRAR_LOTEActionPerformed
 
+    private void BUTTON_ATUALIZARActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_ATUALIZARActionPerformed
+        FormListarProduto.atualizar();
+    }//GEN-LAST:event_BUTTON_ATUALIZARActionPerformed
+
 
     public void setProduto(Produto produto){
         this.produto = produto;
@@ -336,6 +355,9 @@ public class FormConsultarProduto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel BG_INPUT_DTVALIDADE;
     private javax.swing.JPanel BG_INPUT_NOME;
+    private javax.swing.JButton BUTTON_ATUALIZAR;
+    private javax.swing.JButton BUTTON_ATUALIZAR2;
+    private javax.swing.JButton BUTTON_ATUALIZAR3;
     private javax.swing.JButton BUTTON_CADASTRAR_LOTE;
     private javax.swing.JButton BUTTON_CONSULTAR_LOTE;
     private javax.swing.JButton BUTTON_EDITAR;

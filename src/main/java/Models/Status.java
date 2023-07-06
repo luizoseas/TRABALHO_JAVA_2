@@ -51,7 +51,7 @@ public class Status implements Serializable {
         return query.getResultList();
     }
     
-     public static Status buscarVeiculo(String nome) throws FalhaException {
+     public static Status buscarStatus(String nome) throws FalhaException {
         TypedQuery<Status> query = DAO.getInstance().createNamedQuery("Status.findByStatDescricao", Status.class);
         query.setParameter("statDescricao", nome);
 

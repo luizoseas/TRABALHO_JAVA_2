@@ -55,8 +55,22 @@ public class ControllerConserto implements InterfaceController {
             conserto = new Conserto();
         }
         conserto.setConsIdveiculo(Veiculo.buscarVeiculo((String) veic.getItemAt(veic.getSelectedIndex())));
-        conserto.setConsIdstatus(Status.buscarVeiculo((String) sta.getItemAt(sta.getSelectedIndex())));
+        conserto.setConsIdstatus(Status.buscarStatus((String) sta.getItemAt(sta.getSelectedIndex())));
         conserto.setConsDescricao(descricao.getText());
+        conserto.setConsIdfuncionario(ControllerFuncionarioLogado.getFuncionario());
+        conserto.setConsDatainicio(new Date());
+    }
+    
+        public void setCampos(
+        JComboBox sta,
+        JTextPane descricao
+    ) throws FalhaException{
+        if(!(conserto instanceof Conserto)){
+            conserto = new Conserto();
+        }
+        conserto.setConsIdstatus(Status.buscarStatus((String) sta.getItemAt(sta.getSelectedIndex())));
+        conserto.setConsDescricao(descricao.getText());
+        conserto.setConsIdfuncionario(ControllerFuncionarioLogado.getFuncionario());
         conserto.setConsDatainicio(new Date());
     }
 

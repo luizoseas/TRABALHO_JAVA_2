@@ -189,6 +189,7 @@ public class FormCadastrarEstoque extends javax.swing.JFrame {
         INPUT_PRODUTO.setFont(new java.awt.Font("Segoe UI", 0, 28)); // NOI18N
         INPUT_PRODUTO.setToolTipText("Quantidade");
         INPUT_PRODUTO.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        INPUT_PRODUTO.setEnabled(false);
 
         javax.swing.GroupLayout BG_INPUT_PRODUTOLayout = new javax.swing.GroupLayout(BG_INPUT_PRODUTO);
         BG_INPUT_PRODUTO.setLayout(BG_INPUT_PRODUTOLayout);
@@ -206,8 +207,8 @@ public class FormCadastrarEstoque extends javax.swing.JFrame {
             .addGroup(BG_INPUT_PRODUTOLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(BG_INPUT_PRODUTOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(INPUT_PRODUTO, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TEXT_PRODUTO, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TEXT_PRODUTO, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(INPUT_PRODUTO, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -266,9 +267,18 @@ public class FormCadastrarEstoque extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BUTTON_CADASTRARActionPerformed
 
+        
+    public void carregarNota(){
+        for (Nota nfe : Nota.getNotas()) {
+            SELECT_NOTA.addItem(nfe.getIdnota()+"");
+        }
+    }
+    
     public void setProduto(Produto produto){
         this.produto = produto;
         controllerLote.setProduto(produto);
+        INPUT_PRODUTO.setText(produto.getProdNome());
+        carregarNota();
     }
     
 

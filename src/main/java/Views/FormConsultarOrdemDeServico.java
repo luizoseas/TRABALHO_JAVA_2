@@ -33,10 +33,12 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
     }
     
     public void setConserto(Conserto conserto){
+        this.conserto = conserto;
         controllerConserto.setConserto(conserto);
-        controllerConserto.preencherForm(INPUT_DESC, INPUT_CLIENTE, INPUT_STATUS, INPUT_DESC, INPUT_TOTAL);
-        FormListarProdutoConserto.setTabela(jTable1);
+        controllerConserto.preencherForm(INPUT_VEICULO, INPUT_CLIENTE, INPUT_STATUS, INPUT_DESC, INPUT_TOTAL);
+        FormListarProdutoConserto.setTabela(ProdutosTable);
         FormListarProdutoConserto.setConserto(conserto);
+        FormListarProdutoConserto.atualizar();
     }
 
     /**
@@ -66,7 +68,7 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
         TEXT_VEICULO1 = new javax.swing.JLabel();
         INPUT_STATUS = new javax.swing.JTextPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        ProdutosTable = new javax.swing.JTable();
         TEXT_TITLE1 = new javax.swing.JLabel();
         BUTTON_EDITAR1 = new javax.swing.JButton();
         BG_INPUT_CLIENTE1 = new javax.swing.JPanel();
@@ -253,7 +255,7 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ProdutosTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -261,7 +263,7 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
                 "Produto", "Quantidade", "Valor"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(ProdutosTable);
 
         TEXT_TITLE1.setFont(new java.awt.Font("Arial", 1, 35)); // NOI18N
         TEXT_TITLE1.setText("Produtos");
@@ -317,7 +319,6 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
         BUTTON_EDITAR2.setForeground(new java.awt.Color(255, 255, 255));
         BUTTON_EDITAR2.setText("REMOVER PRODUTO");
         BUTTON_EDITAR2.setToolTipText("");
-        BUTTON_EDITAR2.setActionCommand("REMOVER PRODUTO");
         BUTTON_EDITAR2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         BUTTON_EDITAR2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -392,7 +393,7 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
                         .addGap(95, 95, 95)
                         .addComponent(BG_INPUT_CLIENTE1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BUTTON_EDITAR1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BUTTON_EDITAR2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(123, 123, 123))
@@ -423,8 +424,8 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
     }//GEN-LAST:event_BUTTON_EDITAR1ActionPerformed
 
     private void BUTTON_EDITAR2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BUTTON_EDITAR2ActionPerformed
-        int linha = jTable1.getSelectedRow();
-       int codigoLote = Integer.parseInt(jTable1.getValueAt(linha,0).toString());
+        int linha = ProdutosTable.getSelectedRow();
+       int codigoLote = Integer.parseInt(ProdutosTable.getValueAt(linha,0).toString());
         Estoque estoque = DAO.getInstance().find(Estoque.class, codigoLote);
        if(estoque instanceof Estoque){
         try {
@@ -453,6 +454,7 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
     private javax.swing.JTextPane INPUT_STATUS;
     private javax.swing.JTextPane INPUT_TOTAL;
     private javax.swing.JTextPane INPUT_VEICULO;
+    private javax.swing.JTable ProdutosTable;
     private javax.swing.JLabel TEXT_CLIENTE;
     private javax.swing.JLabel TEXT_CLIENTE1;
     private javax.swing.JLabel TEXT_DESCRICAO;
@@ -461,6 +463,5 @@ public class FormConsultarOrdemDeServico extends javax.swing.JFrame {
     private javax.swing.JLabel TEXT_VEICULO;
     private javax.swing.JLabel TEXT_VEICULO1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
