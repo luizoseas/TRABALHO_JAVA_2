@@ -4,6 +4,7 @@
  */
 package Models;
 
+import Controllers.DAO;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -26,7 +27,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "Pecasconserto.findByPcIdconserto", query = "SELECT p FROM Pecasconserto p WHERE p.pecasconsertoPK.pcIdconserto = :pcIdconserto"),
     @NamedQuery(name = "Pecasconserto.findByPcIdestoque", query = "SELECT p FROM Pecasconserto p WHERE p.pecasconsertoPK.pcIdestoque = :pcIdestoque"),
     @NamedQuery(name = "Pecasconserto.findByPcQuantidade", query = "SELECT p FROM Pecasconserto p WHERE p.pcQuantidade = :pcQuantidade")})
-public class Pecasconserto implements Serializable {
+public class Pecasconserto extends DAO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
